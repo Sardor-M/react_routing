@@ -1,0 +1,31 @@
+* {
+    @apply box-border;
+}
+
+html, body {
+    @apply m-0 p-0 bg-[#FFF7ED] font-inter;
+}
+
+body::-webkit-scrollbar {
+    @apply hidden;
+}
+
+body {
+    @apply overflow-hidden;
+}
+
+header {
+    @apply h-28 flex items-center py-2.5;
+}
+
+header .site-logo {
+    @apply text-black mr-auto uppercase font-bold text-2xl;
+}
+
+header a {
+    @apply no-underline text-gray-600 font-semibold px-5 py-1;
+}
+
+header a:hover {
+    @apply text-gray-900 underline;
+}
