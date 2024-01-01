@@ -5,7 +5,6 @@ import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
 import ContactPage from "../pages/ContactPage";
 import Runners from "../pages/Runners";
-// import "./src/server/server.tsx";
 
 export default function AppRoutes() {
   return (

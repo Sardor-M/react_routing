@@ -1,12 +1,23 @@
 import { Model, createServer } from "miragejs";
 
+interface RunnerModel {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  imageUrl: string;
+  type: string;
+}
+
+const Runner = Model.extend<Partial<RunnerModel>>({});
+
 createServer({
   models: {
     runner: Model,
   },
 
   seeds(server) {
-    server.create("van", {
+    server.create("runner", {
       id: "1",
       name: "Modest Explorer",
       price: 60,
@@ -16,7 +27,7 @@ createServer({
         "https://assets.scrimba.com/advanced-react/react-router/modest-explorer.png",
       type: "simple",
     });
-    server.create("van", {
+    server.create("runner", {
       id: "2",
       name: "Beach Bum",
       price: 80,
@@ -26,7 +37,7 @@ createServer({
         "https://assets.scrimba.com/advanced-react/react-router/beach-bum.png",
       type: "rugged",
     });
-    server.create("van", {
+    server.create("runner", {
       id: "3",
       name: "Reliable Red",
       price: 100,
@@ -36,7 +47,7 @@ createServer({
         "https://assets.scrimba.com/advanced-react/react-router/reliable-red.png",
       type: "luxury",
     });
-    server.create("van", {
+    server.create("runner", {
       id: "4",
       name: "Dreamfinder",
       price: 65,
@@ -46,7 +57,7 @@ createServer({
         "https://assets.scrimba.com/advanced-react/react-router/dreamfinder.png",
       type: "simple",
     });
-    server.create("van", {
+    server.create("runner", {
       id: "5",
       name: "The Cruiser",
       price: 120,
@@ -56,7 +67,7 @@ createServer({
         "https://assets.scrimba.com/advanced-react/react-router/the-cruiser.png",
       type: "luxury",
     });
-    server.create("van", {
+    server.create("runner", {
       id: "6",
       name: "Green Wonder",
       price: 70,
@@ -67,153 +78,18 @@ createServer({
       type: "rugged",
     });
   },
-  //         {
-  //           id: 2,
-  //           name: "Runner 2",
-  //           email: "new@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 3,
-  //           name: "Runner 3",
-  //           email: "new@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 4,
-  //           name: "Runner 4",
-  //           email: "jake@gmail.com",
-  //           location: "New York",
-  //           distance: 11,
-  //           pace: 53,
-  //           time: 10,
-  //           description: "I am a runner of a New York group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 5,
-  //           name: "Runner 5",
-  //           email: "non@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 6,
-  //           name: "Runner 5",
-  //           email: "non@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 7,
-  //           name: "Runner 5",
-  //           email: "non@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 8,
-  //           name: "Runner 5",
-  //           email: "non@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 9,
-  //           name: "Runner 5",
-  //           email: "non@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 10,
-  //           name: "Runner 5",
-  //           email: "non@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 11,
-  //           name: "Runner 5",
-  //           email: "non@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //         {
-  //           id: 12,
-  //           name: "Runner 5",
-  //           email: "non@gmail.com",
-  //           location: "New York",
-  //           distance: 10,
-  //           pace: 5,
-  //           time: 50,
-  //           description: "I am a runner of a new group",
-  //           image:
-  //             "https://images.unsplash.com/photo-1512310604669-443b2520fa8f?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cnVubmVycyUyMGJ1ZGR5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-  //         },
-  //       ],
-  //     });
-  //   },
 
   routes() {
     this.namespace = "api";
     this.logging = true;
 
     this.get("/runners", (schema, request) => {
-      return schema.db.all;
+      return schema.all("runner");
     });
 
     this.get("/runners/:id", (schema, request) => {
       const id = request.params.id;
-      return schema.db.runners.find(id);
+      return schema.find("runner", id);
     });
   },
 });

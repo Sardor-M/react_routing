@@ -22,29 +22,43 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+interface Runner {
+  id: number;
+  name: string;
+  email: string;
+  location: string;
+  distance: number;
+  pace: number;
+  time: number;
+  description: string;
+  imageUrl: string;
+}
+
 export default function Runners() {
-  const [runners, setRunners] = useState([]);
+  const [runners, setRunners] = useState<Runner[]>([]);
   // const runnersArray = Object.values(runners);
 
   useEffect(() => {
     fetch("/api/runners")
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if (Array.isArray(data.runners)) {
+          setRunners(data.runners);
+        }
+      });
   }, []);
 
-  return (
-    <div className="container">
-      <h1>Runners 🏃‍♀️</h1>
-      <ul>
-        {runners.map((runner) => (
-          <li> {runner} </li>
-        ))}
-      </ul>
-
-      <h2> Or </h2>
-      <h1>Find your running buddy</h1>
-
-      <Link to="/runners"> Find your buddy</Link>
+  const runnersArray = runners.map((runner) => (
+    <div key={runner.id} className="runner-title">
+      {" "}
+      <img src={runner.imageUrl} alt={runner.name} />
+      <div className="runner-info">
+        <h2>{runner.name}</h2>
+        <h3>{runner.location}</h3>
+        <p>{runner.description}</p>
+      </div>
     </div>
-  );
+  ));
+
+  return <>{runnersArray}</>;
 }
