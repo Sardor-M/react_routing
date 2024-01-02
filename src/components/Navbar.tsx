@@ -7,6 +7,7 @@ export default function Navbar() {
         #RunWithUs
       </Link>
       <nav>
+        <Link to="/event">Events</Link>
         <Link to="/about">About</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/runner">Runners</Link>

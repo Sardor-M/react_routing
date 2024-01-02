@@ -268,12 +268,12 @@ i[class*="van-type-"] {
   align-self: flex-start;
 }
 
-.runner-detail .van-price {
+.runner-detail .runner-price {
   font-size: 1.25rem;
   margin-bottom: 10px;
 }
 
-.runner-detail .van-price span {
+.runner-detail .runner-price span {
   font-weight: 700;
   font-size: 1.5rem;
 }
