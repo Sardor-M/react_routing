@@ -67,16 +67,13 @@ header a:hover {
 .home-container {
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.46)),
     url("./assets/images/running_banner_img.png");
-  -webkit-background-size: contain;
-  -moz-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   min-height: 350px;
   color: white;
   padding: 45px 23px;
-  width: 100%;
-  max-width: 600px;
-  height: auto;
 }
 
 .home-container h1 {
@@ -107,6 +104,14 @@ header a:hover {
 
 .home-container a:hover {
   transform: translate(1px, 1px);
+}
+.home-container .link-button {
+  background-color: #ffce1f;
+  color: white;
+  font-size: 1.125rem;
+  margin-top: 27px;
+  max-width: 200px;
+  max-height: fit-content;
 }
 
 /*** ABOUT PAGE ***/

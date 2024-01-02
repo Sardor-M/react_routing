@@ -16,17 +16,16 @@ export default function AppRoutes() {
     <Router>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<AboutPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/runner" element={<Runners />} />
-          <Route path="/runner/:id" element={<RunnersDetail />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="runner" element={<Runners />} />
+          <Route path="runner/:id" element={<RunnersDetail />} />
 
-          <Route element={<HostLayout />}>
-            <Route path="/event" element={<EventsPage />} />
-            <Route path="/event/dashboard" element={<DashboardPage />} />
-            <Route path="/event/review" element={<ReviewsPages />} />
+          <Route path="event" element={<HostLayout />}>
+            <Route index element={<EventsPage />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="review" element={<ReviewsPages />} />
           </Route>
         </Route>
       </Routes>
