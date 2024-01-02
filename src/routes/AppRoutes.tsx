@@ -9,7 +9,7 @@ import Layout from "../components/Layout";
 import EventsPage from "../pages/Events/EventsPage";
 import DashboardPage from "../pages/Events/DashboardPage";
 import ReviewsPages from "../pages/Events/ReviewsPage";
-import HostLayout from "../components/HostLayout";
+import HostLayout from "../components/EventLayout";
 
 export default function AppRoutes() {
   return (
