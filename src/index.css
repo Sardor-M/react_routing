@@ -147,3 +147,139 @@ header a:hover {
   color: white;
   border-radius: 10px;
 }
+
+/*** Runner's Page ***/
+.runner-list-container {
+  padding-inline: 23px;
+}
+
+.runner-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  gap: 34px;
+  margin-top: 57px;
+}
+
+.runner-tile a {
+  color: #161616;
+  text-decoration: none;
+}
+
+.runner-tile img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.runner-list-container button {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.runner-type {
+  height: 34px;
+  padding: 6px 26px;
+  font-style: normal;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffead0;
+  color: #4d4d4d;
+  transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.runner-type:hover {
+  color: #ffead0;
+}
+
+.runner-type:focus {
+  outline: none;
+}
+
+.runner-type.selected {
+  color: #ffead0;
+}
+
+.runner-type.simple:hover,
+.runner-type.simple.selected {
+  background-color: #e17654;
+}
+
+.runner-type.rugged:hover,
+.runner-type.rugged.selected {
+  background-color: #115e59;
+}
+
+.runner-type.luxury:hover,
+.runner-type.luxury.selected {
+  background-color: #161616;
+}
+
+.runner-type.clear-filters {
+  margin-left: -20px;
+  height: 34px;
+  padding: 6px 26px;
+  font-style: normal;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  text-decoration: underline;
+  background-color: transparent;
+  color: #4d4d4d;
+}
+
+i[class*="van-type-"] {
+  padding: 7px 14px;
+}
+
+.runner-detail-container {
+  padding: 27px;
+}
+
+.runner-detail-container .back-button {
+  color: black;
+  text-decoration: none;
+}
+
+.runner-detail-container .back-button:visited {
+}
+
+.runner-detail-container .back-button span {
+  text-decoration: underline;
+}
+
+.runner-detail {
+  display: flex;
+  flex-direction: column;
+  color: #161616;
+}
+
+.runner-detail img {
+  border-radius: 5px;
+  margin-block: 47px;
+}
+
+.runner-detail h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.runner-detail > i {
+  align-self: flex-start;
+}
+
+.runner-detail .van-price {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.runner-detail .van-price span {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.runner-detail .link-button {
+  background-color: #ff8c38;
+  color: white;
+  font-size: 1.125rem;
+}

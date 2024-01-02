@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <header>
       <Link className="site-logo" to="/">
-        #VanLife
+        #RunWithUs
       </Link>
       <nav>
         <Link to="/about">About</Link>
