@@ -305,3 +305,52 @@ i[class*="van-type-"] {
   text-decoration: underline;
   font-weight: 600;
 }
+
+/* Footer Component Styling */
+/* Footer Styling */
+
+.footer {
+  background-color: rgb(30, 30, 30);
+  color: white;
+  text-align: center;
+  justify-content: center;
+  padding: 40px 0;
+  margin-top: 340px;
+}
+
+.social-icons {
+  margin-bottom: 10px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-icons img {
+  height: 35px; /* Adjust the size as needed */
+  width: auto;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.social-icons a:hover {
+  opacity: 0.8;
+}
+
+/* HomePage Animation Styling */
+
+.home-container {
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
