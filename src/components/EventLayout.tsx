@@ -19,6 +19,12 @@ export default function HostLayout() {
           Dashboard
         </NavLink>
         <NavLink
+          to="/event/upcoming"
+          className={({ isActive }) => (isActive ? "navbar-link" : "")}
+        >
+          Upcoming
+        </NavLink>
+        <NavLink
           to="/event/review"
           className={({ isActive }) => (isActive ? "navbar-link" : "")}
         >

@@ -7,13 +7,14 @@ interface RunnerModel {
   description: string;
   imageUrl: string;
   type: string;
+  upcomingId: string;
 }
 
 const Runner = Model.extend<Partial<RunnerModel>>({});
 
 createServer({
   models: {
-    runner: Model,
+    runner: Runner,
   },
 
   seeds(server) {
@@ -26,6 +27,7 @@ createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/modest-explorer.png",
       type: "simple",
+      upcomingId: "11",
     });
     server.create("runner", {
       id: "2",
@@ -36,6 +38,7 @@ createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/beach-bum.png",
       type: "rugged",
+      upcomingId: "22",
     });
     server.create("runner", {
       id: "3",
@@ -46,6 +49,7 @@ createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/reliable-red.png",
       type: "luxury",
+      upcomingId: "33",
     });
     server.create("runner", {
       id: "4",
@@ -56,6 +60,7 @@ createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/dreamfinder.png",
       type: "simple",
+      upcomingId: "44",
     });
     server.create("runner", {
       id: "5",
@@ -66,6 +71,7 @@ createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/the-cruiser.png",
       type: "luxury",
+      upcomingId: "55",
     });
     server.create("runner", {
       id: "6",
@@ -76,12 +82,13 @@ createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/green-wonder.png",
       type: "rugged",
+      upcomingId: 66,
     });
   },
 
   routes() {
     this.namespace = "api";
-    this.logging = true;
+    this.logging = false;
 
     this.get("/runners", (schema, request) => {
       return schema.all("runner");
@@ -90,6 +97,13 @@ createServer({
     this.get("/runners/:id", (schema, request) => {
       const id = request.params.id;
       return schema.find("runner", id);
+    });
+    this.get("/upcoming/runners", (schema) => {
+      return schema.runner.where({ upcomingId: "11" });
+    });
+    this.get("/upcoming/runners/:id", (schema, request) => {
+      const id = request.params.id;
+      return schema.runner.where({ id });
     });
   },
 });

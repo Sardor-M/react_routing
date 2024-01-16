@@ -10,6 +10,8 @@ import EventsPage from "../pages/Events/EventsPage";
 import DashboardPage from "../pages/Events/DashboardPage";
 import ReviewsPages from "../pages/Events/ReviewsPage";
 import HostLayout from "../components/EventLayout";
+import Upcoming from "../pages/Events/Upcoming";
+import UpcomingDetails from "../pages/Events/UpcomingDetails";
 
 export default function AppRoutes() {
   return (
@@ -28,6 +30,8 @@ export default function AppRoutes() {
           <Route path="event" element={<HostLayout />}>
             <Route index element={<EventsPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="upcoming" element={<Upcoming />} />
+            <Route path="upcoming/:id" element={<UpcomingDetails />} />
             <Route path="review" element={<ReviewsPages />} />
           </Route>
         </Route>
