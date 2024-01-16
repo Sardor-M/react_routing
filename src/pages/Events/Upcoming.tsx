@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface Upcoming {
+  id: number;
   name: string;
   imgUrl: string;
   price: number;
@@ -11,11 +12,12 @@ export default function Upcoming() {
   const [upcomingEvents, setUpcomingEvents] = useState<Upcoming[]>([]);
 
   useEffect(() => {
-    fetch("/api/upcoming/runners")
+    fetch("/api/events/upcoming/runner")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data.runner)) {
           setUpcomingEvents(data.runner);
+          console.log(data.runner, "data.runner");
         }
       });
   }, []);
@@ -24,7 +26,7 @@ export default function Upcoming() {
     return (
       // <div key={runner.id} className="upcoming-title">
       <Link
-        to={`/upcoming/runners/${runner.id}`}
+        to={`/events/upcoming/${runner.id}`}
         aria-label={`View details for ${runner.name}`}
       >
         <div className="upcoming-event" key={runner.id}>

@@ -14,7 +14,7 @@ const Runner = Model.extend<Partial<RunnerModel>>({});
 
 createServer({
   models: {
-    runner: Runner,
+    runners: Runner,
   },
 
   seeds(server) {
@@ -82,7 +82,7 @@ createServer({
       imageUrl:
         "https://assets.scrimba.com/advanced-react/react-router/green-wonder.png",
       type: "rugged",
-      upcomingId: 66,
+      upcomingId: "66",
     });
   },
 
@@ -98,12 +98,14 @@ createServer({
       const id = request.params.id;
       return schema.find("runner", id);
     });
-    this.get("/upcoming/runners", (schema) => {
-      return schema.runner.where({ upcomingId: "11" });
+    this.get("/events/upcoming", (schema) => {
+      return schema.runners.where("runner", { upcomingId: "11" });
+      // return schema.find('runner', '1');
     });
-    this.get("/upcoming/runners/:id", (schema, request) => {
+    this.get("/events/upcoming/:id", (schema, request) => {
       const id = request.params.id;
-      return schema.runner.where({ id });
+      return schema.runners.where("runner", { upcomingId: id });
+      // return schema.find('runner', id);
     });
   },
 });
