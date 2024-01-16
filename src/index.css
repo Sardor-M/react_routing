@@ -305,6 +305,11 @@ i[class*="van-type-"] {
   font-weight: 500;
   padding: 5px 20px;
 }
+a.navbar-link {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #f4c350;
+}
 
 .navbar-event a:hover {
   color: #161616;
