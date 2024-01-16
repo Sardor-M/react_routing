@@ -19,8 +19,11 @@ export default function AppRoutes() {
           <Route path="/" element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
-          <Route path="runner" element={<Runners />} />
-          <Route path="runner/:id" element={<RunnersDetail />} />
+
+          <Route path="runner">
+            <Route index element={<Runners />} />
+            <Route path=":id" element={<RunnersDetail />} />
+          </Route>
 
           <Route path="event" element={<HostLayout />}>
             <Route index element={<EventsPage />} />
