@@ -8,7 +8,7 @@ interface Upcoming {
   price: number;
 }
 
-export default function Upcoming() {
+export default function UpcomingEvent() {
   const [upcomingEvents, setUpcomingEvents] = useState<Upcoming[]>([]);
 
   useEffect(() => {
