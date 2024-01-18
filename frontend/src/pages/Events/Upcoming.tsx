@@ -12,7 +12,7 @@ export default function UpcomingEvent() {
   const [upcomingEvents, setUpcomingEvents] = useState<Upcoming[]>([]);
 
   useEffect(() => {
-    fetch("/api/events/upcoming/runner")
+    fetch("/api/events/upcoming")
       .then((response) => response.json())
       .then((data) => {
         if (Array.isArray(data.runner)) {
