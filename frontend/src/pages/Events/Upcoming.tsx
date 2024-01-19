@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 interface Upcoming {
   id: number;
   name: string;
-  imgUrl: string;
+  imageUrl: string;
   price: number;
 }
 
@@ -19,7 +19,7 @@ export default function UpcomingEvent() {
       .then((data) => {
         if (Array.isArray(data)) {
           setUpcomingEvents(data);
-          // console.log(data, "Data from the server!");
+          // console.log(data, "useEffect: Data from the server!");
         }
       })
       .catch((error) => {
@@ -28,16 +28,17 @@ export default function UpcomingEvent() {
   }, []);
 
   const upcomingEventsData = upcomingEvents.map((runner) => {
+    // console.log(runner.imageUrl, "runner.imageUrl");
     return (
       // <div key={runner.id} className="upcoming-title">
       <Link
         key={runner.id}
-        to={`/events/upcoming/${runner.id}`}
+        to={`/event/upcoming/${runner.id}`}
         aria-label={`View details for ${runner.name}`}
         className="upcoming-event-title"
       >
         <div className="upcoming-event-single" key={runner.id}>
-          <img src={runner.imgUrl} alt={`Pic of ${runner.name}`} />
+          <img src={runner.imageUrl} alt={`Pic of ${runner.name}`} />
           <div className="upcoming-event-info">
             <h3>{runner.name}</h3>
             <p>${runner.price}</p>
