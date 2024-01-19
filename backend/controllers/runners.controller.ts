@@ -106,8 +106,13 @@ export function getRunnerById(req: Request, res: Response) {
 }
 
 export function getUpcomingRunningEvents(req: Request, res: Response) {
-  const upcomingId = "11"; // hardcoded for now
-  const upcomingEvents = runners.filter((r) => r.upcomingId === upcomingId);
+  //   const upcomingId = req.query.upcomingId as string;
+  //   const upcomingEvents = runners.filter((r) => r.upcomingId === upcomingId);
+  const upcomingEvents = runners.map(({ name, price, imageUrl }) => ({
+    name,
+    price,
+    imageUrl,
+  }));
 
   res.json(upcomingEvents);
 }

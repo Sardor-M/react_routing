@@ -19,7 +19,7 @@ export default function UpcomingEvent() {
       .then((data) => {
         if (Array.isArray(data)) {
           setUpcomingEvents(data);
-          console.log(data, "Data from the server!");
+          // console.log(data, "Data from the server!");
         }
       })
       .catch((error) => {
