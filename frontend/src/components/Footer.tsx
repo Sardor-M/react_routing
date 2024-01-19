@@ -6,7 +6,7 @@ import mediumSvg from "../assets/images/mediumsvg.svg";
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <div className="footer">
       <div className="social-icons">
         <a
           href="https://github.com/sardor-m"
@@ -34,6 +34,6 @@ export default function Footer() {
         </a>
       </div>
       <p>© 2024 by Sardor-M</p>
-    </footer>
+    </div>
   );
 }

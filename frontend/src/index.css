@@ -8,6 +8,7 @@ body {
   padding: 0;
   background-color: #fff7ed;
   font-family: "Inter", sans-serif;
+  flex-direction: column;
 }
 
 body::-webkit-scrollbar {
@@ -17,6 +18,12 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -318,7 +325,6 @@ a.navbar-link {
 }
 
 /* Footer Component Styling */
-/* Footer Styling */
 
 .footer {
   background-color: rgb(30, 30, 30);
@@ -326,7 +332,7 @@ a.navbar-link {
   text-align: center;
   justify-content: center;
   padding: 40px 0;
-  margin-top: 340px;
+  margin-top: 30px;
 }
 
 .social-icons {
@@ -364,4 +370,44 @@ a.navbar-link {
     opacity: 1;
     transform: translateY(0px);
   }
+}
+
+/* Upcoming Page Styling */
+
+.upcoming-event-link-wrapper {
+  color: unset;
+  text-decoration: unset;
+}
+
+.upcoming-event-list {
+  padding-inline: 26px;
+}
+
+.upcoming-event-title {
+  padding-inline: 26px;
+}
+
+.upcoming-event-single {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 15px;
+  padding-block: 18px;
+  padding-left: 24px;
+}
+
+.upcoming-event-single > img {
+  height: 70px;
+  border-radius: 5px;
+  margin-right: 17px;
+}
+
+.upcoming-event-info h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-block: 10px;
+}
+
+.upcoming-event-info p {
+  margin-block: 10px;
 }

@@ -34,8 +34,9 @@ export default function UpcomingEvent() {
         key={runner.id}
         to={`/events/upcoming/${runner.id}`}
         aria-label={`View details for ${runner.name}`}
+        className="upcoming-event-title"
       >
-        <div className="upcoming-event" key={runner.id}>
+        <div className="upcoming-event-single" key={runner.id}>
           <img src={runner.imgUrl} alt={`Pic of ${runner.name}`} />
           <div className="upcoming-event-info">
             <h3>{runner.name}</h3>
