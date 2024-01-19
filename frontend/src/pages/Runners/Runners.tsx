@@ -4,35 +4,35 @@ import { Link } from "react-router-dom";
 interface Runner {
   id: number;
   name: string;
-  email: string;
-  location: string;
-  distance: number;
   price: number;
   type: string;
-  pace: number;
-  time: number;
   description: string;
   imageUrl: string;
+  upcomingId: string;
 }
 
 export default function Runners() {
   const [runners, setRunners] = useState<Runner[]>([]);
 
   useEffect(() => {
-    fetch("/api/runners")
+    fetch("http://localhost:4000/api/runners")
       .then((response) => response.json())
       .then((data) => {
-        if (Array.isArray(data.runners)) {
-          setRunners(data.runners);
+        // console.log(data, "Received data from server!");
+        if (Array.isArray(data)) {
+          setRunners(data);
+          console.log(data, "Data From Server!");
         }
       });
   }, []);
+
+  // console.log(runners, "runners");
 
   const runnersArray = runners.map((runner) => (
     <div key={runner.id} className="runner-title">
       {" "}
       <Link
-        to={`/runner/${runner.id}`}
+        to={`/runners/${runner.id}`}
         aria-label={`View details for ${runner.name}`}
       >
         <img src={runner.imageUrl} alt={runner.name} />

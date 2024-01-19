@@ -12,13 +12,18 @@ export default function UpcomingEvent() {
   const [upcomingEvents, setUpcomingEvents] = useState<Upcoming[]>([]);
 
   useEffect(() => {
-    fetch("/api/events/upcoming")
-      .then((response) => response.json())
+    fetch("http://localhost:4000/api/events/upcoming")
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
-        if (Array.isArray(data.runner)) {
-          setUpcomingEvents(data.runner);
-          console.log(data.runner, "data.runner");
+        if (Array.isArray(data)) {
+          setUpcomingEvents(data);
+          console.log(data, "Data from the server!");
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }, []);
 
@@ -26,6 +31,7 @@ export default function UpcomingEvent() {
     return (
       // <div key={runner.id} className="upcoming-title">
       <Link
+        key={runner.id}
         to={`/events/upcoming/${runner.id}`}
         aria-label={`View details for ${runner.name}`}
       >
