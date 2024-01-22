@@ -14,7 +14,7 @@ export default function Navbar() {
           About
         </NavLink>
         <NavLink
-          to="/event"
+          to="/events"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           Events

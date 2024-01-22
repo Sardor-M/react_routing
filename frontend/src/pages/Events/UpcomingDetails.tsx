@@ -6,17 +6,20 @@ import { useParams } from "react-router";
 interface EventsDetails {
   id: number;
   name: string;
-  imageUrl: string;
   price: number;
+  imageUrl: string;
   description: string;
 }
 
 export default function UpcomingDetails() {
   const [eventsDetails, setEventsDetails] = useState<EventsDetails[]>();
 
-  const params = useParams();
+  const { id } = useParams<{ id: string }>();
 
-  const urlPath = `http://localhost:4000/api/events/upcoming/${params.id}`;
+  const urlPath = `http://localhost:4000/api/events/upcoming/${id}`;
+  console.log(id, "ID OF THE EVENT");
+
+  // console.log(id, ": params.id");
 
   useEffect(() => {
     fetch(urlPath)
@@ -24,21 +27,21 @@ export default function UpcomingDetails() {
         return response.json();
       })
       .then((data) => {
-        console.log(data, "Events detaild from the server!");
-        setEventsDetails(data.runners);
+        console.log(data, "Events detail from the server!");
+        setEventsDetails(data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [urlPath]);
 
-  // console.log(id, "id");
-
   const eventsDetailsData = eventsDetails?.map((event) => {
+    console.log(event, "event");
     return (
       <div key={event.id} className="upcoming-event-details">
         <img src={event.imageUrl} alt={`Pic of ${event.name}`} />
         <h3> {event.name}</h3>
+        <p> {event.id}</p>
         <p> ${event.price}</p>
         <p> {event.description}</p>
       </div>

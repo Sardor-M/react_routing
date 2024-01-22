@@ -122,5 +122,7 @@ export function getUpcomingRunningEventsById(req: Request, res: Response) {
   const id = Number(req.params.id);
   const upcomingRunningEventId = runners.filter((r) => r.id === id);
 
-  res.json(upcomingRunningEventId);
+  upcomingRunningEventId
+    ? res.json(upcomingRunningEventId)
+    : res.status(404).json({ message: "Runner not found" });
 }

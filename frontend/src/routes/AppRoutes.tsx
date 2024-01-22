@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Footer from "../components/Footer";
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
 import ContactPage from "../pages/ContactPage";
@@ -9,9 +8,10 @@ import Layout from "../components/Layout";
 import EventsPage from "../pages/Events/EventsPage";
 import DashboardPage from "../pages/Events/DashboardPage";
 import ReviewsPages from "../pages/Events/ReviewsPage";
-import HostLayout from "../components/EventLayout";
+// import HostLayout from "../components/EventLayout";
 import Upcoming from "../pages/Events/Upcoming";
 import UpcomingDetails from "../pages/Events/UpcomingDetails";
+import EventLayout from "../components/EventLayout";
 
 export default function AppRoutes() {
   return (
@@ -27,7 +27,7 @@ export default function AppRoutes() {
             <Route path=":id" element={<RunnersDetail />} />
           </Route>
 
-          <Route path="event" element={<HostLayout />}>
+          <Route path="events" element={<EventLayout />}>
             <Route index element={<EventsPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="upcoming" element={<Upcoming />} />

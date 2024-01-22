@@ -1,31 +1,31 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
-export default function HostLayout() {
+export default function EventLayout() {
   return (
     <>
       <nav className="navbar-event">
         <NavLink
-          to="/event"
+          to="/events"
           end
           className={({ isActive }) => (isActive ? "navbar-link" : "")}
         >
           Event
         </NavLink>
         <NavLink
-          to="/event/dashboard"
+          to="/events/dashboard"
           className={({ isActive }) => (isActive ? "navbar-link" : "")}
         >
           Dashboard
         </NavLink>
         <NavLink
-          to="/event/upcoming"
+          to="/events/upcoming"
           className={({ isActive }) => (isActive ? "navbar-link" : "")}
         >
           Upcoming
         </NavLink>
         <NavLink
-          to="/event/review"
+          to="/events/review"
           className={({ isActive }) => (isActive ? "navbar-link" : "")}
         >
           Reviews
