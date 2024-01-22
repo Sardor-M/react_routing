@@ -19,7 +19,8 @@ export default function RunnersDetail() {
   // console.log(params.id);
 
   useEffect(() => {
-    fetch(`/api/runners/${params.id}`)
+    fetch(`http://localhost:4000/api/runners/${params.id}`)
+      // /api/runners/${params.id}
       .then((reponse) => reponse.json())
       .then((data) => {
         console.log(data);
