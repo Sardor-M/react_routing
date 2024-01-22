@@ -27,21 +27,20 @@ export default function UpcomingEvent() {
       });
   }, []);
 
-  const upcomingEventsData = upcomingEvents.map((runner) => {
-    // console.log(runner.imageUrl, "runner.imageUrl");
+  const upcomingEventsData = upcomingEvents.map((event) => {
+    // console.log(upcomingEvents, "upcomingEvents");
     return (
-      // <div key={runner.id} className="upcoming-title">
       <Link
-        key={runner.id}
-        to={`/events/upcoming/${runner.id}`}
-        aria-label={`View details for ${runner.name}`}
+        key={event.id}
+        to={`/events/upcoming/${event.id}`}
+        aria-label={`View details for ${event.name}`}
         className="upcoming-event-title"
       >
-        <div className="upcoming-event-single" key={runner.id}>
-          <img src={runner.imageUrl} alt={`Pic of ${runner.name}`} />
+        <div className="upcoming-event-single" key={event.id}>
+          <img src={event.imageUrl} alt={`Pic of ${event.name}`} />
           <div className="upcoming-event-info">
-            <h3>{runner.name}</h3>
-            <p>${runner.price}</p>
+            <h3>{event.name}</h3>
+            <p>${event.price}</p>
           </div>
         </div>{" "}
       </Link>

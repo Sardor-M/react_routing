@@ -22,21 +22,23 @@ export default function UpcomingDetails() {
   // console.log(id, ": params.id");
 
   useEffect(() => {
-    fetch(urlPath)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data, "Events detail from the server!");
-        setEventsDetails(data);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(urlPath);
+        const data = await response.json();
+        console.log(data, " Data fromt the server for Event Details page!");
+        setEventsDetails(data.runners);
+      } catch (error) {
         console.log(error);
-      });
+      }
+    };
+    fetchData();
   }, [urlPath]);
 
+  // console.log(eventsDetails, "EVENTS DETAILS");
   const eventsDetailsData = eventsDetails?.map((event) => {
-    console.log(event, "event");
+    // console.log(event.id, "EVENT DETIALS ID IS PRINTED");
+    console.log(eventsDetails, "EVENTS DETAILS");
     return (
       <div key={event.id} className="upcoming-event-details">
         <img src={event.imageUrl} alt={`Pic of ${event.name}`} />

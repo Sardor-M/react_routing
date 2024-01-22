@@ -106,9 +106,10 @@ export function getRunnerById(req: Request, res: Response) {
 }
 
 export function getUpcomingRunningEvents(req: Request, res: Response) {
-  const upcomingEvents = runners.map(({ name, price, imageUrl }) => {
+  const upcomingEvents = runners.map(({ id, name, price, imageUrl }) => {
     // console.log(name, price, imageUrl);
     return {
+      id,
       name,
       price,
       imageUrl,
@@ -120,7 +121,7 @@ export function getUpcomingRunningEvents(req: Request, res: Response) {
 
 export function getUpcomingRunningEventsById(req: Request, res: Response) {
   const id = Number(req.params.id);
-  const upcomingRunningEventId = runners.filter((r) => r.id === id);
+  const upcomingRunningEventId = runners.find((r) => r.id === id);
 
   upcomingRunningEventId
     ? res.json(upcomingRunningEventId)
