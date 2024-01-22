@@ -10,7 +10,8 @@ interface EventsDetails {
 }
 
 export default function UpcomingDetails() {
-  const [eventsDetails, setEventsDetails] = useState<EventsDetails[]>([]);
+  // saving the fetched data as an object
+  const [eventsDetails, setEventsDetails] = useState<EventsDetails>();
 
   const { id } = useParams<{ id: string }>();
 
@@ -36,21 +37,33 @@ export default function UpcomingDetails() {
 
   // console.log(eventsDetails, "EVENTS DETAILS");
   console.log(eventsDetails, "EVENTS DETAILS Before return statement");
-  const eventsDetailsData =
-    Array.from(eventsDetails) && eventsDetails.length > 0 ? (
-      eventsDetails.map((event) => {
-        return (
-          <div key={event.id} className="upcoming-event-details">
-            {/* <img src={event.imageUrl} alt={`Pic of ${event.name}`} /> */}
-            <h3> {event.name}</h3>
-            <p> ${event.price}</p>
-            <p> {event.description}</p>
-          </div>
-        );
-      })
-    ) : (
-      <p> No upcoming events found.</p>
-    );
+  // const eventsDetailsData =
+  //   Array.from(eventsDetails) && eventsDetails.length > 0 ? (
+  //     eventsDetails.map((event) => {
+  //       return (
+  //         <div key={event.id} className="upcoming-event-details">
+  //           {/* <img src={event.imageUrl} alt={`Pic of ${event.name}`} /> */}
+  //           <h3> {event.name}</h3>
+  //           <p> ${event.price}</p>
+  //           <p> {event.description}</p>
+  //         </div>
+  //       );
+  //     })
+  //   ) : (
+  //     <p> No upcoming events found.</p>
+  //   );
+
+  const eventsDetailsData = eventsDetails ? (
+    <div className="upcoming-event-details">
+      <img src={eventsDetails.imageUrl} alt={`Pic of ${eventsDetails.name}`} />
+      <h3> {eventsDetails.name}</h3>
+      <p> {eventsDetails.id}</p>
+      <p> ${eventsDetails.price}</p>
+      <p> {eventsDetails.description}</p>
+    </div>
+  ) : (
+    <p>No upcoming events found.</p>
+  );
 
   return (
     <div className="container">
