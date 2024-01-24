@@ -411,3 +411,32 @@ a.navbar-link {
 .upcoming-event-info p {
   margin-block: 10px;
 }
+
+.upcoming-details-layout-container {
+  background-color: white;
+  padding: 24px;
+  margin: 30px 26px;
+}
+
+.upcoming-details {
+  display: flex;
+  align-items: center;
+}
+
+.upcoming-details > img {
+  height: 160px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.upcoming-details-info-text > h3 {
+  margin-top: 24px;
+  margin-bottom: 5px;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.upciming-details-info-text > h4 {
+  font-size: 20px;
+  margin-block: 0;
+}

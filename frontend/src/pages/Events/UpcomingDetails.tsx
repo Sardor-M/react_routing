@@ -7,6 +7,7 @@ interface EventsDetails {
   name: string;
   price: number;
   description: string;
+  type: string;
 }
 
 export default function UpcomingDetails() {
@@ -14,9 +15,7 @@ export default function UpcomingDetails() {
   const [eventsDetails, setEventsDetails] = useState<EventsDetails>();
 
   const { id } = useParams<{ id: string }>();
-
   const urlPath = `http://localhost:4000/api/events/upcoming/${id}`;
-  // console.log(id, "ID OF THE EVENT");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,40 +34,40 @@ export default function UpcomingDetails() {
     fetchData();
   }, [urlPath]);
 
-  // console.log(eventsDetails, "EVENTS DETAILS");
-  console.log(eventsDetails, "EVENTS DETAILS Before return statement");
-  // const eventsDetailsData =
-  //   Array.from(eventsDetails) && eventsDetails.length > 0 ? (
-  //     eventsDetails.map((event) => {
-  //       return (
-  //         <div key={event.id} className="upcoming-event-details">
-  //           {/* <img src={event.imageUrl} alt={`Pic of ${event.name}`} /> */}
-  //           <h3> {event.name}</h3>
-  //           <p> ${event.price}</p>
-  //           <p> {event.description}</p>
-  //         </div>
-  //       );
-  //     })
-  //   ) : (
-  //     <p> No upcoming events found.</p>
-  //   );
-
-  const eventsDetailsData = eventsDetails ? (
-    <div className="upcoming-event-details">
-      <img src={eventsDetails.imageUrl} alt={`Pic of ${eventsDetails.name}`} />
-      <h3> {eventsDetails.name}</h3>
-      <p> {eventsDetails.id}</p>
-      <p> ${eventsDetails.price}</p>
-      <p> {eventsDetails.description}</p>
-    </div>
-  ) : (
-    <p>No upcoming events found.</p>
-  );
-
   return (
-    <div className="container">
-      <h1>UpcomingDetails</h1>
-      {eventsDetailsData}
-    </div>
+    <section>
+      <div className="upcoming-details-layout-container">
+        <div className="upcoming-details">
+          <img
+            src={eventsDetails?.imageUrl}
+            alt={`Pic of ${eventsDetails?.name}`}
+          />
+          <div className="upcoming-details-info-text">
+            <i className={`runner-type runner-type ${eventsDetails?.type}`}>
+              {eventsDetails?.price}
+            </i>
+            <h3> {eventsDetails?.name}</h3>
+            <h4> ${eventsDetails?.price}</h4>
+            {/* <p> {eventsDetails?.description}</p> */}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
+
+// const eventsDetailsData =
+//   Array.from(eventsDetails) && eventsDetails.length > 0 ? (
+//     eventsDetails.map((event) => {
+//       return (
+//         <div key={event.id} className="upcoming-event-details">
+//           {/* <img src={event.imageUrl} alt={`Pic of ${event.name}`} /> */}
+//           <h3> {event.name}</h3>
+//           <p> ${event.price}</p>
+//           <p> {event.description}</p>
+//         </div>
+//       );
+//     })
+//   ) : (
+//     <p> No upcoming events found.</p>
+//   );
