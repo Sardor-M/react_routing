@@ -13,19 +13,19 @@ export default function EventLayout() {
           Event
         </NavLink>
         <NavLink
-          to="/events/dashboard"
+          to="dashboard"
           className={({ isActive }) => (isActive ? "navbar-link" : "")}
         >
           Dashboard
         </NavLink>
         <NavLink
-          to="/events/upcoming"
+          to="upcoming"
           className={({ isActive }) => (isActive ? "navbar-link" : "")}
         >
           Upcoming
         </NavLink>
         <NavLink
-          to="/events/review"
+          to="review"
           className={({ isActive }) => (isActive ? "navbar-link" : "")}
         >
           Reviews

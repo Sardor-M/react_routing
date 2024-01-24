@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 interface EventsDetails {
   id: number;
@@ -36,6 +37,9 @@ export default function UpcomingDetails() {
 
   return (
     <section>
+      <Link to=".." relative="path" className="back-button">
+        &larr; <span>Back</span>
+      </Link>
       <div className="upcoming-details-layout-container">
         <div className="upcoming-details">
           <img
@@ -44,7 +48,7 @@ export default function UpcomingDetails() {
           />
           <div className="upcoming-details-info-text">
             <i className={`runner-type runner-type ${eventsDetails?.type}`}>
-              {eventsDetails?.price}
+              {eventsDetails?.type}
             </i>
             <h3> {eventsDetails?.name}</h3>
             <h4> ${eventsDetails?.price}</h4>
