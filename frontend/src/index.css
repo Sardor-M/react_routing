@@ -452,3 +452,29 @@ a.navbar-link {
   font-size: 20px;
   margin-block: 0;
 }
+
+.upcoming-event-details-nav {
+  display: flex;
+  margin-block: 25px;
+}
+
+.upcoming-event-details-nav a {
+  text-decoration: none;
+  color: #4d4d4d;
+  font-weight: 500;
+  padding: 5px 20px;
+}
+
+.upcoming-event-details-nav a:first-of-type {
+  text-decoration: none;
+  color: #4d4d4d;
+  font-weight: 500;
+  padding: 5px 15px;
+  margin-left: -15px;
+}
+
+.upcoming-event-details-nav a:hover {
+  color: #161616;
+  text-decoration: underline;
+  font-weight: 700;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Outlet, useParams } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 
 interface EventsDetails {
   id: number;
@@ -35,7 +35,7 @@ export default function UpcomingDetails() {
     fetchData();
   }, [urlPath]);
 
-  return (
+  return eventsDetails ? (
     <section>
       <Link to=".." relative="path" className="back-button">
         &larr; <span>Back</span>
@@ -55,8 +55,27 @@ export default function UpcomingDetails() {
             {/* <p> {eventsDetails?.description}</p> */}
           </div>
         </div>
+
+        <nav className="upcoming-event-details-nav">
+          <NavLink
+            to="."
+            className={({ isActive }) => (isActive ? "navbar-link" : undefined)}
+          >
+            Details
+          </NavLink>
+          <NavLink
+            to="photos"
+            className={({ isActive }) => (isActive ? "navbar-link" : undefined)}
+          >
+            Photos
+          </NavLink>
+        </nav>
+
+        <Outlet />
       </div>
     </section>
+  ) : (
+    <h2> Loading ...</h2>
   );
 }
 

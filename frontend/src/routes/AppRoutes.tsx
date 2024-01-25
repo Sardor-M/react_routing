@@ -11,8 +11,8 @@ import ReviewsPages from "../pages/Events/ReviewsPage";
 import Upcoming from "../pages/Events/Upcoming";
 import UpcomingDetails from "../pages/Events/UpcomingDetails";
 import EventLayout from "../components/EventLayout";
+import UpcomingEventDetailsPhotos from "../pages/Events/UpcomingEventPhotos";
 import UpcomingEventDetails from "../pages/Events/UpcomingEventDetails";
-import UpcomingEventDetailsPhotos from "../pages/Events/UpcomingEventDetailsPhotos";
 
 export default function AppRoutes() {
   return (
@@ -31,17 +31,12 @@ export default function AppRoutes() {
           <Route path="events" element={<EventLayout />}>
             <Route index element={<EventsPage />} />
             <Route path="dashboard" element={<DashboardPage />} />
-            <Route path="upcoming" element={<Upcoming />} />
-            <Route path="upcoming/:id" element={<UpcomingDetails />} />
-            <Route
-              path="upcoming/:id/details"
-              element={<UpcomingEventDetails />}
-            />
-            <Route
-              path="upcoming/:id/photos"
-              element={<UpcomingEventDetailsPhotos />}
-            />
             <Route path="review" element={<ReviewsPages />} />
+            <Route path="upcoming" element={<Upcoming />} />
+            <Route path="upcoming/:id" element={<UpcomingDetails />}>
+              <Route index element={<UpcomingEventDetails />} />
+              <Route path="photos" element={<UpcomingEventDetailsPhotos />} />
+            </Route>
           </Route>
         </Route>
       </Routes>
