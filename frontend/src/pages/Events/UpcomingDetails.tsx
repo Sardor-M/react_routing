@@ -70,8 +70,7 @@ export default function UpcomingDetails() {
             Photos
           </NavLink>
         </nav>
-
-        <Outlet />
+        <Outlet context={eventsDetails} />
       </div>
     </section>
   ) : (
