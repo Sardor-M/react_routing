@@ -30,6 +30,7 @@ export default function EventLayout() {
         >
           Reviews
         </NavLink>
+        
       </nav>
       <Outlet />
     </>
