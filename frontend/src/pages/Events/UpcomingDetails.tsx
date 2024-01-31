@@ -13,7 +13,7 @@ interface EventsDetails {
 
 export default function UpcomingDetails() {
   // saving the fetched data as an object
-  const [eventsDetails, setEventsDetails] = useState<EventsDetails>();
+  const [eventDetails, setEventsDetails] = useState<EventsDetails>();
 
   const { id } = useParams<{ id: string }>();
   const urlPath = `http://localhost:4000/api/events/upcoming/${id}`;
@@ -35,7 +35,7 @@ export default function UpcomingDetails() {
     fetchData();
   }, [urlPath]);
 
-  return eventsDetails ? (
+  return eventDetails ? (
     <section>
       <Link to=".." relative="path" className="back-button">
         &larr; <span>Back</span>
@@ -43,15 +43,15 @@ export default function UpcomingDetails() {
       <div className="upcoming-details-layout-container">
         <div className="upcoming-details">
           <img
-            src={eventsDetails?.imageUrl}
-            alt={`Pic of ${eventsDetails?.name}`}
+            src={eventDetails?.imageUrl}
+            alt={`Pic of ${eventDetails?.name}`}
           />
           <div className="upcoming-details-info-text">
-            <i className={`runner-type runner-type ${eventsDetails?.type}`}>
-              {eventsDetails?.type}
+            <i className={`runner-type runner-type ${eventDetails?.type}`}>
+              {eventDetails?.type}
             </i>
-            <h3> {eventsDetails?.name}</h3>
-            <h4> ${eventsDetails?.price}</h4>
+            <h3> {eventDetails?.name}</h3>
+            <h4> ${eventDetails?.price}</h4>
             {/* <p> {eventsDetails?.description}</p> */}
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function UpcomingDetails() {
             Photos
           </NavLink>
         </nav>
-        <Outlet context={{ eventsDetails }} />
+        <Outlet context={{ eventDetails }} />
       </div>
     </section>
   ) : (

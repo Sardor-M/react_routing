@@ -1,15 +1,31 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
 
+interface OutletContext {
+  eventDetails: {
+    name: string;
+    description: string;
+    type: string;
+  };
+}
+
 export default function UpcomingEventDetails() {
-  const { eventDetails } = useOutletContext();
+  const { eventDetails } = useOutletContext() as OutletContext;
 
   return (
-    <section>
-      <h4>Name: {eventDetails.name}</h4>
-      <h4>Decription: {eventDetails.description}</h4>
-      <h4>Category: {eventDetails.type}</h4>
-      <h4>Visibility: public</h4>
+    <section className="upcoming-event-details-info">
+      <h4>
+        Name: <span> {eventDetails.name} </span>
+      </h4>
+      <h4>
+        Decription: <span> {eventDetails.description}</span>
+      </h4>
+      <h4>
+        Category: <span>{eventDetails.type}</span>
+      </h4>
+      <h4>
+        Visibility: <span>Public</span>
+      </h4>
     </section>
   );
 }
