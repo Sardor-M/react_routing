@@ -272,6 +272,7 @@ i[class*="van-type-"] {
 }
 
 .runner-detail-container .back-button:visited {
+  color: black;
 }
 
 .runner-detail-container .back-button span {
@@ -491,7 +492,7 @@ a.navbar-link {
   font-weight: 500;
 }
 
-.upcoming-event-details-img {
+upcoming-event-details-img {
   height: 100px;
   border-radius: 5px;
 }
