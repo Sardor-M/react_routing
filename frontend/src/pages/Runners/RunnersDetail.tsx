@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 interface RunnerDetails {
   type: string;
@@ -27,6 +27,7 @@ export default function RunnersDetail() {
         setRunnersDetails(data.runner);
       });
   }, [params.id]);
+ 
   return (
     <div className="runner-detail-container">
       {runnerDetails ? (

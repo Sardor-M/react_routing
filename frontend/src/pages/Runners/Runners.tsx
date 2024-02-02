@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 interface Runner {
   id: number;
@@ -12,7 +12,11 @@ interface Runner {
 }
 
 export default function Runners() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [runners, setRunners] = useState<Runner[]>([]);
+
+  const typeFilter = searchParams.get("type") || "";
+  // console.log(typeFilter, "typeFilter");
 
   useEffect(() => {
     fetch("http://localhost:4000/api/runners")
@@ -26,7 +30,9 @@ export default function Runners() {
       });
   }, []);
 
-  // console.log(runners, "runners");
+  const displayRunner = typeFilter
+    ? runners.filter((runner) => runner.type === typeFilter)
+    : runners;
 
   const runnersArray = runners.map((runner) => (
     <div key={runner.id} className="runner-title">
