@@ -211,6 +211,13 @@ header a:hover {
 .runner-list-container button:hover {
   transform: translate(1px, 1px);
 }
+
+.runner-list-filter-button {
+  margin-right: 20px;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+}
 .runner-type {
   height: 34px;
   padding: 6px 26px;

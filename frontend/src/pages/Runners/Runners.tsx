@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 
 interface Runner {
   id: number;
@@ -12,9 +17,9 @@ interface Runner {
 }
 
 export default function Runners() {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const type = queryParams.get("type");
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const type = queryParams.get("type");
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [runners, setRunners] = useState<Runner[]>([]);
@@ -60,23 +65,35 @@ export default function Runners() {
   return (
     <div className="runner-list-container">
       <h1> Explore running communites around you.</h1>
-      <div className="runner-list-container button">
-        <Link to="?type=simple" className="runner-type simple">
+      <div className="runner-list-filter-button">
+        <button
+          onClick={() => setSearchParams({ type: "simple" })}
+          className="runner-type simple"
+        >
           {" "}
-          Simple{" "}
-        </Link>
-        <Link to="?type=luxury" className="runner-type luxury">
+          Simple
+        </button>
+        <button
+          onClick={() => setSearchParams({ type: "luxury" })}
+          className="runner-type luxury"
+        >
           {" "}
-          Luxury{" "}
-        </Link>
-        <Link to="?type=rugged" className="runner-type rugged">
+          Simple
+        </button>
+        <button
+          onClick={() => setSearchParams({ type: "rugged" })}
+          className="runner-type rugged"
+        >
           {" "}
-          Rugged{" "}
-        </Link>
-        <Link to="/runner" className="runner-type clear-filters">
+          Simple
+        </button>
+        <button
+          onClick={() => setSearchParams(".")}
+          className="runner-type clear-filters"
+        >
           {" "}
-          Clear{" "}
-        </Link>
+          Clear Filters
+        </button>
       </div>
       <div className="runner-list">{runnersArray}</div>
     </div>
