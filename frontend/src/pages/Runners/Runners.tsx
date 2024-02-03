@@ -60,7 +60,7 @@ export default function Runners() {
   return (
     <div className="runner-list-container">
       <h1> Explore running communites around you.</h1>
-      <div className="runner-type-filter">
+      <div className="runner-list-container button">
         <Link to="?type=simple" className="runner-type simple">
           {" "}
           Simple{" "}
@@ -72,6 +72,10 @@ export default function Runners() {
         <Link to="?type=rugged" className="runner-type rugged">
           {" "}
           Rugged{" "}
+        </Link>
+        <Link to="/runner" className="runner-type clear-filters">
+          {" "}
+          Clear{" "}
         </Link>
       </div>
       <div className="runner-list">{runnersArray}</div>

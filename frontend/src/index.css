@@ -181,13 +181,15 @@ header a:hover {
 /*** Runner's Page ***/
 .runner-list-container {
   padding-inline: 23px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .runner-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
-  gap: 34px;
+  gap: 50px;
   margin-top: 57px;
 }
 
@@ -206,6 +208,9 @@ header a:hover {
   cursor: pointer;
 }
 
+.runner-list-container button:hover {
+  transform: translate(1px, 1px);
+}
 .runner-type {
   height: 34px;
   padding: 6px 26px;
