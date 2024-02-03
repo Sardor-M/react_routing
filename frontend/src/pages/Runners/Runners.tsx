@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 
 interface Runner {
   id: number;
@@ -12,11 +12,14 @@ interface Runner {
 }
 
 export default function Runners() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const type = queryParams.get("type");
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [runners, setRunners] = useState<Runner[]>([]);
 
   const typeFilter = searchParams.get("type") || "";
-  // console.log(typeFilter, "typeFilter");
 
   useEffect(() => {
     fetch("http://localhost:4000/api/runners")
@@ -34,7 +37,7 @@ export default function Runners() {
     ? runners.filter((runner) => runner.type === typeFilter)
     : runners;
 
-  const runnersArray = runners.map((runner) => (
+  const runnersArray = displayRunner.map((runner) => (
     <div key={runner.id} className="runner-title">
       {" "}
       <Link
@@ -57,6 +60,20 @@ export default function Runners() {
   return (
     <div className="runner-list-container">
       <h1> Explore running communites around you.</h1>
+      <div className="runner-type-filter">
+        <Link to="?type=simple" className="runner-type simple">
+          {" "}
+          Simple{" "}
+        </Link>
+        <Link to="?type=luxury" className="runner-type luxury">
+          {" "}
+          Luxury{" "}
+        </Link>
+        <Link to="?type=rugged" className="runner-type rugged">
+          {" "}
+          Rugged{" "}
+        </Link>
+      </div>
       <div className="runner-list">{runnersArray}</div>
     </div>
   );
