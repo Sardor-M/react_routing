@@ -62,38 +62,47 @@ export default function Runners() {
     </div>
   ));
 
+  const handleFilterChange = (key: string, value: string | null) => {
+    setSearchParams((prevParams) => {
+      value === null ? prevParams.delete(key) : prevParams.set(key, value);
+      return prevParams;
+    });
+  };
+
   return (
     <div className="runner-list-container">
       <h1> Explore running communites around you.</h1>
       <div className="runner-list-filter-button">
         <button
-          onClick={() => setSearchParams({ type: "simple" })}
+          onClick={() => handleFilterChange("type", "simple")}
           className="runner-type simple"
         >
           {" "}
           Simple
         </button>
         <button
-          onClick={() => setSearchParams({ type: "luxury" })}
+          onClick={() => handleFilterChange("type", "luxury")}
           className="runner-type luxury"
         >
           {" "}
-          Simple
+          Luxury
         </button>
         <button
-          onClick={() => setSearchParams({ type: "rugged" })}
+          onClick={() => handleFilterChange("type", "rugged")}
           className="runner-type rugged"
         >
           {" "}
-          Simple
+          Rugged
         </button>
-        <button
-          onClick={() => setSearchParams(".")}
-          className="runner-type clear-filters"
-        >
-          {" "}
-          Clear Filters
-        </button>
+        {typeFilter ? (
+          <button
+            onClick={() => handleFilterChange("type", null)}
+            className="runner-type clear-filters"
+          >
+            {" "}
+            Clear Filters
+          </button>
+        ) : null}
       </div>
       <div className="runner-list">{runnersArray}</div>
     </div>
