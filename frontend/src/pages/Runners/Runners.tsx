@@ -75,21 +75,27 @@ export default function Runners() {
       <div className="runner-list-filter-button">
         <button
           onClick={() => handleFilterChange("type", "simple")}
-          className="runner-type simple"
+          className={`runner-type simple ${
+            typeFilter === "simple" ? "selected" : ""
+          }`}
         >
           {" "}
           Simple
         </button>
         <button
           onClick={() => handleFilterChange("type", "luxury")}
-          className="runner-type luxury"
+          className={`runner-type luxury ${
+            typeFilter === "luxury" ? "selected" : ""
+          }`}
         >
           {" "}
           Luxury
         </button>
         <button
           onClick={() => handleFilterChange("type", "rugged")}
-          className="runner-type rugged"
+          className={`runner-type rugged ${
+            typeFilter === "rugged" ? "selected" : ""
+          }`}
         >
           {" "}
           Rugged
