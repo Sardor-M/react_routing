@@ -73,8 +73,6 @@ const Homepage: React.FC = () => {
     prevArrow: <SamplePrevArrow />,
   };
 
-  //   console.log(CarouselComponent.);
-
   return (
     <div className="carousel-wrapper">
       <Slider {...settings}>

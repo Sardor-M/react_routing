@@ -24,7 +24,6 @@ export default function ContactPage() {
           placeholder="Write your inquiry here.."
           style={{ height: "200px" }}
         ></textarea>
-
         <input type="submit" value="Submit" />
       </form>
     </div>

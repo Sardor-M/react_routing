@@ -16,7 +16,6 @@ export default function RunnersDetail() {
   const [runnerDetails, setRunnersDetails] = useState<RunnerDetails>();
 
   const params = useParams();
-  // console.log(params.id);
 
   useEffect(() => {
     fetch(`http://localhost:4000/api/runners/${params.id}`)
