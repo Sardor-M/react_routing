@@ -36,28 +36,28 @@ export default function FilterPageDetails() {
     }
 
   return (
-    <div className='container'>
-     <h1 className='filter-page-left'>FilterPageDetails</h1>
-      <button onClick ={() => handleFilterChange("short-run")} className="btn btn-primary"> Short-Runs</button>
-      <button onClick={() => handleFilterChange("long-run")} className='btn btn-primary'>Long-runs</button>
-      <button onClick={() => handleFilterChange("marathons")} className="btn btn-primary"> Marathons</button>
-      <button onClick={() => handleFilterChange("short-distance-races")} className="btn btn-primary">Short Distance Races</button>
-
-      <div className="filtered-event-list">
-          <h1 className='events-filtered'> Events </h1>
-          <ul>
-            {category.map((event) => (
-              <div className='running-event-id' key={event.id}>{event.id}
-                <h2 key={event.type}>{event.type}</h2>
-                <li key={event.date}>{event.date.toString()}</li>
-                <li key={event.description}>{event.description}</li>
-                <li key={event.location}>{event.location}</li>
-                <li key={event.distanceLength}>{event.distanceLength}</li>
-              </div>
-            ))}
-          </ul>
-        </div> 
+    <div className='filter-container'>
+      <h3 className='filter-page-left'>FilterPageDetails</h3>
+        <div className='filter-page-left input' onChange={event => handleFilterChange((event.target as HTMLInputElement).value)}> 
+          <input type="radio" value="short-run" name="filter"/> short run 
+          <input type="radio" value="long-run" name="filter"/> long run
+          <input type="radio" value="marathon" name="filter"/> marathon
+          <input type="radio" value="short-distance-race" name="filter"/> short-distance run
+        </div>
+        <div className="filtered-event-list">
+            <h2 className='events-filtered'> Events </h2>
+            <ul>
+              {category.map((event) => (
+                <div className='filtered-event-result-list' key={event.id}>{event.id}
+                  <h2 key={event.type}>{event.type}</h2>
+                  <li key={event.date}>{event.date.toString()}</li>
+                  <li key={event.description}>{event.description}</li>
+                  <li key={event.location}>{event.location}</li>
+                  <li key={event.distanceLength}>{event.distanceLength}</li>
+                </div>
+              ))}
+            </ul>
+          </div> 
     </div>
-    
   )
 };
