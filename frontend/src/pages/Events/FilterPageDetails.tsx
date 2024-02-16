@@ -36,12 +36,15 @@ export default function FilterPageDetails() {
     }
 
   return (
-    <div className='filter-container'>
+    <div className='filter-page-container'>
       <h3 className='filter-page-left'>FilterPageDetails</h3>
         <div className='filter-page-left input' onChange={event => handleFilterChange((event.target as HTMLInputElement).value)}> 
-          <input type="radio" value="short-run" name="filter"/> short run 
-          <input type="radio" value="long-run" name="filter"/> long run
-          <input type="radio" value="marathon" name="filter"/> marathon
+          <input type="radio" value="short-run" name="filter"> short run
+          <label htmlFor="option1">short run</label> </input> <br></br>  
+          <input type="radio" value="long-run" name="filter"> long run
+          <label htmlFor="option1"> long run </label> </input> <br></br> 
+          <input type="radio" value="marathon" name="filter"> marathon
+          <label htmlFor="option1">marathon</label> </input> <br></br> 
           <input type="radio" value="short-distance-race" name="filter"/> short-distance run
         </div>
         <div className="filtered-event-list">

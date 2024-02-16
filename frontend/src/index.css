@@ -512,7 +512,7 @@ upcoming-event-details-img {
 
 /* FilterComponent Styling */
 
-.filter-container{
+.filter-page-container{
   display: flex;
   flex-direction: column;
 }
@@ -522,18 +522,32 @@ upcoming-event-details-img {
 }
 
 .filter-page-left input [type="radio"] {
-  display: flex;
-  margin-right: 10px
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f4c350;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+.filter-page-left input [type="radio"]:checked {
+  background-color: #4d4d4d;
 }
 
-.filtered-event-list {
+.filter-page-left label {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+/* .filtered-event-list {
   flex: 3;
   padding-inline: 26px;
-}
+} */
 
-.filtered-event-result-list{
+/* .filtered-event-result-list{
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
-}
+} */
