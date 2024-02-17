@@ -106,15 +106,25 @@ export function getRunnerById(req: Request, res: Response) {
 }
 
 export function getUpcomingRunningEvents(req: Request, res: Response) {
-  const upcomingEvents = runners.map(({ id, name, price, imageUrl }) => {
+  // Get the filter value from the query parameter
+  const typeFilter = req.query.type as string;
+
+  let upcomingEvents = runners.map(({ id, type, name, price, imageUrl }) => {
     // console.log(name, price, imageUrl);
     return {
       id,
+      type,
       name,
       price,
       imageUrl,
     };
   });
+
+  if (typeFilter) {
+    upcomingEvents = upcomingEvents.filter(
+      (event) => event.type === typeFilter
+    );
+  }
 
   res.json(upcomingEvents);
 }
@@ -127,3 +137,8 @@ export function getUpcomingRunningEventsById(req: Request, res: Response) {
     ? res.json(upcomingRunningEventId)
     : res.status(404).json({ message: "Runner not found" });
 }
+
+// export function getUpcomingRunningEventByType(req:Request, res: Response) {
+//   const typeFilter = req.query.type as string;
+
+// }

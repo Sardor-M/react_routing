@@ -1,7 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
 import runnerRouter from "./routes/runner.routes";
-import cors from "cors";
 
 const app = express();
 const PORT = 4000;
