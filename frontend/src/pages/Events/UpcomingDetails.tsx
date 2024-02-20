@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router";
 import { Link, NavLink } from "react-router-dom";
+import { UpcomingEvents } from "../../types";
 
-interface EventsDetails {
-  id: number;
-  imageUrl: string;
-  name: string;
-  price: number;
-  description: string;
-  type: string;
-}
+
 
 export default function UpcomingDetails() {
   // saving the fetched data as an object
-  const [eventDetails, setEventsDetails] = useState<EventsDetails>();
+  const [eventDetails, setEventsDetails] = useState<UpcomingEvents>();
 
   const { id } = useParams<{ id: string }>();
   const urlPath = `http://localhost:4000/api/events/upcoming/${id}`;

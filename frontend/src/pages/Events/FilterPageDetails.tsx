@@ -1,14 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { EventCategory } from "../../types";
 
-interface EventCategory {
-  id: number;
-  type: string;
-  date: number;
-  location: string;
-  distanceLength: number;
-  description: string;
-}
 
 export default function FilterPageDetails() {
   const [category, setCategory] = useState<EventCategory[]>([]);
@@ -75,9 +68,8 @@ export default function FilterPageDetails() {
           {category.map((event) => (
             <div className="filtered-event-result-list" key={event.id}>
               {event.id}
-              <h2 key={event.type}>{event.type}</h2>
+              <h2 key={event.eventType}>{event.eventType}</h2>
               <li key={event.date}>{event.date}</li>
-              <li key={event.description}>{event.description}</li>
               <li key={event.location}>{event.location}</li>
               <li key={event.distanceLength}>{event.distanceLength}</li>
             </div>

@@ -3,16 +3,8 @@ import {
   Link,
   useSearchParams,
 } from "react-router-dom";
+import { Runner } from "../../types";
 
-interface Runner {
-  id: number;
-  name: string;
-  price: number;
-  type: string;
-  description: string;
-  imageUrl: string;
-  upcomingId: string;
-}
 
 export default function Runners() {
   // const location = useLocation();

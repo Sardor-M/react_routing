@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {  UpcomingEvents } from "../../types";
 
-interface Upcoming {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
+
 
 export default function UpcomingEvent() {
-  const [upcomingEvents, setUpcomingEvents] = useState<Upcoming[]>([]);
+  const [upcomingEvents, setUpcomingEvents] = useState<UpcomingEvents[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:4000/api/events/upcoming")

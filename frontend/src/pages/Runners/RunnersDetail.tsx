@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import { UpcomingEvents } from "../../types";
 
-interface RunnerDetails {
-  type: string;
-  pace: number;
-  runner: string;
-  price: number;
-  time: number;
-  description: string;
-  imageUrl: string;
-  name: string;
-}
 
 export default function RunnersDetail() {
-  const [runnerDetails, setRunnersDetails] = useState<RunnerDetails>();
+  const [runnerDetails, setRunnersDetails] = useState<UpcomingEvents>();
 
   const params = useParams();
 
