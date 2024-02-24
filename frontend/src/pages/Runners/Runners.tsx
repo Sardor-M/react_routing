@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  Link,
-  useSearchParams,
-} from "react-router-dom";
-import { Runner } from "../../types";
-
+import { Link, useSearchParams } from "react-router-dom";
+import { Events } from "../../types";
 
 export default function Runners() {
   // const location = useLocation();
@@ -12,7 +8,7 @@ export default function Runners() {
   // const type = queryParams.get("type");
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [runners, setRunners] = useState<Runner[]>([]);
+  const [runners, setRunners] = useState<Events[]>([]);
 
   const typeFilter = searchParams.get("type") || "";
 
