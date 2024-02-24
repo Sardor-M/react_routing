@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { EventCategory } from "../../types";
 
-
 export default function FilterPageDetails() {
   const [category, setCategory] = useState<EventCategory[]>([]);
 
