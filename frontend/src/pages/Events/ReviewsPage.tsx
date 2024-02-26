@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Reviews} from "../../types/index";
+import { Reviews } from "../../types/index";
 
 
 export default function ReviewsPages() {
@@ -9,6 +9,7 @@ export default function ReviewsPages() {
   return (
     <div className="container">
       <h1>Reviews Page</h1>
+      
     </div>
   );
 }

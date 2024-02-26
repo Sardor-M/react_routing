@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {  UpcomingEvents } from "../../types";
 
 
-
 export default function UpcomingEvent() {
   const [upcomingEvents, setUpcomingEvents] = useState<UpcomingEvents[]>([]);
 

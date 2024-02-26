@@ -4,7 +4,6 @@ import { Link, NavLink } from "react-router-dom";
 import { UpcomingEvents } from "../../types";
 
 
-
 export default function UpcomingDetails() {
   // saving the fetched data as an object
   const [eventDetails, setEventsDetails] = useState<UpcomingEvents>();

@@ -1,10 +1,19 @@
-
+export interface Runner {
+    id: number;
+    name: string;
+    price: number;
+    type: string;
+    description: string;
+    imageUrl: string;
+    upcomingId: string;
+}
+  
 export interface Reviews {
     id: number;
     title: string;
-    description: string;
+    comment: string;
     rating: number;
-    event: number
+    eventSelect: number
 }
 export interface UpcomingEvents {
     id: number;
