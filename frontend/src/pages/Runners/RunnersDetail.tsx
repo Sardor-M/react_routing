@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { UpcomingEvents } from "../../types";
-
+import { Events } from "../../types";
 
 export default function RunnersDetail() {
-  const [runnerDetails, setRunnersDetails] = useState<UpcomingEvents>();
+  const [runnerDetails, setRunnersDetails] = useState<Events>();
 
   const params = useParams();
 
@@ -17,7 +16,7 @@ export default function RunnersDetail() {
         setRunnersDetails(data.runner);
       });
   }, [params.id]);
- 
+
   return (
     <div className="runner-detail-container">
       {runnerDetails ? (
