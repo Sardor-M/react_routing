@@ -3,6 +3,10 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Events } from "../../types";
 import { getEvents } from "../../api/api";
 
+export function loader() {
+  return <p> Runner's event goes here </p>;
+}
+
 export default function Runners() {
   // const location = useLocation();
   // const queryParams = new URLSearchParams(location.search);
