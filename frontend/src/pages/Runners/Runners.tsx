@@ -11,6 +11,7 @@ export default function Runners() {
   const [runners, setRunners] = useState<Events[]>([]);
 
   const typeFilter = searchParams.get("type") || "";
+  // console.log("Type Filter: ", searchParams.toString());
 
   useEffect(() => {
     fetch("http://localhost:4000/api/runners")
@@ -34,6 +35,8 @@ export default function Runners() {
       <Link
         to={runner.id.toString()}
         aria-label={`View details for ${runner.name}`}
+        // sending state object infos to the target component link
+        state={{ search: `?${searchParams.toString()}` }}
       >
         <img src={runner.imageUrl} alt={runner.name} />
         <div className="runner-info">

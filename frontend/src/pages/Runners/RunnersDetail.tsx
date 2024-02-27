@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { Events } from "../../types";
 
 export default function RunnersDetail() {
   const [runnerDetails, setRunnersDetails] = useState<Events>();
+  const location = useLocation();
+  const searchData = location.state?.search || "";
+  // below is the same as the above line var declarion
+  // above declaration is using the optional chaining operator in js
+  const seachData1 = (location.state && location.state.search) || "";
+  console.log("Search Data on the target side:", searchData);
 
   const params = useParams();
 
@@ -19,6 +30,9 @@ export default function RunnersDetail() {
 
   return (
     <div className="runner-detail-container">
+      <Link to={`..${searchData}`} relative="path" className="back-button">
+        &larr; <span>Back to all</span>
+      </Link>
       {runnerDetails ? (
         <div className="runner-detail">
           <img src={runnerDetails?.imageUrl} alt="runnerDetails?.name" />
