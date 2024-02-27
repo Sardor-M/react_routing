@@ -542,7 +542,9 @@ upcoming-event-details-img {
 
 
 .not-found {
-  height: 34px;
+  padding-inline: 26px;
+  width: 20%;
+  height: 42px;
   padding: 6px 26px;
   font-style: normal;
   font-weight: 500;
@@ -554,5 +556,11 @@ upcoming-event-details-img {
 }
 
 .not-found:hover {
-  color: #f8b460;
+  color: #f5a646;
+}
+
+.not-found-container .link-button {
+  width: 100%;
+  background-color: #161616;
+  color: white;
 }

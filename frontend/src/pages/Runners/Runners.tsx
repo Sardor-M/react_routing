@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Events } from "../../types";
+import { getEvents } from "../../api/api";
 
 export default function Runners() {
   // const location = useLocation();
@@ -9,20 +10,25 @@ export default function Runners() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [runners, setRunners] = useState<Events[]>([]);
-
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const typeFilter = searchParams.get("type") || "";
   // console.log("Type Filter: ", searchParams.toString());
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/runners")
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data, "Received data from server!");
-        if (Array.isArray(data)) {
-          setRunners(data);
-          console.log(data, "Data From Server!");
-        }
-      });
+    async function loadEvents() {
+      setLoading(true);
+      try {
+        const data = await getEvents();
+        setRunners(data as Events[]);
+        // console.log(data, "Runners Page Data");
+      } catch (err) {
+        setError(err as null);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadEvents();
   }, []);
 
   const displayRunner = typeFilter
@@ -58,6 +64,12 @@ export default function Runners() {
     });
   };
 
+  if (loading) {
+    return <h1> Loading... </h1>;
+  }
+  if (error) {
+    return <h1 aria-live="assertive">There was an error: {error}</h1>;
+  }
   return (
     <div className="runner-list-container">
       <h1> Explore running communites around you.</h1>
