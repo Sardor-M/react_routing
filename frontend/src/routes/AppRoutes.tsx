@@ -13,6 +13,7 @@ import UpcomingDetails from "../pages/Events/UpcomingDetails";
 import EventLayout from "../components/EventLayout";
 import UpcomingEventDetailsPhotos from "../pages/Events/UpcomingEventPhotos";
 import UpcomingEventDetails from "../pages/Events/UpcomingEventDetails";
+import NotFound from "../components/NotFound";
 
 export default function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
 
