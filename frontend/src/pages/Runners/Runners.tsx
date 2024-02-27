@@ -36,7 +36,7 @@ export default function Runners() {
         to={runner.id.toString()}
         aria-label={`View details for ${runner.name}`}
         // sending state object infos to the target component link
-        state={{ search: `?${searchParams.toString()}` }}
+        state={{ search: `?${searchParams.toString()}`, type: runner.type }}
       >
         <img src={runner.imageUrl} alt={runner.name} />
         <div className="runner-info">

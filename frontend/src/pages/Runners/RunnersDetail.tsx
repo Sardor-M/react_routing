@@ -10,12 +10,6 @@ import { Events } from "../../types";
 export default function RunnersDetail() {
   const [runnerDetails, setRunnersDetails] = useState<Events>();
   const location = useLocation();
-  const searchData = location.state?.search || "";
-  // below is the same as the above line var declarion
-  // above declaration is using the optional chaining operator in js
-  const seachData1 = (location.state && location.state.search) || "";
-  console.log("Search Data on the target side:", searchData);
-
   const params = useParams();
 
   useEffect(() => {
@@ -28,10 +22,19 @@ export default function RunnersDetail() {
       });
   }, [params.id]);
 
+  const searchData = location.state?.search || "";
+  // below is the same as the above line var declarion
+  // above declaration is using the optional chaining operator in js
+  const seachData1 = (location.state && location.state.search) || "";
+  // console.log("Search Data on the target side:", searchData);
+
+  const type = location.state?.type || "";
+  console.log("Type of the event :", type);
+
   return (
     <div className="runner-detail-container">
       <Link to={`..${searchData}`} relative="path" className="back-button">
-        &larr; <span>Back to all</span>
+        &larr; <span>Back to {type}</span>
       </Link>
       {runnerDetails ? (
         <div className="runner-detail">
