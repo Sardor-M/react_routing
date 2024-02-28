@@ -31,6 +31,17 @@ export default function Navbar() {
         >
           Contact
         </NavLink>
+        <NavLink
+          to="login"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          <img
+            width="22"
+            height="22"
+            src="https://img.icons8.com/cotton/64/gender-neutral-user--v1.png"
+            alt="gender-neutral-user--v1"
+          />
+        </NavLink>
       </nav>
     </header>
   );

@@ -59,6 +59,12 @@ header a:hover {
   text-decoration: underline;
 }
 
+header .login-icon {
+  height: 18px;
+  width: 18px;
+}
+
+
 .back-button {
   display: block;
   color: black;

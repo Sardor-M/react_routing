@@ -22,6 +22,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Error from "../components/Error";
+import LoginPage from "../pages/LoginPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="*" element={<NotFound />} />
       <Route path="about" element={<AboutPage />} />
       <Route path="contact" element={<ContactPage />} />
+      <Route path="login" element={<LoginPage />} />
 
       <Route path="runner">
         <Route
@@ -40,16 +42,6 @@ const router = createBrowserRouter(
         />
         <Route path=":id" element={<RunnersDetail />} />
       </Route>
-
-      {/* difference  */}
-
-      {/* <Route
-        path="runner"
-        element={<Runners />}
-        loader={runnersEventLoader}
-        errorElement={<Error />}
-      />
-      <Route path=":id" element={<RunnersDetail />} /> */}
 
       <Route path="events" element={<EventLayout />}>
         <Route index element={<EventsPage />} />
