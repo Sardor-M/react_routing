@@ -22,6 +22,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import { create } from "domain";
+import Error from "../components/Error";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +33,12 @@ const router = createBrowserRouter(
       <Route path="contact" element={<ContactPage />} />
 
       <Route path="runner">
-        <Route index element={<Runners />} loader={runnersEventLoader} />
+        <Route
+          index
+          element={<Runners />}
+          loader={runnersEventLoader}
+          errorElement={<Error />}
+        />
         <Route path=":id" element={<RunnersDetail />} />
       </Route>
 
