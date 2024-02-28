@@ -21,7 +21,6 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { create } from "domain";
 import Error from "../components/Error";
 
 const router = createBrowserRouter(
@@ -44,9 +43,13 @@ const router = createBrowserRouter(
 
       {/* difference  */}
 
-      {/* <Route path="runner"element={<Runners />} />
-        <Route path=":id" element={<RunnersDetail />} />
-     */}
+      {/* <Route
+        path="runner"
+        element={<Runners />}
+        loader={runnersEventLoader}
+        errorElement={<Error />}
+      />
+      <Route path=":id" element={<RunnersDetail />} /> */}
 
       <Route path="events" element={<EventLayout />}>
         <Route index element={<EventsPage />} />

@@ -93,6 +93,10 @@ const runners: RunnerModel[] = [
 ];
 
 export function getAllRunners(req: Request, res: Response) {
+  
+  if (!res){
+    res.status(404).json({ message: "No runners found" });
+  }
   res.json(runners);
 }
 

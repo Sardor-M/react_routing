@@ -1,6 +1,6 @@
 
 export  async function getEvents() {
-    const response = await fetch("http://localhost:4000/api/runners");
+    const response = await fetch("/api/runners");
    
     if (!response.ok){
         throw {
@@ -13,7 +13,7 @@ export  async function getEvents() {
     return data;
 }
 
-
+// http://localhost:4000/api/runners
 
 
 

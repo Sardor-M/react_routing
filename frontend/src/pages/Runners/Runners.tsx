@@ -13,7 +13,6 @@ export default function Runners() {
   // const type = queryParams.get("type");
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const typeFilter = searchParams.get("type") || "";
   const runners = useLoaderData() as Events[];

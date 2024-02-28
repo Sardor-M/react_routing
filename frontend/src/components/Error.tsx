@@ -2,11 +2,20 @@ import React from "react";
 import { useRouteError } from "react-router";
 
 export default function Error() {
-  const error = useRouteError();
+  const error = useRouteError() as {
+    message: string;
+    status: number;
+    statusText: string;
+  };
   console.log(error, "Predefined error message is displayed");
+
   return (
-    <div className="container-list">
-      <h1>An error occurred!</h1>
-    </div>
+    <>
+      <h1>Error message:</h1>
+      <h2>{error.message}</h2>
+      <p>
+        {error.status} - {error.statusText}
+      </p>
+    </>
   );
 }
