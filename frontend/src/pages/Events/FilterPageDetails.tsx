@@ -16,9 +16,6 @@ export default function FilterPageDetails() {
       console.log(fetchedData, "Fetched Data!");
 
       // Moved the filtering the data to server side.
-      // const filteredData = filter
-      //   ? fetchedData.filter((event) => event.type === filter)
-      //   : fetchedData;
 
       setCategory(fetchedData);
     } catch (error) {
@@ -38,12 +35,7 @@ export default function FilterPageDetails() {
   return (
     <div className="filter-page-container">
       <h3 className="filter-page-left">FilterPageDetails</h3>
-      <div
-        className="filter-page-left input"
-        // onChange={(event) =>
-        //   handleFilterChange((event.target as HTMLInputElement).value)
-        // }
-      >
+      <div className="filter-page-left input">
         <label>
           {" "}
           <input
