@@ -1,17 +1,40 @@
-import { Link, useLoaderData, useLocation, useParams } from "react-router-dom";
+import {
+  Link,
+  LoaderFunction,
+  useLoaderData,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { Events } from "../../types";
 import { getEventDetails } from "../../api/api";
 
 interface ParamsInterface {
-  params: { id: string };
+  id: string;
 }
-export function loader({ params }: ParamsInterface) {
-  console.log("Runner Details Loader Data:", params);
-  return getEventDetails({ id: params.id });
-}
+// export function loader({ params }: ParamsInterface) {
+//   console.log("Runner Details Loader Data:", params);
+//   return getEventDetails({ id: params.id });
+// }
+
+// export async function loader(params: ParamsInterface) {
+//   console.log("Runner Details Loader Data:", params.params.id);
+//   return getEventDetails({ id: params.params.id });
+// }
+
+// export async function loader(loaderArgs: { params: ParamsInterface }) {
+//   const params = loaderArgs.params;
+//   console.log("Runner Details Loader Data:", params.id);
+//   return getEventDetails({ id: params.id });
+// }
+
+export const loader: LoaderFunction = async function (loaderArgs) {
+  const params = loaderArgs.params;
+  console.log("Runner Details Loader Data:", params.id);
+  return getEventDetails({ id: params.id ?? "1" });
+};
 
 export default function RunnersDetail() {
-  const params = useParams<{ id: string }>();
+  const params = useParams();
   const location = useLocation();
   const runnerDetails = useLoaderData() as Events;
 
