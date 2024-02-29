@@ -92,17 +92,26 @@ const runners: RunnerModel[] = [
   },
 ];
 
-export function getAllRunners(req: Request, res: Response) {
-  
-  if (!res){
-    res.status(404).json({ message: "No runners found" });
+  // const runners = await Runner.find(); // Fetch all runners from your data source
+
+  // if (!runners || runners.length === 0){
+  //   res.status(404).json({ message: "No runners found is an error from the server" });
+  //   return;
+  // }
+  // res.json(runners);
+
+export async function getAllRunners  (req: Request, res: Response) {
+
+  if(!runners || runners.length === 0){
+    res.status(404).json({message: "No Runners found from the server is an error"});
+    return;
   }
   res.json(runners);
 }
 
 export function getRunnerById(req: Request, res: Response) {
-  const runnerId = Number(req.params.runnerId);
-  const runner = runners.find((r) => r.id === runnerId);
+  const id = Number(req.params.id);
+  const runner = runners.find((r) => r.id === id);
 
   runner
     ? res.json(runner)

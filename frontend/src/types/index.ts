@@ -16,3 +16,7 @@ export interface Events {
   type: string;
   upcomingId: string;
 }
+
+export interface GetEvent {
+  id: string;
+}

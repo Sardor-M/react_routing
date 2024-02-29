@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { Events } from "../../types";
 import { getEvents } from "../../api/api";
 
 export function loader() {
-  return getEvents();
+  // default value of id is 0
+  return getEvents({ id: "0" });
 }
+
+console.log("Runners Loader Data:", loader);
 
 export default function Runners() {
   // const location = useLocation();
@@ -16,6 +19,7 @@ export default function Runners() {
   const [error, setError] = useState(null);
   const typeFilter = searchParams.get("type") || "";
   const runners = useLoaderData() as Events[];
+  console.log("Runners Data:", runners);
 
   const displayRunner = typeFilter
     ? runners.filter((runner) => runner.type === typeFilter)

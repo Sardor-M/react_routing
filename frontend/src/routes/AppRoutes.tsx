@@ -5,7 +5,9 @@ import ContactPage from "../pages/ContactPage";
 import Runners, {
   loader as runnersEventLoader,
 } from "../pages/Runners/Runners";
-import RunnersDetail from "../pages/Runners/RunnersDetail";
+import RunnersDetail, {
+  loader as runnerEventDetailsLoader,
+} from "../pages/Runners/RunnersDetail";
 import Layout from "../components/Layout";
 import EventsPage from "../pages/Events/EventsPage";
 import DashboardPage from "../pages/Events/DashboardPage";
@@ -40,7 +42,11 @@ const router = createBrowserRouter(
           loader={runnersEventLoader}
           errorElement={<Error />}
         />
-        <Route path=":id" element={<RunnersDetail />} />
+        <Route
+          path="runner/:id"
+          element={<RunnersDetail />}
+          loader={runnerEventDetailsLoader}
+        />
       </Route>
 
       <Route path="events" element={<EventLayout />}>
