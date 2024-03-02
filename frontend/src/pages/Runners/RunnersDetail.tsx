@@ -26,12 +26,13 @@ interface ParamsInterface {
 //   console.log("Runner Details Loader Data:", params.id);
 //   return getEventDetails({ id: params.id });
 // }
-
-export const loader: LoaderFunction = async function (loaderArgs) {
+export const loader: LoaderFunction = async (loaderArgs) => {
   const params = loaderArgs.params;
   console.log("Runner Details Loader Data:", params.id);
-  return getEventDetails({ id: params.id ?? "1" });
+  return getEventDetails(params.id ?? "");
 };
+
+console.log("DATA FROM HERE:", loader);
 
 export default function RunnersDetail() {
   const params = useParams();
