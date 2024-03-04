@@ -46,7 +46,7 @@ const router = createBrowserRouter(
           path="runner/:id"
           element={<RunnersDetail />}
           loader={runnerEventDetailsLoader}
-          // errorElement={<Error />}
+          errorElement={<Error />}
         />
       </Route>
 

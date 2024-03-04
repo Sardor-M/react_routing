@@ -4,7 +4,7 @@ import * as RunnerController from "../controllers/runners.controller";
 const router = express.Router();
 
 router.get("/runners", RunnerController.getAllRunners);
-router.get("/runners/:id", RunnerController.getRunnerById);
+router.get("/runner/:id", RunnerController.getRunnerById);
 router.get("/events/upcoming", RunnerController.getUpcomingRunningEvents);
 router.get(
   "/events/upcoming/:id",
