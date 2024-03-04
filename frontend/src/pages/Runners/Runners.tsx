@@ -1,12 +1,36 @@
 import { useState } from "react";
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  LoaderFunction,
+  useLoaderData,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { Events } from "../../types";
 import { getEvents } from "../../api/api";
 
+<<<<<<< HEAD
 export function loader() {
   // default value of id is 0
   return getEvents();
 }
+=======
+// export function loader({ id }: GetEvent) {
+//   return getEvents(id);
+// }
+
+export const loader: LoaderFunction = async ({ params }) => {
+  const id = params.id;
+  console.log("Runner Details Loader Data:", id);
+  return getEvents(id ?? "");
+};
+
+// export const loader: LoaderFunction = async function (loaderArgs) {
+//   const params = loaderArgs.params;
+//   console.log("Runner Details Loader Data:", params.id);
+//   return getEventDetails();
+// };
+>>>>>>> 80781c7152779d7b675b5cd84f2699cdaac21125
 
 console.log("Runners Loader Data:", loader);
 
@@ -18,7 +42,10 @@ export default function Runners() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(null);
   const typeFilter = searchParams.get("type") || "";
+
+  const { id } = useParams<{ id: string }>();
   const runners = useLoaderData() as Events[];
+
   console.log("Runners Data:", runners);
 
   const displayRunner = typeFilter
