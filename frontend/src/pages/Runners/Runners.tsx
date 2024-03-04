@@ -5,7 +5,7 @@ import { getEvents } from "../../api/api";
 
 export function loader() {
   // default value of id is 0
-  return getEvents({ id: "0" });
+  return getEvents();
 }
 
 console.log("Runners Loader Data:", loader);
