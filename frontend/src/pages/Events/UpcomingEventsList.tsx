@@ -1,8 +1,10 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { Events } from "../../types";
 import { getUpcomingEventsList } from "../../api/api";
+import requireAuth from "../../utils/utils";
 
 export async function loader() {
+  await requireAuth();
   return getUpcomingEventsList();
 }
 

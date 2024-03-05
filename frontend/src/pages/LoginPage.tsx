@@ -1,7 +1,19 @@
 import React, { useState } from "react";
-// import { Events } from "../types";
+import { useLoaderData } from "react-router";
+
+type RequestType = {
+  url: React.ReactNode;
+};
+
+// acessing the Request object which is a native browser object
+// and we are extracting  a new URL from the request object
+export async function loader({ request }: { request: Request }) {
+  return new URL(request.url).searchParams.get("message");
+}
 
 export default function LoginPage() {
+  const messageData = useLoaderData() as string | "";
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -22,6 +34,7 @@ export default function LoginPage() {
   return (
     <div className="container">
       <h1> Sign in to your account</h1>
+      {messageData && <h3 className="login-text">{messageData} </h3>}
       <form onSubmit={handleSubmit} className="login-form">
         <input
           className="login-input"

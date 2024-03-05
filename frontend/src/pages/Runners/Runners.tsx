@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { Events } from "../../types";
 import { getEvents } from "../../api/api";
+import requireAuth from "../../utils/utils";
 
 export const loader = async () => {
+  await requireAuth();
   return getEvents();
 };
 

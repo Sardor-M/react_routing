@@ -26,7 +26,8 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Error from "../components/Error";
-import LoginPage from "../pages/LoginPage";
+import LoginPage, { loader as loginElementLoader } from "../pages/LoginPage";
+import requireAuth from "../utils/utils";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,7 +36,7 @@ const router = createBrowserRouter(
       <Route path="*" element={<NotFound />} />
       <Route path="about" element={<AboutPage />} />
       <Route path="contact" element={<ContactPage />} />
-      <Route path="login" element={<LoginPage />} />
+      <Route path="login" element={<LoginPage />} loader={loginElementLoader} />
 
       <Route path="runner">
         <Route
@@ -53,18 +54,54 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="events" element={<EventLayout />}>
-        <Route index element={<EventsPage />} />
-        <Route path="dashboard" element={<DashboardPage />} />
-        <Route path="review" element={<ReviewsPages />} />
+        <Route
+          index
+          element={<EventsPage />}
+          loader={async () => {
+            return requireAuth();
+          }}
+        />
+        <Route
+          path="dashboard"
+          element={<DashboardPage />}
+          loader={async () => {
+            requireAuth();
+          }}
+        />
+        <Route
+          path="review"
+          element={<ReviewsPages />}
+          loader={async () => {
+            requireAuth();
+          }}
+        />
         <Route
           path="upcoming"
           element={<UpcomingEventsList />}
           loader={upcomingEventsList}
           errorElement={<Error />}
         />
-        <Route path="upcoming/:id" element={<UpcomingDetails />}>
-          <Route index element={<UpcomingEventDetails />} />
-          <Route path="photos" element={<UpcomingEventDetailsPhotos />} />
+        <Route
+          path="upcoming/:id"
+          element={<UpcomingDetails />}
+          loader={async () => {
+            return requireAuth();
+          }}
+        >
+          <Route
+            index
+            element={<UpcomingEventDetails />}
+            loader={async () => {
+              return requireAuth();
+            }}
+          />
+          <Route
+            path="photos"
+            element={<UpcomingEventDetailsPhotos />}
+            loader={async () => {
+              return requireAuth();
+            }}
+          />
         </Route>
       </Route>
     </Route>
