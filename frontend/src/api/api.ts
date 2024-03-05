@@ -23,19 +23,22 @@ export async function getEventDetail(id: string) {
 
 }
 
-
-export async function getEventDetails(id : GetEvent) {
-    const url = id ? `http://localhost:4000/api/events/upcoming${id}` : "http://localhost:4000/api/events/upcoming";
-    const response = await fetch(url);
-    
-    if(!response.ok){
-        throw {
-            message: "Error fetching data from the server !",
-            statusText: response.statusText,
-            status: response.status,
-        }
-    }
-    const data = await response.json();
-    return data;
-    // const response = await fetch ("/events/upcoming/${id}")
+export async function getUpcomingEventsList() {
+    return fetchData("http://localhost:4000/api/events/upcoming");
 }
+
+
+// export async function getEventDetails(id : GetEvent) {
+//     const url = id ? `http://localhost:4000/api/events/upcoming${id}` : "http://localhost:4000/api/events/upcoming";
+//     const response = await fetch(url);
+    
+//     if(!response.ok){
+//         throw {
+//             message: "Error fetching data from the server !",
+//             statusText: response.statusText,
+//             status: response.status,
+//         }
+//     }
+//     const data = await response.json();
+//     return data;
+// }

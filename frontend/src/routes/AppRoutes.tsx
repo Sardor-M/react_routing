@@ -12,11 +12,13 @@ import Layout from "../components/Layout";
 import EventsPage from "../pages/Events/EventsPage";
 import DashboardPage from "../pages/Events/DashboardPage";
 import ReviewsPages from "../pages/Events/ReviewsPage";
-import Upcoming from "../pages/Events/Upcoming";
-import UpcomingDetails from "../pages/Events/UpcomingDetails";
+import UpcomingEventsList, {
+  loader as upcomingEventsList,
+} from "../pages/Events/UpcomingEventsList";
+import UpcomingDetails from "../pages/Events/UpcomingEventsCard";
 import EventLayout from "../components/EventLayout";
-import UpcomingEventDetailsPhotos from "../pages/Events/UpcomingEventPhotos";
-import UpcomingEventDetails from "../pages/Events/UpcomingEventDetails";
+import UpcomingEventDetailsPhotos from "../pages/Events/UpcomingEventsPhotos";
+import UpcomingEventDetails from "../pages/Events/UpcomingEventsDetails";
 import NotFound from "../components/NotFound";
 import {
   RouterProvider,
@@ -54,7 +56,12 @@ const router = createBrowserRouter(
         <Route index element={<EventsPage />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="review" element={<ReviewsPages />} />
-        <Route path="upcoming" element={<Upcoming />} />
+        <Route
+          path="upcoming"
+          element={<UpcomingEventsList />}
+          loader={upcomingEventsList}
+          errorElement={<Error />}
+        />
         <Route path="upcoming/:id" element={<UpcomingDetails />}>
           <Route index element={<UpcomingEventDetails />} />
           <Route path="photos" element={<UpcomingEventDetailsPhotos />} />
