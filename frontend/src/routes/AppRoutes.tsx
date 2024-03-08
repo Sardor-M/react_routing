@@ -32,7 +32,7 @@ import requireAuth from "../utils/utils";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage images={[]} />} />
       <Route path="*" element={<NotFound />} />
       <Route path="about" element={<AboutPage />} />
       <Route path="contact" element={<ContactPage />} />

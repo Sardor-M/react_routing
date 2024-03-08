@@ -21,6 +21,10 @@ export interface GetEvent {
   id: string;
 }
 
+export interface HomePageProps {
+    images: string[];
+    interval?: number;
+}
 
 export interface Auth extends GetEvent {
   email: string;
