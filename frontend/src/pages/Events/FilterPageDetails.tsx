@@ -29,7 +29,7 @@ export default function FilterPageDetails() {
   const handleFilterChange = (type: string) => {
     // TODO: Fetch category details
     setCategory([]);
-    fetchRunnerEventsData(type);
+    fetchRunnerEventsData(type).then(r => r);
   };
 
   return (

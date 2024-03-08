@@ -13,23 +13,6 @@ import { getEventDetail } from "../../api/api";
 //   return params.id ? getEventDetail(params.id) : null;
 // };
 
-// export const loader: LoaderFunction = async ({
-//   params,
-// }: {
-//   params: RunnerDetailParams;
-// }) => {
-//   try {
-//     const data = await getEventDetail(params.id);
-//     return data;
-//   } catch (error: any) {
-//     return {
-//       status: error.status,
-//       statusText: error.statusText,
-//       message: error.message,
-//     };
-//
-// };
-
 export const loader: LoaderFunction = async ({
   params,
 }: {
@@ -38,7 +21,7 @@ export const loader: LoaderFunction = async ({
   try {
     // Convert the 'params.id' argument to a string
     const data = await getEventDetail(params.id ?? "");
-    console.log("Fetched data from the GETEVENTDETAILS:", data);
+    console.log("Fetched data from the GET EVENT DETAILS:", data);
     return data;
   } catch (error: any) {
     console.error("Error fetching events:", error);

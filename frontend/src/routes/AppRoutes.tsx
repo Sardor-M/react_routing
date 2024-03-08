@@ -57,9 +57,9 @@ const router = createBrowserRouter(
         <Route
           index
           element={<EventsPage />}
-          loader={async () => {
-            return requireAuth();
-          }}
+          // loader={async () => {
+          //   return requireAuth();
+          // }}
         />
         <Route
           path="dashboard"

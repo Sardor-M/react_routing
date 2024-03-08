@@ -20,3 +20,11 @@ export interface Events {
 export interface GetEvent {
   id: string;
 }
+
+
+export interface Auth {
+  id: number;
+  email: string;
+  password: string;
+  token: string;
+}

@@ -5,7 +5,7 @@ type RequestType = {
   url: React.ReactNode;
 };
 
-// acessing the Request object which is a native browser object
+// accessing the Request object which is a native browser object
 // and we are extracting  a new URL from the request object
 export async function loader({ request }: { request: Request }) {
   return new URL(request.url).searchParams.get("message");
