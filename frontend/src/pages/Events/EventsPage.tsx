@@ -5,7 +5,6 @@ export default function EventsPage() {
     <div className="container">
       <h1>Events Goes Here</h1>
       <FilterPageDetails />
-        // I should add the filtered events here after the filter component has finished it rendering.
     </div>
   );
 }
