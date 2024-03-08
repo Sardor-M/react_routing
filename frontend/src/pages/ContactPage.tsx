@@ -3,7 +3,7 @@ export default function ContactPage() {
     <div className="contact-container">
       <h1>Contact Page</h1>
       <p>
-        Contect us at <a href="mailto:sardor0968@gmail.com">Send email to us</a>
+        Contact us at <a href="mailto:sardor0968@gmail.com">Send email to us</a>
       </p>
       <form className="contact-form">
         <label htmlFor="name">Name: </label>

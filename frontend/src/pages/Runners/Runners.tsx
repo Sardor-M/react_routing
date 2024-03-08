@@ -9,6 +9,7 @@ export const loader = async () => {
   return getEvents();
 };
 
+
 export default function Runners() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(null);
@@ -59,7 +60,7 @@ export default function Runners() {
 
   return (
     <div className="runner-list-container">
-      <h1> Explore running communites around you.</h1>
+      <h1> Explore running communities around you.</h1>
       <div className="runner-list-filter-button">
         <button
           onClick={() => handleFilterChange("type", "simple")}

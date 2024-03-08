@@ -22,8 +22,7 @@ export interface GetEvent {
 }
 
 
-export interface Auth {
-  id: number;
+export interface Auth extends GetEvent {
   email: string;
   password: string;
   token: string;

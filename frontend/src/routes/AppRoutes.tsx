@@ -10,8 +10,8 @@ import RunnersDetail, {
 } from "../pages/Runners/RunnersDetail";
 import Layout from "../components/Layout";
 import EventsPage from "../pages/Events/EventsPage";
-import DashboardPage from "../pages/Events/DashboardPage";
-import ReviewsPages from "../pages/Events/ReviewsPage";
+import DashboardPage, {loader as dashboardLoader} from "../pages/Events/DashboardPage";
+import ReviewsPages , {loader as reviewsLoader} from "../pages/Events/ReviewsPage";
 import UpcomingEventsList, {
   loader as upcomingEventsList,
 } from "../pages/Events/UpcomingEventsList";
@@ -57,23 +57,16 @@ const router = createBrowserRouter(
         <Route
           index
           element={<EventsPage />}
-          // loader={async () => {
-          //   return requireAuth();
-          // }}
         />
         <Route
           path="dashboard"
           element={<DashboardPage />}
-          loader={async () => {
-            requireAuth();
-          }}
+          loader={ dashboardLoader}
         />
         <Route
           path="review"
           element={<ReviewsPages />}
-          loader={async () => {
-            requireAuth();
-          }}
+          loader={ reviewsLoader}
         />
         <Route
           path="upcoming"
