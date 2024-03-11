@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
-import ContactPage from "../pages/ContactPage";
+import ContactPage, {loader as contactUsPageLoader} from "../pages/ContactPage";
 import Runners, {
   loader as runnersEventLoader,
 } from "../pages/Runners/Runners";
@@ -36,7 +36,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<HomePage images={[]} />} />
       <Route path="*" element={<NotFound />} />
       <Route path="about" element={<AboutPage />} />
-      <Route path="contact" element={<ContactPage />} />
+      <Route path="contact" element={<ContactPage />} loader={contactUsPageLoader} />
       <Route path="login" element={<LoginPage />} loader={loginPageLoader} />
       <Route path="signup" element ={<SignUpPage/>} loader={signUpPageLoader}/>
 

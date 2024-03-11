@@ -31,3 +31,11 @@ export interface Auth extends GetEvent {
   password: string;
   token: string;
 }
+
+export interface ContactPageProps {
+    name: string;
+    email: string;
+    city: string;
+    country: string;
+    message: string;
+}
