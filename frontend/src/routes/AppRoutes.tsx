@@ -26,8 +26,9 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Error from "../components/Error";
-import LoginPage, { loader as loginElementLoader } from "../pages/LoginPage";
+import LoginPage, { loader as loginPageLoader } from "../pages/LoginPage";
 import requireAuth from "../utils/utils";
+import SignUpPage, {loader as signUpPageLoader} from "../pages/SignUpPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,7 +37,8 @@ const router = createBrowserRouter(
       <Route path="*" element={<NotFound />} />
       <Route path="about" element={<AboutPage />} />
       <Route path="contact" element={<ContactPage />} />
-      <Route path="login" element={<LoginPage />} loader={loginElementLoader} />
+      <Route path="login" element={<LoginPage />} loader={loginPageLoader} />
+      <Route path="signup" element ={<SignUpPage/>} loader={signUpPageLoader}/>
 
       <Route path="runner">
         <Route
