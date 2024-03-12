@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
-import ContactPage, {loader as contactUsPageLoader} from "../pages/ContactPage";
+import ContactPage, {
+  loader as contactUsPageLoader,
+} from "../pages/ContactPage";
 import Runners, {
   loader as runnersEventLoader,
 } from "../pages/Runners/Runners";
@@ -10,8 +12,12 @@ import RunnersDetail, {
 } from "../pages/Runners/RunnersDetail";
 import Layout from "../components/Layout";
 import EventsPage from "../pages/Events/EventsPage";
-import DashboardPage, {loader as dashboardLoader} from "../pages/Events/DashboardPage";
-import ReviewsPages , {loader as reviewsLoader} from "../pages/Events/ReviewsPage";
+import DashboardPage, {
+  loader as dashboardLoader,
+} from "../pages/Events/DashboardPage";
+import ReviewsPages, {
+  loader as reviewsLoader,
+} from "../pages/Events/ReviewsPage";
 import UpcomingEventsList, {
   loader as upcomingEventsList,
 } from "../pages/Events/UpcomingEventsList";
@@ -28,7 +34,7 @@ import {
 import Error from "../components/Error";
 import LoginPage, { loader as loginPageLoader } from "../pages/LoginPage";
 import requireAuth from "../utils/utils";
-import SignUpPage, {loader as signUpPageLoader} from "../pages/SignUpPage";
+import SignUpPage, { loader as signUpPageLoader } from "../pages/SignUpPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,9 +42,13 @@ const router = createBrowserRouter(
       <Route path="/" element={<HomePage images={[]} />} />
       <Route path="*" element={<NotFound />} />
       <Route path="about" element={<AboutPage />} />
-      <Route path="contact" element={<ContactPage />} loader={contactUsPageLoader} />
+      <Route
+        path="contact"
+        element={<ContactPage />}
+        loader={contactUsPageLoader}
+      />
       <Route path="login" element={<LoginPage />} loader={loginPageLoader} />
-      <Route path="signup" element ={<SignUpPage/>} loader={signUpPageLoader}/>
+      <Route path="signup" element={<SignUpPage />} loader={signUpPageLoader} />
 
       <Route path="runner">
         <Route
@@ -59,19 +69,19 @@ const router = createBrowserRouter(
         <Route
           index
           element={<EventsPage />}
-            //  loader={async () => {
-            //     return requireAuth();
-            // }}
+          //  loader={async () => {
+          //     return requireAuth();
+          // }}
         />
         <Route
           path="dashboard"
           element={<DashboardPage />}
-          loader={ dashboardLoader}
+          loader={dashboardLoader}
         />
         <Route
           path="review"
           element={<ReviewsPages />}
-          loader={ reviewsLoader}
+          loader={reviewsLoader}
         />
         <Route
           path="upcoming"
