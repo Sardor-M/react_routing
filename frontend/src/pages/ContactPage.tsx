@@ -21,7 +21,6 @@ const ContactPageContainer = styled.form`
 // `;
 
 const InputField = styled.input`
-  required;
   width: 50%;
   padding: 13px;
   margin: 15px 0;
@@ -104,6 +103,7 @@ export default function ContactPage({ onSubmit }: FormProps) {
           placeholder={"Your Name"}
           value={name}
           onChange={handleChange}
+          required
         />
         <InputField
           name="email"
@@ -111,6 +111,7 @@ export default function ContactPage({ onSubmit }: FormProps) {
           placeholder="Email address"
           value={email}
           onChange={handleChange}
+          required
         />
         <MessageField
           name="message"
