@@ -36,6 +36,11 @@ import LoginPage, { loader as loginPageLoader } from "../pages/LoginPage";
 import requireAuth from "../utils/utils";
 import SignUpPage, { loader as signUpPageLoader } from "../pages/SignUpPage";
 
+const onSubmit = (form: { name: string; email: string; message: string }) => {
+  console.log(form);
+  return form;
+};
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
@@ -44,7 +49,7 @@ const router = createBrowserRouter(
       <Route path="about" element={<AboutPage />} />
       <Route
         path="contact"
-        element={<ContactPage />}
+        element={<ContactPage onSubmit={onSubmit} />}
         loader={contactUsPageLoader}
       />
       <Route path="login" element={<LoginPage />} loader={loginPageLoader} />

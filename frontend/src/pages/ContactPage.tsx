@@ -10,6 +10,16 @@ const ContactPageContainer = styled.form`
   padding: 60px;
   margin: 10px;
 `;
+
+// const Label = styled.label`
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   width: 50%;
+//   font-size: 16px;
+//   margin -right: 5px;
+// `;
+
 const InputField = styled.input`
   required;
   width: 50%;
@@ -39,11 +49,15 @@ const SubmitButton = styled.button`
   font-size: 18px;
 `;
 
+type FormProps = {
+  onSubmit: (form: { name: string; email: string; message: string }) => void;
+};
+
 export function loader() {
   return getEvents();
 }
 
-export default function ContactPage() {
+export default function ContactPage({ onSubmit }: FormProps) {
   const [inputData, setInputData] = React.useState({
     name: "",
     email: "",
@@ -56,66 +70,55 @@ export default function ContactPage() {
     return re.test(email);
   };
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLAreaElement>
-  ) => {
-    return () => {
-      const target = event.target as HTMLInputElement;
-      setInputData({
-        ...inputData,
-        [target.name]: target.value,
-      });
-    };
+  const { name, email, message } = inputData;
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    onSubmit(inputData);
+    setInputData({
+      name: "",
+      email: "",
+      message: "",
+    });
   };
 
-  const handleMessageSubmit = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    event.preventDefault();
+    const { name, value } = event.target;
 
     setInputData({
       ...inputData,
-      message: event.target.value,
+      [name]: value,
     });
-    return inputData;
-    // submit the form data should be defined
-  };
-
-  const handleSubmitButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log("SUbmitting the form data:", inputData);
-    return inputData;
   };
 
   return (
     <>
       <h1>Contact Us</h1>
-      <ContactPageContainer
-      // onSubmit={handleSubmit}
-      >
+      <ContactPageContainer onSubmit={handleSubmit}>
         <InputField
-          title="Name"
+          name="name"
           type="text"
           placeholder={"Your Name"}
-          value={inputData.name}
+          value={name}
           onChange={handleChange}
         />
         <InputField
+          name="email"
           type="email"
           placeholder="Email address"
-          value={inputData.email}
+          value={email}
           onChange={handleChange}
         />
         <MessageField
+          name="message"
           placeholder="Your Message"
-          value={inputData.message}
-          onChange={handleMessageSubmit}
+          value={message}
+          onChange={handleChange}
         />
-        <SubmitButton
-          title="Message"
-          type="submit"
-          onClick={handleSubmitButton}
-        >
+        <SubmitButton title="Message" type="submit">
           Submit
         </SubmitButton>
       </ContactPageContainer>
