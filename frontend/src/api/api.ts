@@ -1,4 +1,3 @@
-import { GetEvent } from "../types";
 
 async function fetchData(url: string): Promise<any> {
   const response = await fetch(url);
