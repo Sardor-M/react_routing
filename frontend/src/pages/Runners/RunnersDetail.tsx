@@ -1,13 +1,22 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Events } from "../../types";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+// runner-detail-container
+// .runner-detail-container {
+//   padding: 27px;
+// }
+
+const RunnerDetailContainer = styled.div`
+  padding: 27px;
+`;
 
 export default function RunnersDetail() {
   const [runnerDetails, setRunnerDetails] = useState<Events>();
 
   const location = useLocation();
   const { id } = useParams();
-  // const { id } = useParams();
   console.log("Location:", location);
 
   useEffect(() => {
@@ -16,11 +25,11 @@ export default function RunnersDetail() {
       if (!response.ok) {
         throw new Error("Failed to fetch data details.");
       }
-      // if (Array.isArray(data)) {
-      //   setRunnerDetails(data[0].runners);
-      // }
       const data = await response.json();
-      setRunnerDetails(data.runner);
+      // if (Array.isArray(data)) {
+      //   setRunnerDetails(data[0]);
+      // }
+      setRunnerDetails(data[0]);
       console.log("Runner Details: ", runnerDetails);
     };
     fetchRunnersDetails();
@@ -30,7 +39,7 @@ export default function RunnersDetail() {
   const type = location.state?.type || "";
 
   return (
-    <div className="runner-detail-container">
+    <RunnerDetailContainer>
       <Link to={`..${searchData}`} relative="path" className="back-button">
         &larr; <span>Back to {type}</span>
       </Link>
@@ -47,6 +56,6 @@ export default function RunnersDetail() {
         <p> {runnerDetails?.description}</p>
         <button className="link-button"> Join the team</button>
       </div>
-    </div>
+    </RunnerDetailContainer>
   );
 }

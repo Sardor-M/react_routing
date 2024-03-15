@@ -31,7 +31,7 @@ export default function Runners() {
         <div key={runner.id} className="runner-title">
           {" "}
           <Link
-            to={`/runner/${runner.id}`}
+            to={runner.id.toString()}
             aria-label={`View details for ${runner.name}`}
           >
             <img src={runner.imageUrl} alt={runner.name} />
