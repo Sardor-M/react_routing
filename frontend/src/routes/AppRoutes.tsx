@@ -4,12 +4,8 @@ import AboutPage from "../pages/AboutPage";
 import ContactPage, {
   loader as contactUsPageLoader,
 } from "../pages/ContactPage";
-import Runners, {
-  loader as runnersEventLoader,
-} from "../pages/Runners/Runners";
-import RunnersDetail, {
-  loader as runnerEventDetailsLoader,
-} from "../pages/Runners/RunnersDetail";
+import Runners from "../pages/Runners/Runners";
+import RunnersDetail from "../pages/Runners/RunnersDetail";
 import Layout from "../components/Layout";
 import EventsPage from "../pages/Events/EventsPage";
 import DashboardPage, {
@@ -18,9 +14,7 @@ import DashboardPage, {
 import ReviewsPages, {
   loader as reviewsLoader,
 } from "../pages/Events/ReviewsPage";
-import UpcomingEventsList, {
-  loader as upcomingEventsList,
-} from "../pages/Events/UpcomingEventsList";
+import UpcomingEventsList from "../pages/Events/UpcomingEventsList";
 import UpcomingDetails from "../pages/Events/UpcomingEventsCard";
 import EventLayout from "../components/EventLayout";
 import UpcomingEventDetailsPhotos from "../pages/Events/UpcomingEventsPhotos";
@@ -56,16 +50,10 @@ const router = createBrowserRouter(
       <Route path="signup" element={<SignUpPage />} loader={signUpPageLoader} />
 
       <Route path="runner">
+        <Route index element={<Runners />} errorElement={<Error />} />
         <Route
-          index
-          element={<Runners />}
-          loader={runnersEventLoader}
-          errorElement={<Error />}
-        />
-        <Route
-          path="runner/:id"
+          path="/runner/:id"
           element={<RunnersDetail />}
-          loader={runnerEventDetailsLoader}
           errorElement={<Error />}
         />
       </Route>
@@ -91,7 +79,6 @@ const router = createBrowserRouter(
         <Route
           path="upcoming"
           element={<UpcomingEventsList />}
-          loader={upcomingEventsList}
           errorElement={<Error />}
         />
         <Route

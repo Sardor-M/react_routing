@@ -12,19 +12,12 @@ async function fetchData(url: string): Promise<any> {
   return response.json();
 }
 
+
 export async function getEvents() {
   return fetchData("http://localhost:4000/api/runners");
-}
-
-export async function getEventDetail(id: string) {
-    return fetchData(`http://localhost:4000/api/runners/${id}`);
-
-}
-
-export async function getUpcomingEventsList() {
-    return fetchData("http://localhost:4000/api/events/upcoming");
 }
 
 export async function getUpcomingEventDetail(id: string) {
     return fetchData(`http://localhost:4000/api/events/upcoming/${id}`);
 }
+

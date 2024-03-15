@@ -1,51 +1,54 @@
-import { useState } from "react";
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Events } from "../../types";
-import { getEvents } from "../../api/api";
-import requireAuth from "../../utils/utils";
-
-export const loader = async () => {
-  await requireAuth();
-  return getEvents();
-};
-
 
 export default function Runners() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [error, setError] = useState(null);
+  const [runners, setRunners] = useState<Events[]>([]);
+
   const typeFilter = searchParams.get("type") || "";
 
-  const runners = useLoaderData() as Events[];
-  console.log("RUNNERS.DATA:", runners);
+  useEffect(() => {
+    const fetchRunnersData = async () => {
+      const response = await fetch("http://localhost:4000/api/runners");
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        setRunners(data);
+      }
+
+      console.log("Receiving data:", data);
+    };
+
+    fetchRunnersData();
+  }, []);
 
   const displayRunner = typeFilter
     ? runners.filter((runner) => runner.type === typeFilter)
     : runners;
 
-  const runnersArray = displayRunner.map((runner) => (
-    <div key={runner.id} className="runner-title">
-      {" "}
-      <Link
-        to={runner.id.toString()}
-        aria-label={`View details for ${runner.name}`}
-        // sending state object infos to the target component link
-        state={{
-          search: `?${searchParams.toString()}`,
-          type: runner.type,
-        }}
-      >
-        <img src={runner.imageUrl} alt={runner.name} />
-        <div className="runner-info">
-          <h2>{runner.name}</h2>
-          <p>
-            ${runner.price}
-            <span>/day</span>
-          </p>
+  const runnersArray = displayRunner
+    ? displayRunner.map((runner) => (
+        <div key={runner.id} className="runner-title">
+          {" "}
+          <Link
+            to={`/runner/${runner.id}`}
+            aria-label={`View details for ${runner.name}`}
+          >
+            <img src={runner.imageUrl} alt={runner.name} />
+            <div className="runner-info">
+              <h2>{runner.name}</h2>
+              <p>
+                ${runner.price}
+                <span>/day</span>
+              </p>
+            </div>
+            <i className={`runner-type ${runner.type} selected`}>
+              {runner.type}
+            </i>
+          </Link>
         </div>
-        <i className={`runner-type ${runner.type} selected`}>{runner.type}</i>
-      </Link>
-    </div>
-  ));
+      ))
+    : "No Data is recieved";
 
   const handleFilterChange = (key: string, value: string | null) => {
     setSearchParams((prevParams) => {
@@ -54,13 +57,9 @@ export default function Runners() {
     });
   };
 
-  if (error) {
-    return <h1 aria-live="assertive">There was an error: {error}</h1>;
-  }
-
   return (
     <div className="runner-list-container">
-      <h1> Explore running communities around you.</h1>
+      <h1> Explore running communites around you.</h1>
       <div className="runner-list-filter-button">
         <button
           onClick={() => handleFilterChange("type", "simple")}

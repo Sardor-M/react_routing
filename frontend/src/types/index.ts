@@ -8,14 +8,15 @@ export interface Reviews {
 }
 
 export interface Events {
-  description: string;
-  id: number;
   imageUrl: string;
+  type: string;
   name: string;
   price: number;
-  type: string;
+  description: string;
+  id: number;
   upcomingId: string;
 }
+
 
 export interface GetEvent {
   id: string;

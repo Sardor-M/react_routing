@@ -1,39 +1,30 @@
-import {
-  Link,
-  LoaderFunction,
-  useLoaderData,
-  useLocation,
-} from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Events } from "../../types";
-import { getEventDetail } from "../../api/api";
-
-// export const loader: LoaderFunction = async (loaderArgs) => {
-//   const params = loaderArgs.params as RunnerDetailParams;
-//   console.log("Runner Details Loader Data:", params.id);
-//   return params.id ? getEventDetail(params.id) : null;
-// };
-
-export const loader: LoaderFunction = async ({
-  params,
-}: {
-  params: { id?: string };
-}) => {
-  try {
-    // Convert the 'params.id' argument to a string
-    const data = await getEventDetail(params.id ?? "");
-    console.log("Fetched data from the GET EVENT DETAILS:", data);
-    return data;
-  } catch (error: any) {
-    console.error("Error fetching events:", error);
-    return null;
-  }
-};
-
-console.log("DATA FROM HERE:", loader);
+import { useEffect, useState } from "react";
 
 export default function RunnersDetail() {
+  const [runnerDetails, setRunnerDetails] = useState<Events>();
+
   const location = useLocation();
-  const runnerDetails = useLoaderData() as Events;
+  const { id } = useParams();
+  // const { id } = useParams();
+  console.log("Location:", location);
+
+  useEffect(() => {
+    const fetchRunnersDetails = async () => {
+      const response = await fetch(`http://localhost:4000/api/runner/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data details.");
+      }
+      // if (Array.isArray(data)) {
+      //   setRunnerDetails(data[0].runners);
+      // }
+      const data = await response.json();
+      setRunnerDetails(data.runner);
+      console.log("Runner Details: ", runnerDetails);
+    };
+    fetchRunnersDetails();
+  }, [id]);
 
   const searchData = location.state?.search || "";
   const type = location.state?.type || "";
@@ -45,7 +36,7 @@ export default function RunnersDetail() {
       </Link>
 
       <div className="runner-detail">
-        <img src={runnerDetails?.imageUrl} alt="runnerDetails?.name" />
+        <img src={runnerDetails?.imageUrl} alt={runnerDetails?.name} />
         <i className={`runner-type ${runnerDetails?.type} selected`}>
           {runnerDetails?.type}
         </i>
