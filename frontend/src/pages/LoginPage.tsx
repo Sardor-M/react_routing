@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useLoaderData } from "react-router";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -7,11 +7,17 @@ type RequestType = {
   url: React.ReactNode;
 };
 
-const LoginInput = styled.div`
+const LOGIN_URL = "/auth";
+
+const SectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex;
+`;
+const LoginPageTitle = styled.h1`
+  display: flex;
+  font-size: 22px;
 `;
 
 const StyledForm = styled.form`
@@ -23,7 +29,7 @@ const StyledForm = styled.form`
   margin: 20px;
 `;
 
-const LoginInputData = styled.input`
+const InputField = styled.input`
   width: 180%;
   padding: 13px;
   margin: 15px 0;
@@ -37,7 +43,7 @@ const LoginInputData = styled.input`
   }
 `;
 
-const LoginButton = styled.button`
+const SignInButton = styled.button`
   width: 180%;
   padding: 9px;
   margin: 15px;
@@ -59,16 +65,48 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export default function LoginPage() {
+  const errRef = useRef<HTMLInputElement | null>(null);
+
   const messageData = useLoaderData() as string | "";
 
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+  const [user, setUser] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(loginData);
+
+    try {
+      const formData = new FormData();
+
+      formData.append("user", user);
+      formData.append("pwd", pwd);
+
+      const response = await fetch(LOGIN_URL, {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to log in.");
+      }
+
+      const data = await response.json();
+      console.log("Response data:", data);
+      setSuccess(true);
+    } catch (err) {
+      console.log("Login is failed", err);
+      setErrMsg("Login Failed, Try again.");
+      if (errRef.current) {
+        errRef.current.focus();
+      }
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,18 +116,14 @@ export default function LoginPage() {
     });
   };
 
-  const handleSignUp = (e: React.FormEvent) => {
-    const link = document.links[0];
-    console.log(link);
-  };
-
   return (
     <div className="container">
-      <h1> Sign in to your account</h1>
+      {/* <h1> Sign in to your account</h1> */}
       {messageData && <h3 className="login-text">{messageData} </h3>}
       <StyledForm onSubmit={handleSubmit}>
-        <LoginInput>
-          <LoginInputData
+        <SectionContainer>
+          <LoginPageTitle>Sign in to your account</LoginPageTitle>
+          <InputField
             type="email"
             name="email"
             placeholder="Email"
@@ -97,7 +131,7 @@ export default function LoginPage() {
             value={loginData?.email}
             onChange={handleChange}
           />
-          <LoginInputData
+          <InputField
             type="pasword"
             name="password"
             placeholder="Password"
@@ -105,10 +139,8 @@ export default function LoginPage() {
             value={loginData?.password}
             onChange={handleChange}
           />
-          <LoginButton type="submit" onClick={handleSubmit}>
-            Login
-          </LoginButton>
-          <SignUpLink onClick={handleSignUp}>
+          <SignInButton type="submit">Login</SignInButton>
+          <SignUpLink>
             Not Registered yet ?{" "}
             <Link
               to={"/signup"}
@@ -117,7 +149,7 @@ export default function LoginPage() {
               Sign Up
             </Link>
           </SignUpLink>
-        </LoginInput>
+        </SectionContainer>
       </StyledForm>
     </div>
   );
