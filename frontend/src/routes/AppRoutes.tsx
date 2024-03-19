@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import AboutPage from "../pages/AboutPage";
 import ContactPage, {
@@ -28,7 +28,7 @@ import {
 import Error from "../components/Error";
 import LoginPage, { loader as loginPageLoader } from "../pages/LoginPage";
 import requireAuth from "../utils/utils";
-import SignUpPage, { loader as signUpPageLoader } from "../pages/SignUpPage";
+import SignUpPage from "../pages/SignUpPage";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
@@ -47,7 +47,7 @@ const router = createBrowserRouter(
         loader={contactUsPageLoader}
       />
       <Route path="login" element={<LoginPage />} loader={loginPageLoader} />
-      <Route path="signup" element={<SignUpPage />} loader={signUpPageLoader} />
+      <Route path="signup" element={<SignUpPage />} errorElement={<Error />} />
 
       <Route path="runner">
         <Route index element={<Runners />} errorElement={<Error />} />

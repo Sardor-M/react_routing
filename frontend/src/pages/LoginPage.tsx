@@ -66,11 +66,10 @@ export default function LoginPage() {
 
   const messageData = useLoaderData() as string | "";
 
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const [success, setSuccess] = useState(false);
   const [errMsg, setErrMsg] = useState("");
-  const [email, setEmail] = useState("");
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -78,7 +77,7 @@ export default function LoginPage() {
     try {
       const formData = new FormData();
 
-      formData.append("user", user);
+      formData.append("email", email);
       formData.append("pwd", pwd);
 
       const response = await fetch(LOGIN_URL, {
