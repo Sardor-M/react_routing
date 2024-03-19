@@ -1,120 +1,154 @@
-import React from "react";
-import Slider, { CustomArrowProps } from "react-slick";
-import { Link } from "react-router-dom";
-import "../carousel.css";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import Map from "../components/Map";
 
-interface SlideData {
-  image: string;
-  title: string;
-  description: string;
-  date: string;
-}
-interface ArrowProps extends CustomArrowProps {
-  className?: string;
-  style?: React.CSSProperties;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+interface CarouselImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  active: boolean;
 }
 
-const SampleNextArrow: React.FC<ArrowProps> = ({
-  className,
-  style,
-  onClick,
-}) => {
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "red" }}
-      onClick={onClick}
-    />
-  );
-};
+const images: string[] = [
+  "https://images.unsplash.com/photo-1581889470536-467bdbe30cd0?q=80&w=2764&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1551927336-09d50efd69cd?q=80&w=2952&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1502904550040-7534597429ae?q=80&w=2900&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1530143311094-34d807799e8f?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1540539234-c14a20fb7c7b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+];
 
-const SamplePrevArrow: React.FC<ArrowProps> = ({
-  className,
-  style,
-  onClick,
-}) => {
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "green" }}
-      onClick={onClick}
-    />
-  );
-};
+const CarouselContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+`;
 
-const Homepage: React.FC = () => {
-  const slideData: SlideData[] = [
-    {
-      image:
-        "https://images.unsplash.com/photo-1682695796497-31a44224d6d6?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Run with us",
-      description:
-        "If you want to run, run a mile with us. If you want to experience a different life, run a marathon with a community.",
-      date: "04/01/2023",
-    },
-    {
-      image:
-        " https://images.unsplash.com/photo-1695264424367-a61e7988200b?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Run with us",
-      description:
-        "If you want to run, run a mile with us. If you want to experience a different life, run a marathon with a community.",
-      date: "04/01/2023",
-    },
-  ];
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    autoplay: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+const CarouselImage = styled.img<CarouselImageProps>`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: ${(props) => (props.active ? 1 : 0)};
+  transition: opcacity 0.5s ease-in;
+`;
+const CarouselControls = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
+const CarouselControl = styled.button`
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  //align-items: center;align-items: center;
+  font-size: 18px;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: rgba(255, 200, 0);
+  }
+`;
+
+const CarouselDots = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+`;
+
+const CarouselDot = styled.button`
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+
+  &:hover {
+    background-color: rgb(255, 250, 0);
+  }
+`;
+export default function HomePage({ images: [], interval = 3600 }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prevIndex: number) => {
+        if (prevIndex === images.length - 1) {
+          return 0;
+        } else {
+          return prevIndex + 1;
+        }
+      });
+    }, interval);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [images, interval]);
+
+  const handleNextClick = () => {
+    setActiveIndex((prevIndex) => {
+      if (prevIndex === images.length - 1) {
+        return 0;
+      } else {
+        return prevIndex + 1;
+      }
+    });
   };
 
+  const handlePrevClick = () => {
+    setActiveIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
   return (
-    <div className="carousel-wrapper">
-      <Slider {...settings}>
-        {slideData.map((slide, index) => (
-          <div>
-            <div key={index}>
-              <img
-                src={slide.image}
-                alt={slide.title}
-                style={{ width: "100%", display: "block" }}
-                className="carousel-image"
-              />
-              <div className="carousel-content">
-                <h3>{slide.title}</h3>
-                <p>{slide.description}</p>
-                <span>{slide.date}</span>
-                {/* <Link className="link-button" to="/register">
-                            Find your buddy
-                        </Link> */}
-              </div>
-            </div>
-          </div>
+    <CarouselContainer>
+      <h2> Explore the running events near you</h2>
+      {images.map((imageUrl, index) => (
+        <CarouselImage
+          key={index}
+          src={imageUrl}
+          alt={"carousel image"}
+          // style={{opacity: index === activeIndex ? 1 : 0}}
+          active={index === activeIndex}
+        />
+      ))}
+      <CarouselControls>
+        <CarouselControl onClick={handlePrevClick}> &#8249; </CarouselControl>
+        <CarouselControl onClick={handleNextClick}> &#8250; </CarouselControl>
+      </CarouselControls>
+      <CarouselDots>
+        {images.map((_, index) => (
+          <CarouselDot
+            key={index}
+            onClick={() => setActiveIndex(index)}
+            style={{
+              backgroundColor:
+                index === activeIndex
+                  ? "rgba(255, 255, 255, 0.8)"
+                  : "rgba(255, 255, 255, 0.5)",
+            }}
+          />
         ))}
-      </Slider>
-    </div>
+      </CarouselDots>
+      {/* This rednering of Map component has to be removed to Routes */}
+      <Map />
+    </CarouselContainer>
   );
-};
+}
 
-export default Homepage;
-
-// <div className="home-container">
-//   <h1>
-//     If you want to run, run a mile with us. If you want to experience a
-//     different life, run a marathon with a community.
-//   </h1>
-//   <p>
-//     {" "}
-//     Add one mile everyday to your daily streak of running challenge and be
-//     part of the running community.{" "}
-//   </p>
-//   <Link className="link-button" to="/register">
-//     {" "}
-//     Find your buddy
-//   </Link>
-// </div>
+// {/* This rednering of Map component has to be removed to Routes */}
+// <Map />

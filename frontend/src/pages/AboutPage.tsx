@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import runnerHero from "../assets/images/running_banner_img.png";
 export default function AboutPage() {

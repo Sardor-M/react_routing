@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router";
 import { Link, NavLink } from "react-router-dom";
 import { Events } from "../../types";
@@ -6,8 +6,8 @@ import { Events } from "../../types";
 export default function UpcomingDetails() {
   // saving the fetched data as an object
   const [eventDetails, setEventsDetails] = useState<Events | null>(null);
-
   const { id } = useParams<{ id: string }>();
+
   const urlPath = `http://localhost:4000/api/events/upcoming/${id}`;
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-import React from "react";
 import FilterPageDetails from "./FilterPageDetails";
 
 export default function EventsPage() {
@@ -9,3 +8,4 @@ export default function EventsPage() {
     </div>
   );
 }
+

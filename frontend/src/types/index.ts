@@ -8,15 +8,35 @@ export interface Reviews {
 }
 
 export interface Events {
-  description: string;
-  id: number;
   imageUrl: string;
+  type: string;
   name: string;
   price: number;
-  type: string;
+  description: string;
+  id: number;
   upcomingId: string;
 }
 
+
 export interface GetEvent {
   id: string;
+}
+
+export interface HomePageProps {
+    images: string[];
+    interval?: number;
+}
+
+export interface Auth extends GetEvent {
+  email: string;
+  password: string;
+  token: string;
+}
+
+export interface ContactPageProps {
+    name: string;
+    email: string;
+    city: string;
+    country: string;
+    message: string;
 }

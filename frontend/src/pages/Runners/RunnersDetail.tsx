@@ -1,32 +1,51 @@
-import { Link, useLoaderData, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { Events } from "../../types";
-import { getEventDetails } from "../../api/api";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 
-interface ParamsInterface {
-  params: { id: string };
-}
-export function loader({ params }: ParamsInterface) {
-  console.log("Runner Details Loader Data:", params);
-  return getEventDetails({ id: params.id });
-}
+// runner-detail-container
+// .runner-detail-container {
+//   padding: 27px;
+// }
+
+const RunnerDetailContainer = styled.div`
+  padding: 27px;
+`;
 
 export default function RunnersDetail() {
-  const params = useParams<{ id: string }>();
+  const [runnerDetails, setRunnerDetails] = useState<Events>();
+
   const location = useLocation();
-  const runnerDetails = useLoaderData() as Events;
+  const { id } = useParams();
+  console.log("Location:", location);
+
+  useEffect(() => {
+    const fetchRunnersDetails = async () => {
+      const response = await fetch(`http://localhost:4000/api/runner/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch data details.");
+      }
+      const data = await response.json();
+      // if (Array.isArray(data)) {
+      //   setRunnerDetails(data[0]);
+      // }
+      setRunnerDetails(data[0]);
+      console.log("Runner Details: ", runnerDetails);
+    };
+    fetchRunnersDetails();
+  }, [id]);
 
   const searchData = location.state?.search || "";
   const type = location.state?.type || "";
-  // console.log("Type of the event :", type);
 
   return (
-    <div className="runner-detail-container">
+    <RunnerDetailContainer>
       <Link to={`..${searchData}`} relative="path" className="back-button">
         &larr; <span>Back to {type}</span>
       </Link>
 
       <div className="runner-detail">
-        <img src={runnerDetails?.imageUrl} alt="runnerDetails?.name" />
+        <img src={runnerDetails?.imageUrl} alt={runnerDetails?.name} />
         <i className={`runner-type ${runnerDetails?.type} selected`}>
           {runnerDetails?.type}
         </i>
@@ -37,6 +56,6 @@ export default function RunnersDetail() {
         <p> {runnerDetails?.description}</p>
         <button className="link-button"> Join the team</button>
       </div>
-    </div>
+    </RunnerDetailContainer>
   );
 }
