@@ -1,11 +1,7 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useLoaderData } from "react-router";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
-type RequestType = {
-  url: React.ReactNode;
-};
 
 const LOGIN_URL = "/auth";
 
@@ -66,17 +62,15 @@ export async function loader({ request }: { request: Request }) {
 
 export default function LoginPage() {
   const errRef = useRef<HTMLInputElement | null>(null);
+  const emailRef = useRef<HTMLInputElement | null>(null);
 
   const messageData = useLoaderData() as string | "";
 
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [success, setSuccess] = useState(false);
   const [errMsg, setErrMsg] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -109,35 +103,29 @@ export default function LoginPage() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginData({
-      ...loginData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
-    <div className="container">
+    <>
       {/* <h1> Sign in to your account</h1> */}
       {messageData && <h3 className="login-text">{messageData} </h3>}
       <StyledForm onSubmit={handleSubmit}>
         <SectionContainer>
           <LoginPageTitle>Sign in to your account</LoginPageTitle>
           <InputField
-            type="email"
-            name="email"
+            id="email"
+            type="text"
+            ref={emailRef}
             placeholder="Email"
             required
-            value={loginData?.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <InputField
+            id="password"
             type="pasword"
-            name="password"
             placeholder="Password"
             required
-            value={loginData?.password}
-            onChange={handleChange}
+            value={pwd}
+            onChange={(e) => setPwd(e.target.value)}
           />
           <SignInButton type="submit">Login</SignInButton>
           <SignUpLink>
@@ -151,6 +139,6 @@ export default function LoginPage() {
           </SignUpLink>
         </SectionContainer>
       </StyledForm>
-    </div>
+    </>
   );
 }
