@@ -11,15 +11,6 @@ const ContactPageContainer = styled.form`
   margin: 10px;
 `;
 
-// const Label = styled.label`
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-//   width: 50%;
-//   font-size: 16px;
-//   margin -right: 5px;
-// `;
-
 const InputField = styled.input`
   width: 50%;
   padding: 13px;
