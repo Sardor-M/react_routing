@@ -9,19 +9,19 @@ const SectionContainer = styled.section`
   justify-content: center;
 `;
 const FormTitleElement = styled.h1`
-  display: flex;
-  font-size: 22px;
+  //display: flex;
+  margin: 20px;
 `;
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px;
-  margin: 5px;
+  padding: 145px;
+  margin: 10px;
 `;
 const InputFieldElement = styled.input`
-  width: 180%;
+  width: 130%;
   padding: 13px;
   margin: 15px 0;
   border: none;
@@ -34,7 +34,7 @@ const InputFieldElement = styled.input`
   }
 `;
 const SubmitButton = styled.button`
-  width: 180%;
+  width: 130%;
   padding: 9px;
   margin: 15px;
   border: none;
@@ -114,8 +114,8 @@ export default function SignUpPage() {
   return (
     <>
       <SectionContainer>
-        <FormTitleElement>Sign Up </FormTitleElement>
         <FormContainer onSubmit={handleSubmit}>
+          <FormTitleElement> Register Your Account </FormTitleElement>
           <InputFieldElement
             type="username"
             id="username"

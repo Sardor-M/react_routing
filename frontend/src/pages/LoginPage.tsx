@@ -9,7 +9,7 @@ const SectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex;
+  justify-content: center;
 `;
 const LoginPageTitle = styled.h1`
   display: flex;
@@ -21,12 +21,12 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px;
-  margin: 20px;
+  padding: 165px;
+  margin: 10px;
 `;
 
 const InputField = styled.input`
-  width: 180%;
+  width: 140%;
   padding: 13px;
   margin: 15px 0;
   border: none;
@@ -40,7 +40,7 @@ const InputField = styled.input`
 `;
 
 const SignInButton = styled.button`
-  width: 180%;
+  width: 140%;
   padding: 9px;
   margin: 15px;
   border: none;
@@ -106,9 +106,9 @@ export default function LoginPage() {
     <>
       {/* <h1> Sign in to your account</h1> */}
       {messageData && <h3 className="login-text">{messageData} </h3>}
+      <SectionContainer>
       <StyledForm onSubmit={handleSubmit}>
-        <SectionContainer>
-          <LoginPageTitle>Sign in to your account</LoginPageTitle>
+        <LoginPageTitle>Sign in to your account</LoginPageTitle>
           <InputField
             id="email"
             type="text"
@@ -120,7 +120,7 @@ export default function LoginPage() {
           />
           <InputField
             id="password"
-            type="pasword"
+            type="password"
             placeholder="Password"
             required
             value={pwd}
@@ -136,8 +136,8 @@ export default function LoginPage() {
               Sign Up
             </Link>
           </SignUpLink>
-        </SectionContainer>
       </StyledForm>
+      </SectionContainer>
     </>
   );
 }
