@@ -1,22 +1,27 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const SectionContainer = styled.section`
   display: flex;
-  justify-content: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 const FormTitleElement = styled.h1`
   display: flex;
-  font-size: 18px;
+  font-size: 22px;
 `;
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  margin: 5px;
 `;
 const InputFieldElement = styled.input`
-  width: 90%;
+  width: 180%;
   padding: 13px;
   margin: 15px 0;
   border: none;
@@ -25,15 +30,28 @@ const InputFieldElement = styled.input`
   outline: none;
 
   &:hover {
-    box-shadow: 0 0 5px rgba(155, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(247, 88, 204);
   }
 `;
 const SubmitButton = styled.button`
-  width: 90%;
-  padding: 13px;
-  display: flex;
-  foxt-size: ;
+  width: 180%;
+  padding: 9px;
+  margin: 15px;
+  border: none;
+  background-color: #f5a646;
+  color: #000000;
+  font-size: 18px;
 `;
+
+const SignInLink = styled.p`
+  color: #e17654;
+  font-size: 14px;
+  margin-top: 10px;
+`;
+
+const USER_REGEX = "^[a-zA-Z0-9]{3,20}$";
+const PWD_REGEX =
+  "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*_)(?!.*W)(?!.* ).{8,16}$/";
 
 export default function SignUpPage() {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -54,9 +72,38 @@ export default function SignUpPage() {
   const [errorMsg, setErrorMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
+  useEffect(() => {
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    const regexUser = new RegExp(USER_REGEX);
+    const result = regexUser.test(user);
+    console.log(result);
+    setValidUser(result);
+  }, [user]);
+
+  useEffect(() => {
+    const regexPwd = new RegExp(PWD_REGEX);
+    const result = regexPwd.test(user);
+    console.log(result);
+    setValidPwd(result);
+
+    // password matching
+    const match = pwd === matchPwd;
+    setValidMatch(match);
+  }, [pwd, matchPwd]);
+
+  useEffect(() => {
+    setErrorMsg("");
+  }, [pwd, user, matchPwd]);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
+    // setSuccess(true);
     try {
       const registerData = new FormData();
     } catch (err) {
@@ -72,7 +119,8 @@ export default function SignUpPage() {
           <InputFieldElement
             type="username"
             id="username"
-            // ref={useRef}
+            placeholder="Username"
+            ref={emailRef}
             value={user}
             autoComplete="off"
             onChange={(e) => setUser(e.target.value)}
@@ -82,12 +130,33 @@ export default function SignUpPage() {
           <InputFieldElement
             type="password"
             id="password"
+            placeholder="Password"
             onChange={(e) => setPwd(e.target.value)}
             onFocus={() => setPwdFocus(true)}
             onBlur={() => setPwdFocus(false)}
             required
           />
-          <SubmitButton>Sing up </SubmitButton>
+          <InputFieldElement
+            type="password"
+            id="password"
+            placeholder="Re-enter your Password "
+            onChange={(e) => setMatchPwd(e.target.value)}
+            onFocus={() => setMatchFocus(true)}
+            onBlur={() => setMatchFocus(false)}
+            required
+          />
+          <SubmitButton>Sign up </SubmitButton>
+          <SignInLink>
+            {" "}
+            Already have an account ?
+            <Link
+              to="/login"
+              style={{ color: "inherit", textDecoration: "underline" }}
+            >
+              {" "}
+              Sign-in
+            </Link>
+          </SignInLink>
         </FormContainer>
       </SectionContainer>
     </>

@@ -35,7 +35,7 @@ const InputField = styled.input`
   outline: none;
 
   &:hover {
-    box-shadow: 0 0 5px rgba(155, 0, 0, 0.3);
+    box-shadow: 0 0 5px rgba(247, 88, 204);
   }
 `;
 
