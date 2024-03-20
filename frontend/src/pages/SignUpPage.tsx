@@ -49,9 +49,9 @@ const SignInLink = styled.p`
   margin-top: 10px;
 `;
 
-const USER_REGEX = "^[a-zA-Z0-9]{3,20}$";
+const USER_REGEX = /^[a-zA-Z0-9]{3,20}$/;
 const PWD_REGEX =
-  "/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*_)(?!.*W)(?!.* ).{8,16}$/";
+  /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*_)(?!.*W)(?!.* ).{8,16}$/;
 
 export default function SignUpPage() {
   const emailRef = useRef<HTMLInputElement | null>(null);
