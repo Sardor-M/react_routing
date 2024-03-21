@@ -48,7 +48,7 @@ export default function Runners() {
           </Link>
         </div>
       ))
-    : "No Data is recieved";
+    : "No Data is received";
 
   const handleFilterChange = (key: string, value: string | null) => {
     setSearchParams((prevParams) => {
@@ -59,7 +59,7 @@ export default function Runners() {
 
   return (
     <div className="runner-list-container">
-      <h1> Explore running communites around you.</h1>
+      <h1> Explore running communities around you.</h1>
       <div className="runner-list-filter-button">
         <button
           onClick={() => handleFilterChange("type", "simple")}

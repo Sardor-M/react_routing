@@ -3,11 +3,6 @@ import { Events } from "../../types";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-// runner-detail-container
-// .runner-detail-container {
-//   padding: 27px;
-// }
-
 const RunnerDetailContainer = styled.div`
   padding: 27px;
 `;
@@ -32,7 +27,8 @@ export default function RunnersDetail() {
       setRunnerDetails(data[0]);
       console.log("Runner Details: ", runnerDetails);
     };
-    fetchRunnersDetails();
+    fetchRunnersDetails()
+        .then(r => console.log("Runner Details fetched: ", r))
   }, [id]);
 
   const searchData = location.state?.search || "";

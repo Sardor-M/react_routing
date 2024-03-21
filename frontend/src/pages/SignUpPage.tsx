@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import {TextProps} from "../types";
 
 const SectionContainer = styled.section`
   display: flex;
@@ -9,7 +10,6 @@ const SectionContainer = styled.section`
   justify-content: center;
 `;
 const FormTitleElement = styled.h1`
-  //display: flex;
   margin: 20px;
 `;
 const FormContainer = styled.form`
@@ -20,8 +20,9 @@ const FormContainer = styled.form`
   padding: 145px;
   margin: 10px;
 `;
+
 const InputFieldElement = styled.input`
-  width: 130%;
+  width: 150%;
   padding: 13px;
   margin: 15px 0;
   border: none;
@@ -34,19 +35,35 @@ const InputFieldElement = styled.input`
   }
 `;
 const SubmitButton = styled.button`
-  width: 130%;
+  width: 150%;
   padding: 9px;
   margin: 15px;
   border: none;
+  border-radius: 5px;
   background-color: #f5a646;
   color: #000000;
   font-size: 18px;
+  transition: all .5s ease;
+  text-align: center;
+  
+  &:hover {
+    color: #161616;
+    background-color: cornflowerblue;
+  }
 `;
 
 const SignInLink = styled.p`
   color: #e17654;
   font-size: 14px;
   margin-top: 10px;
+`;
+
+const Text = styled.p<TextProps>`
+    color: ${(props) => props.color};
+    position: ${(props) => props.position};
+    font-size: 14px;
+    margin-top: 10px;
+
 `;
 
 const REGISTER_URL = "http://localhost:4000/api/register";
@@ -60,19 +77,20 @@ export default function SignUpPage() {
   const errRef = useRef<HTMLInputElement | null>(null);
 
   const [user, setUser] = useState("");
-  const [validUser, setValidUser] = useState(false);
-  const [userFocus, setUserFocus] = useState(false);
+  const [validUser, setValidUser] = useState<boolean>(false);
+  const [userFocus, setUserFocus] = useState<boolean>(false);
 
   const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
+  const [validPwd, setValidPwd] = useState<boolean>(false);
+  const [pwdFocus, setPwdFocus] = useState<boolean>(false);
 
   const [matchPwd, setMatchPwd] = useState("");
-  const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
+  const [validMatch, setValidMatch] = useState<boolean>(false);
+  const [matchFocus, setMatchFocus] = useState<boolean>(false);
 
   const [errorMsg, setErrorMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false)
 
   useEffect(() => {
     if (emailRef.current) {
@@ -81,14 +99,12 @@ export default function SignUpPage() {
   }, []);
 
   useEffect(() => {
-    // const regexUser = new RegExp(USER_REGEX);
     const result = USER_REGEX.test(user);
     console.log(result);
     setValidUser(result);
   }, [user]);
 
   useEffect(() => {
-    // const regexPwd = new RegExp(PWD_REGEX);
     const result1 = PWD_REGEX.test(pwd);
 
     console.log(result1);
@@ -129,14 +145,13 @@ export default function SignUpPage() {
         credentials: "include",
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to register.");
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Response data:", data);
+        setSuccess(true);
+      } else {
+        setErrorMsg("Failed to register.");
       }
-
-      const data = await response.json();
-      console.log("Response data:", data);
-
-      setSuccess(true);
     } catch (err) {
       setErrorMsg("Registration failed. Please try again.");
       if (errRef.current) {
@@ -163,8 +178,9 @@ export default function SignUpPage() {
             aria-live="assertive"
             // aria-atomic="false"
           ></p>
-          <FormTitleElement>Sign Up </FormTitleElement>
+
           <FormContainer onSubmit={handleSubmit}>
+            <FormTitleElement>Sign Up  </FormTitleElement>
             <InputFieldElement
               type="username"
               id="username"
@@ -177,6 +193,7 @@ export default function SignUpPage() {
               onChange={(e) => setUser(e.target.value)}
               onFocus={() => setUserFocus(true)}
               onBlur={() => setValidUser(true)}
+              required
             />
             <InputFieldElement
               type="password"
@@ -197,6 +214,13 @@ export default function SignUpPage() {
               onBlur={() => setMatchFocus(false)}
               required
             />
+            {
+              error && (
+                <Text color="red" position="absolute">
+                  {error}
+                </Text>
+                )
+            }
             <SubmitButton>Sign up </SubmitButton>
             <SignInLink>
               {" "}

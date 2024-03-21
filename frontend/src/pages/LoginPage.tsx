@@ -44,15 +44,31 @@ const SignInButton = styled.button`
   padding: 9px;
   margin: 15px;
   border: none;
+  border-radius: 4px;
   background-color: #f5a646;
   color: #000000;
   font-size: 18px;
+  transition: all .5s ease;
+  text-align: center;
+  
+  &:hover {
+    color: #000000;
+    background-color: cornflowerblue; 
+  }
+  
 `;
 const SignUpLink = styled.p`
   color: #e17654;
   font-size: 14px;
   margin-top: 10px;
 `;
+
+const ErrorMessage = styled.p`
+    color: cornflowerblue;
+    text-align: left;
+   white-space: pre-line;
+  
+`
 
 // accessing the Request object which is a native browser object
 // we are extracting  a new URL from the request object
@@ -66,11 +82,12 @@ export default function LoginPage() {
 
   const messageData = useLoaderData() as string | "";
 
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [errMsg, setErrMsg] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [pwd, setPwd] = useState<string>("");
+  const [success, setSuccess] = useState<boolean>(false);
+  const [errMsg, setErrMsg] = useState<string>("");
 
+  // this handleSubmit has to be changed to useCallback hook to avoid unnecessary re-renders
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -87,14 +104,14 @@ export default function LoginPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to log in.");
+        setErrMsg("Failed to log in.");
       }
 
       const data = await response.json();
       console.log("Response data:", data);
       setSuccess(true);
     } catch (err) {
-      console.log("Login is failed", err);
+      console.log( err);
       setErrMsg("Login Failed, Try again.");
       if (errRef.current) {
         errRef.current.focus();
@@ -112,7 +129,7 @@ export default function LoginPage() {
           <InputField
             id="email"
             type="text"
-            ref={emailRef}
+            // ref={emailRef}
             placeholder="Email"
             required
             value={email}
@@ -126,6 +143,7 @@ export default function LoginPage() {
             value={pwd}
             onChange={(e) => setPwd(e.target.value)}
           />
+        {errMsg && (<ErrorMessage>{errMsg}</ErrorMessage>)}
           <SignInButton type="submit">Login</SignInButton>
           <SignUpLink>
             Not Registered yet ?{" "}
