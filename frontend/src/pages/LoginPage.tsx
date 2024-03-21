@@ -120,7 +120,7 @@ export default function LoginPage() {
           />
           <InputField
             id="password"
-            type="pasword"
+            type="password"
             placeholder="Password"
             required
             value={pwd}
