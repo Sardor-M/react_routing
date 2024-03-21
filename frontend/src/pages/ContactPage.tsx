@@ -86,8 +86,9 @@ export default function ContactPage({ onSubmit }: FormProps) {
 
   return (
     <>
-      <h1>Contact Us</h1>
+      {/*<h1>Contact Us</h1>*/}
       <ContactPageContainer onSubmit={handleSubmit}>
+        <h1>Contact Us</h1>
         <InputField
           name="name"
           type="text"
