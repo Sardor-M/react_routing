@@ -7,7 +7,6 @@ interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
 const PageContainer = styled.div`
     flex-direction: column;
     align-items: center;
-    
 `
 
 const ImageElement = styled.img<ImageProps>`
@@ -23,9 +22,11 @@ const PageContentElement = styled.div`
 const TextElement = styled(PageContentElement).attrs({as: "h1"})`
  line-height: 38px;
 `
+
 const ParagraphElement  = styled(PageContentElement).attrs({as: "p"})`
     line-height: 22px
 `
+
 const TextContainer = styled.div`
     background-color: #ffcc8d;
     color: #161616;

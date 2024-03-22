@@ -16,10 +16,10 @@ const images: string[] = [
 
 const CarouselContainer = styled.div`
   position: relative;
+  margin-bottom: 600px;
   width: 100%;
   height: 400px;
   overflow: hidden;
-  margin-bottom: 700px;
 `;
 
 const CarouselImage = styled.img<CarouselImageProps>`
@@ -145,11 +145,7 @@ export default function HomePage({ images: [], interval = 3600 }) {
           />
         ))}
       </CarouselDots>
-      {/* This rednering of Map component has to be removed to Routes */}
       <Map />
     </CarouselContainer>
   );
 }
-
-// {/* This rednering of Map component has to be removed to Routes */}
-// <Map />
