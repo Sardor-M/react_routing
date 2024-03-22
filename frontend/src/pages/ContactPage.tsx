@@ -37,6 +37,13 @@ const SubmitButton = styled.button`
   color: #0d0d0d;
   background-color: #f5a646;
   font-size: 18px;
+  transition: all .5s ease;
+  text-align: center;
+
+  &:hover {
+    color: #161616;
+    background-color: cornflowerblue;
+  }
 `;
 
 type FormProps = {
