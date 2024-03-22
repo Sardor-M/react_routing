@@ -19,6 +19,7 @@ const CarouselContainer = styled.div`
   width: 100%;
   height: 400px;
   overflow: hidden;
+  margin-bottom: 700px;
 `;
 
 const CarouselImage = styled.img<CarouselImageProps>`

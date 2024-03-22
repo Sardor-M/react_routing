@@ -53,7 +53,7 @@ const SignInButton = styled.button`
   
   &:hover {
     color: #000000;
-    background-color: cornflowerblue; 
+    background-color: #1ea7fd; 
   }
   
 `;
