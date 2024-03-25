@@ -22,9 +22,9 @@ const FormContainer = styled.form`
 `;
 
 const InputFieldElement = styled.input`
-  width: 150%;
+  width: 100%;
   padding: 13px;
-  margin: 15px 0;
+  margin-bottom: 20px;
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 62, 213, 0.1);
@@ -35,9 +35,9 @@ const InputFieldElement = styled.input`
   }
 `;
 const SubmitButton = styled.button`
-  width: 150%;
+  width: 100%;
   padding: 9px;
-  margin: 15px;
+  margin-top: 8px;
   border: none;
   border-radius: 5px;
   background-color: #f5a646;
@@ -56,14 +56,7 @@ const SignInLink = styled.p`
   color: #e17654;
   font-size: 14px;
   margin-top: 10px;
-`;
-
-const Text = styled.p<TextProps>`
-    color: ${(props) => props.color};
-    position: ${(props) => props.position};
-    font-size: 14px;
-    margin-top: 10px;
-
+  margin-right: 116px ;
 `;
 
 const REGISTER_URL = "http://localhost:4000/api/register";
@@ -214,20 +207,13 @@ export default function SignUpPage() {
               onBlur={() => setMatchFocus(false)}
               required
             />
-            {
-              error && (
-                <Text color="red" position="absolute">
-                  {error}
-                </Text>
-                )
-            }
             <SubmitButton>Sign up </SubmitButton>
             <SignInLink>
               {" "}
               Already have an account ?
               <Link
                 to="/login"
-                style={{ color: "inherit", textDecoration: "underline" }}
+                style={{ color: "inherit", textDecoration: "underline", marginLeft: "5px" }}
               >
                 {" "}
                 Sign-in

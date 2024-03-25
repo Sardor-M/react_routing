@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useLoaderData } from "react-router";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
-const LOGIN_URL = "/auth";
+import Input from "../components/Input";
 
 const SectionContainer = styled.section`
   display: flex;
@@ -17,6 +16,7 @@ const LoginPageTitle = styled.h1`
 `;
 
 const StyledForm = styled.form`
+  //position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,26 +25,12 @@ const StyledForm = styled.form`
   margin: 10px;
 `;
 
-const InputField = styled.input`
-  width: 140%;
-  padding: 13px;
-  margin: 15px 0;
+const SignInButton = styled.button`
+  width: 103%;
+  padding: 9px;
+  margin-top: 15px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 62, 213, 0.1);
-  outline: none;
-
-  &:hover {
-    box-shadow: 0 0 5px rgba(247, 88, 204);
-  }
-`;
-
-const SignInButton = styled.button`
-  width: 140%;
-  padding: 9px;
-  margin: 15px;
-  border: none;
-  border-radius: 4px;
   background-color: #f5a646;
   color: #000000;
   font-size: 18px;
@@ -61,14 +47,13 @@ const SignUpLink = styled.p`
   color: #e17654;
   font-size: 14px;
   margin-top: 10px;
+  //position: fixed;
+  margin-right: 123px;
+  //left: 537px;
+  //top: 528px;
+  text-align: left;
 `;
 
-const ErrorMessage = styled.p`
-    color: cornflowerblue;
-    text-align: left;
-   white-space: pre-line;
-  
-`
 
 // accessing the Request object which is a native browser object
 // we are extracting  a new URL from the request object
@@ -77,79 +62,70 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export default function LoginPage() {
-  const errRef = useRef<HTMLInputElement | null>(null);
-  const emailRef = useRef<HTMLInputElement | null>(null);
 
   const messageData = useLoaderData() as string | "";
 
-  const [email, setEmail] = useState<string>("");
-  const [pwd, setPwd] = useState<string>("");
-  const [success, setSuccess] = useState<boolean>(false);
-  const [errMsg, setErrMsg] = useState<string>("");
+  const [inputValues, setInputValues] = useState<{email: string, password: string}>({email: "", password: ""});
+  const [didEdit, setDidEdit] = useState<{email: boolean, password: boolean}>({email: false, password: false});
 
-  // this handleSubmit has to be changed to useCallback hook to avoid unnecessary re-renders
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const emailIsValid = didEdit.email && !inputValues.email.includes("@");
+  const pwdIsValid = didEdit.password && inputValues.password.trim().length < 8;
 
-    try {
-      const formData = new FormData();
 
-      formData.append("email", email);
-      formData.append("pwd", pwd);
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>){
+    event.preventDefault();
+    console.log(inputValues);
+  }
+  function handleInputChange(identifier: string, event: React.ChangeEvent<HTMLInputElement>){
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      [identifier]: event.target.value
+    }))
 
-      const response = await fetch(LOGIN_URL, {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
+    setDidEdit((prevValues) => ({
+      ...prevValues,
+      [identifier]: false
+    }))
+  }
 
-      if (!response.ok) {
-        setErrMsg("Failed to log in.");
-      }
-
-      const data = await response.json();
-      console.log("Response data:", data);
-      setSuccess(true);
-    } catch (err) {
-      console.log( err);
-      setErrMsg("Login Failed, Try again.");
-      if (errRef.current) {
-        errRef.current.focus();
-      }
-    }
-  };
+  function handleInputBlur(identifier: string){
+    setDidEdit((prevValues) => ({
+      ...prevValues,
+      [identifier]: true
+    }))
+  }
 
   return (
     <>
-      {/* <h1> Sign in to your account</h1> */}
-      {messageData && <h3 className="login-text">{messageData} </h3>}
+      {/*{messageData && <h3 className="login-text">{messageData} </h3>}*/}
       <SectionContainer>
       <StyledForm onSubmit={handleSubmit}>
         <LoginPageTitle>Sign in to your account</LoginPageTitle>
-          <InputField
+          <Input
             id="email"
-            type="text"
-            // ref={emailRef}
+            type="email"
+            name="email"
             placeholder="Email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onBlur={() => handleInputBlur("email")}
+            onChange={(event) => handleInputChange("email", event)}
+            error = {emailIsValid ? "Please enter a valid email": ""}
           />
-          <InputField
-            id="password"
-            type="password"
-            placeholder="Password"
-            required
-            value={pwd}
-            onChange={(e) => setPwd(e.target.value)}
-          />
-        {errMsg && (<ErrorMessage>{errMsg}</ErrorMessage>)}
+            <Input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Password"
+                onBlur={() => handleInputBlur("password")}
+                onChange = {(event) => handleInputChange("password", event)}
+                error={pwdIsValid ? "Enter a valid password": ""}
+            />
+          {/*// when working with forms, always use the type="button" to avoid the default behavior of the form*/}
           <SignInButton type="submit">Login</SignInButton>
           <SignUpLink>
             Not Registered yet ?{" "}
             <Link
               to={"/signup"}
-              style={{ color: "inherit", textDecoration: "underline" }}
+              style={{ color: "inherit", textDecoration: "underline", marginLeft: "3px" }}
             >
               Sign Up
             </Link>
