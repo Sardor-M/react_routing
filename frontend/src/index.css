@@ -186,6 +186,8 @@ header .login-icon {
 
 /*** Runner's Page ***/
 .runner-list-container {
+  /*display: flex;*/
+  overflow: auto;
   padding-inline: 23px;
   padding-left: 10px;
   padding-right: 10px;
@@ -199,13 +201,13 @@ header .login-icon {
   margin-top: 57px;
 }
 
-.runner-tile a {
+.runner-title a {
   color: #161616;
   text-decoration: none;
 }
 
-.runner-tile img {
-  max-width: 100%;
+.runner-title img {
+  max-width: 40%;
   border-radius: 5px;
 }
 

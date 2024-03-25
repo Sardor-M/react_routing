@@ -12,7 +12,7 @@ const ContactPageContainer = styled.form`
 `;
 
 const InputField = styled.input`
-  width: 40%;
+  width: 30%;
   padding: 13px;
   margin: 15px 0;
   border: none;
@@ -20,7 +20,7 @@ const InputField = styled.input`
 `;
 
 const MessageField = styled.textarea`
-  width: 40%;
+  width: 30%;
   padding: 30px;
   margin: 15px 0;
   border: none;
@@ -29,7 +29,7 @@ const MessageField = styled.textarea`
 `;
 
 const SubmitButton = styled.button`
-  width: 40%;
+  width: 30%;
   padding: 13px;
   margin: 15px;
   border: none;

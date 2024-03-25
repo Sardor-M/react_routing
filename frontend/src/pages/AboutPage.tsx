@@ -24,21 +24,27 @@ const TextElement = styled(PageContentElement).attrs({as: "h1"})`
 `
 
 const ParagraphElement  = styled(PageContentElement).attrs({as: "p"})`
-    line-height: 22px
-`
+  line-height: 22px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #161616;
+  border-top: 1px solid #161616;
 
+`
+// i want to
 const TextContainer = styled.div`
     background-color: #ffcc8d;
     color: #161616;
     padding-inline: 32px;
     padding-bottom: 32px;
-    margin-inline: 27px;
+    margin-inline: 80px;
     border-radius: 5px;
 `
 
 const TextInsideContainer = styled(TextContainer).attrs({as: "h2"})`
-    margin: 0;
-    padding-block: 37px;
+    margin-bottom: -19px;
+    padding-block: 27px;
 `
 
 const JoinButton = styled(TextContainer).attrs({as: "button"})`
@@ -47,9 +53,9 @@ const JoinButton = styled(TextContainer).attrs({as: "button"})`
     border: none;
     border-radius: 5px;
     color: #e7fdd8;
-    padding-bottom: 3px;
+    padding-bottom: 1px;
     //padding-block: 10px;
-    font-size: 18px;
+    font-size: 15px;
     transition: background-color 0.3s ease-in-out;
     
     &:hover {
@@ -69,14 +75,19 @@ export default function AboutPage() {
           Join the community of runners and find your running buddy. It is never
           late to start running. Just run here. :
         </ParagraphElement>
+        {/*<ParagraphElement>*/}
+        {/*  Our mission is to help people to find their running buddy and start*/}
+        {/*  running with them. Start your journey with us here and be the part of*/}
+        {/*  the community.*/}
+        {/*</ParagraphElement>*/}
+      </PageContentElement>
+      <TextContainer>
+        <TextInsideContainer> A community of runners are waiting for you. Join now.</TextInsideContainer>
         <ParagraphElement>
           Our mission is to help people to find their running buddy and start
           running with them. Start your journey with us here and be the part of
           the community.
         </ParagraphElement>
-      </PageContentElement>
-      <TextContainer>
-        <TextInsideContainer> A community of runners are waiting for you. Join now.</TextInsideContainer>
           <JoinButton>
         <Link className="link-button" to={"/register"}>
           Join Now
