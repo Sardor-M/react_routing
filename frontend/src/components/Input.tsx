@@ -10,13 +10,12 @@ const StyledDiv = styled.div`
     justify-content: center;
     padding: 8px;
     margin: 8px;
-` ;
+`;
 
 const StyledInput = styled.input`
-    width: 182%;
+    width: 140%;
     padding: 13px;
-    margin-bottom: 20px;
-    //margin: 15px 0;
+    margin: 15px 0;
     border: none;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 62, 213, 0.1);
@@ -39,12 +38,13 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     id: string;
     error: string | boolean;
 }
-export default function Input({id, error, ...props} : InputProps) {
+
+export default function Input({id, error, ...props}: InputProps) {
     return (
         <>
             <StyledDiv>
                 <StyledInput id={id} {...props}/>
-                <StyledErrorText>{error &&  <p> {error}</p>} </StyledErrorText>
+                <StyledErrorText>{error && <p> {error}</p>} </StyledErrorText>
             </StyledDiv>
         </>
     );

@@ -38,7 +38,7 @@ export default function UpcomingEventsList() {
 
     return (
         <EventsListSection>
-            <h1 className="upcoming-event-title"> Upcomning Event's List</h1>
+            <h1 className="upcoming-event-title"> Upcoming Event's List</h1>
             <div className="upcoming-event-list">
                 <section>{upcomingEventsData}</section>
             </div>

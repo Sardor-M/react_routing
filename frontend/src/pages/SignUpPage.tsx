@@ -48,7 +48,7 @@ const SubmitButton = styled.button`
   
   &:hover {
     color: #161616;
-    background-color: #1ea7fd;
+    background-color: #1ea7fd   
   }
 `;
 
