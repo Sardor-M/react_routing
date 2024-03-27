@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 import Input from "../components/Input";
 import {useLoaderData} from "react-router-dom";
+import {useInput} from "../hooks/useInput";
+import {isEmail, isNotEmpty, hasMinLength} from "../utils/validation";
 
 const SectionContainer = styled.section`
     display: flex;
@@ -62,41 +64,33 @@ export async function loader({request}: { request: Request }) {
 }
 
 export default function LoginPage() {
-
     const messageData = useLoaderData() as string | "";
 
+    // const [inputValues, setInputValues] = useState<{ email: string, password: string }>({email: "", password: ""});
+    // const [didEdit, setDidEdit] = useState<{ email: boolean, password: boolean }>({email: false, password: false});
 
-    const [inputValues, setInputValues] = useState<{ email: string, password: string }>({email: "", password: ""});
-    const [didEdit, setDidEdit] = useState<{ email: boolean, password: boolean }>({email: false, password: false});
+    // const emailIsValid = didEdit.email && !inputValues.email.includes("@");
+    // const pwdIsValid = didEdit.password && inputValues.password.trim().length < 8;
 
-    const emailIsValid = didEdit.email && !inputValues.email.includes("@");
-    const pwdIsValid = didEdit.password && inputValues.password.trim().length < 8;
+    const {
+        values: emailValue,
+        handleInputChange: handleEmailChange,
+        handleInputBlur: handleEmailBlur,
+        hasAnError: emailHasAnError,
+    } = useInput("", (values) => isEmail(values.email) && isNotEmpty(values.email))
+
+    const {
+        values: pwdValue,
+        handleInputChange: handlePwdChange,
+        handleInputBlur: handlePwdBlur,
+        hasAnError: pwdHasAnError,
+    } = useInput("", (values) => hasMinLength(values.password, 8));
 
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log(inputValues);
+        // console.log(inputValues);
     }
-
-    function handleInputChange(identifier: string, event: React.ChangeEvent<HTMLInputElement>) {
-        setInputValues((prevValues) => ({
-            ...prevValues,
-            [identifier]: event.target.value
-        }))
-
-        setDidEdit((prevValues) => ({
-            ...prevValues,
-            [identifier]: false
-        }))
-    }
-
-    function handleInputBlur(identifier: string) {
-        setDidEdit((prevValues) => ({
-            ...prevValues,
-            [identifier]: true
-        }))
-    }
-
     return (
         <>
             {/* <h1> Sign in to your account</h1> */}
@@ -110,18 +104,18 @@ export default function LoginPage() {
                         type="email"
                         name="email"
                         placeholder="Email"
-                        onBlur={() => handleInputBlur("email")}
-                        onChange={(event) => handleInputChange("email", event)}
-                        error={emailIsValid ? "Please enter a valid email" : ""}
+                        onBlur={handleEmailBlur}
+                        onChange={handleEmailChange}
+                        error={emailHasAnError ? "Please enter a valid email" : ""}
                     />
                     <Input
                         id="password"
                         type="password"
                         name="password"
                         placeholder="Password"
-                        onBlur={() => handleInputBlur("password")}
-                        onChange={(event) => handleInputChange("password", event)}
-                        error={pwdIsValid ? "Enter a valid password" : ""}
+                        onBlur={handlePwdBlur}
+                        onChange={handlePwdChange}
+                        error={pwdHasAnError ? "Enter a valid password" : ""}
                     />
                     {/*// when working with forms, always use the type="button" to avoid the default behavior of the form*/}
                     <SignInButton type="submit">Login</SignInButton>
@@ -129,7 +123,7 @@ export default function LoginPage() {
                         Not Registered yet ?{" "}
                         <Link
                             to={"/signup"}
-                            style={{color: "inherit", textDecoration: "underline", }}
+                            style={{color: "inherit", textDecoration: "underline",}}
                         >
                             Sign Up
                         </Link>
