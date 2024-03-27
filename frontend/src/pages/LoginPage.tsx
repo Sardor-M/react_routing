@@ -13,6 +13,7 @@ const SectionContainer = styled.section`
 const LoginPageTitle = styled.h1`
     display: flex;
     font-size: 22px;
+    margin-bottom: -10px;
 `;
 
 const StyledForm = styled.form`

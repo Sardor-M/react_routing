@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Reviews } from "../../types";
-import requireAuth from "../../utils/utils";
 import {getEvents} from "../../api/api";
 import styled from "styled-components";
 
