@@ -1,157 +1,100 @@
-import {useCallback, useEffect, useRef, useState} from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import {TextProps} from "../types";
+  import {FormEvent, useState} from "react";
+  import { Link } from "react-router-dom";
+  import styled from "styled-components";
 
-const SectionContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`;
-const FormTitleElement = styled.h1`
-  margin: 20px;
-`;
-const FormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 145px;
-  margin: 10px;
-`;
+  const SectionContainer = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  `;
+  const FormTitleElement = styled.h1`
+    margin: 20px;
+  `;
+  const FormContainer = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 145px;
+    margin: 10px;
+  `;
 
-const InputFieldElement = styled.input`
-  width: 100%;
-  padding: 13px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 62, 213, 0.1);
-  outline: none;
-
+  const InputFieldElement = styled.input`
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 62, 213, 0.1);
+    outline: none;
+  
   &:hover {
     box-shadow: 0 0 5px rgba(247, 88, 204);
   }
-`;
-const SubmitButton = styled.button`
-  width: 100%;
-  padding: 9px;
-  margin-top: 8px;
-  border: none;
-  border-radius: 5px;
-  background-color: #f5a646;
-  color: #000000;
-  font-size: 18px;
-  transition: all .5s ease;
-  text-align: center;
+  `;
+  const SubmitButton = styled.button`
+    width: 100%;
+    padding: 9px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f5a646;
+    color: #000000;
+    font-size: 18px;
+    transition: all .5s ease;
+    text-align: center;
   
   &:hover {
     color: #161616;
     background-color: #1ea7fd   
   }
-`;
+  `;
 
-const SignInLink = styled.p`
-  color: #e17654;
-  font-size: 14px;
-  margin-top: 10px;
-  margin-right: 116px ;
-`;
+  const SignInLink = styled.p`
+    color: #e17654;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-right: 116px ;
+  `;
 
-const REGISTER_URL = "http://localhost:4000/api/register";
-
-const USER_REGEX = /^[a-zA-Z0-9]{3,20}$/;
-const PWD_REGEX =
-  /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*_)(?!.*W)(?!.* ).{8,16}$/;
-
-export default function SignUpPage() {
-  const emailRef = useRef<HTMLInputElement | null>(null);
-  const errRef = useRef<HTMLInputElement | null>(null);
-
-  const [user, setUser] = useState("");
-  const [validUser, setValidUser] = useState<boolean>(false);
-  const [userFocus, setUserFocus] = useState<boolean>(false);
-
-  const [pwd, setPwd] = useState("");
-  const [validPwd, setValidPwd] = useState<boolean>(false);
-  const [pwdFocus, setPwdFocus] = useState<boolean>(false);
-
-  const [matchPwd, setMatchPwd] = useState("");
-  const [validMatch, setValidMatch] = useState<boolean>(false);
-  const [matchFocus, setMatchFocus] = useState<boolean>(false);
-
-  const [errorMsg, setErrorMsg] = useState("");
-  const [success, setSuccess] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (emailRef.current) {
-      emailRef.current.focus();
+  const ControlError = styled.div`
+    color: #115e59;
+    font-size: 0.8rem;
+    height: 2rem;
+    padding: 0.5rem 0;
+    
+    p {
+      margin: 0;
     }
-  }, []);
+  `
+  export default function SignUpPage() {
 
-  useEffect(() => {
-    const result = USER_REGEX.test(user);
-    console.log(result);
-    setValidUser(result);
-  }, [user]);
+    const [inputValues, setInputValues] = useState<{input: string, pwd: string}>({
+      input: "string",
+      pwd: "",
+    });
+    const [emailValue, setEmailValue] = useState<string>("");
+    const [pwdValue, setPwdValue] = useState<string>("");
 
-  useEffect(() => {
-    const result1 = PWD_REGEX.test(pwd);
 
-    console.log(result1);
-    setValidPwd(result1);
+  const [pwdIsNotEqual, setPwdIsNotEqual] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
+  function handleSubmit(event:FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-    // password matching
-    const match = pwd === matchPwd;
-    setValidMatch(match);
-  }, [pwd, matchPwd]);
+    const formData = new FormData(event.currentTarget);
+    // const checkBox = formData.getAll("nicknames");
+    const data = Object.fromEntries(formData.entries());
 
-  useEffect(() => {
-    setErrorMsg("");
-  }, [pwd, user, matchPwd]);
+    // data.nicknames = checkBox;
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    const result1 = USER_REGEX.test(user);
-    const result2 = PWD_REGEX.test(pwd);
-
-    if (!result1 || !result2) {
-      setErrorMsg("Invalid Entry is detected");
+    if(data.password !== data["check-password"]){
+      setPwdIsNotEqual(true);
+      console.log(pwdIsNotEqual);
       return;
     }
-
-    try {
-      const registerData = new FormData();
-      registerData.append("user", user);
-      registerData.append("pwd", pwd);
-      console.log(registerData);
-
-      const response = await fetch(REGISTER_URL, {
-        method: "POST",
-        body: JSON.stringify({ registerData }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Response data:", data);
-        setSuccess(true);
-      } else {
-        setErrorMsg("Failed to register.");
-      }
-    } catch (err) {
-      setErrorMsg("Registration failed. Please try again.");
-      if (errRef.current) {
-        errRef.current.focus();
-      }
-    }
-  };
+  }
 
   return (
     <>
@@ -159,19 +102,11 @@ export default function SignUpPage() {
         <section>
           <h1>Successfully Logged in ! </h1>
           <p>
-            {errorMsg}
             <Link to="/login">Back to Login page</Link>
           </p>
         </section>
       ) : (
         <SectionContainer>
-          <p
-            ref={emailRef}
-            className={errorMsg ? "errorMsg" : "assertive"}
-            aria-live="assertive"
-            // aria-atomic="false"
-          ></p>
-
           <FormContainer onSubmit={handleSubmit}>
             <FormTitleElement>Sign Up  </FormTitleElement>
             <InputFieldElement
@@ -179,34 +114,42 @@ export default function SignUpPage() {
               id="username"
               placeholder="Username"
               aria-describedby="uidnote"
-              aria-invalid={validUser ? "false" : "true"}
-              ref={emailRef}
-              value={user}
+              // aria-invalid={validUser ? "false" : "true"}
+              // ref={emailRef}
+              value={emailValue}
               autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              onFocus={() => setUserFocus(true)}
-              onBlur={() => setValidUser(true)}
+              onChange={(e) => setEmailValue(e.target.value)}
+              // onFocus={() => setUserFocus(true)}
+              // onBlur={() => setValidUser(true)}
               required
             />
             <InputFieldElement
               type="password"
               id="password"
               placeholder="Password"
+              value={pwdValue}
               // aria-invalid={validPwd ? " false" : "true"}
-              onChange={(e) => setPwd(e.target.value)}
-              onFocus={() => setPwdFocus(true)}
-              onBlur={() => setPwdFocus(false)}
+              onChange={(e) => setPwdValue(e.target.value)}
+              // onFocus={() => setPwdFocus(true)}
+              // onBlur={() => setPwdFocus(false)}
               required
             />
             <InputFieldElement
               type="password"
-              id="password"
+              id="check-password"
               placeholder="Re-enter your Password "
-              onChange={(e) => setMatchPwd(e.target.value)}
-              onFocus={() => setMatchFocus(true)}
-              onBlur={() => setMatchFocus(false)}
+              // onChange={(e) => setMatchPwd(e.target.value)}
+              // onFocus={() => setMatchFocus(true)}
+              // onBlur={() => setMatchFocus(false)}
               required
             />
+            <ControlError>
+              {pwdIsNotEqual && (
+                  <p>
+                    Password entered does not match. Try again.
+                  </p>
+              )}
+            </ControlError>
             <SubmitButton>Sign up </SubmitButton>
             <SignInLink>
               {" "}
@@ -224,4 +167,4 @@ export default function SignUpPage() {
       )}
     </>
   );
-}
+  }
