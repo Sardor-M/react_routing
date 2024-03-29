@@ -21,6 +21,7 @@ body {
 }
 
 .site-wrapper {
+  overflow: auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -31,6 +32,8 @@ header {
   display: flex;
   align-items: center;
   padding-block: 10px;
+  /*overflow: hidden;*/
+
 }
 
 header .site-logo {

@@ -1,4 +1,5 @@
 import React, {ReactNode} from 'react';
+import PropTypes from "prop-types";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children?: ReactNode,
@@ -17,6 +18,12 @@ const Button: React.FC<ButtonProps> = ({children, textOnly, className, onClick, 
             {children}
         </button>
     )
+}
+
+Button.propTypes= {
+    textOnly: PropTypes.bool,
+    className: PropTypes.string,
+    onClick: PropTypes.func,
 }
 
 export default Button;
