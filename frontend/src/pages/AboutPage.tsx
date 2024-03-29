@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import runnerHero from "../assets/images/running_banner_img.png";
 import styled from "styled-components";
 import React from "react";
+import Button from "../components/UI/Button";
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
 const PageContainer = styled.div`
@@ -57,11 +58,14 @@ const JoinButton = styled(TextContainer).attrs({as: "button"})`
     //padding-block: 10px;
     font-size: 15px;
     transition: background-color 0.3s ease-in-out;
-    
+
     &:hover {
         background-color: #1ea7fd;
     }
 `
+function handleJoinToCommunity () {
+  return ;
+}
 
 export default function AboutPage() {
   return (
@@ -88,7 +92,8 @@ export default function AboutPage() {
           running with them. Start your journey with us here and be the part of
           the community.
         </ParagraphElement>
-          <JoinButton>
+          <JoinButton
+              onClick={handleJoinToCommunity}>
         <Link className="link-button" to={"/register"}>
           Join Now
         </Link>
