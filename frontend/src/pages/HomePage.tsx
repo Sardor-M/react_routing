@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Map from "../components/Map";
 
 interface CarouselImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   active: boolean;
@@ -145,7 +144,7 @@ export default function HomePage({ images: [], interval = 3600 }) {
           />
         ))}
       </CarouselDots>
-      <Map />
+    {/* <Map/> */}
     </CarouselContainer>
   );
 }

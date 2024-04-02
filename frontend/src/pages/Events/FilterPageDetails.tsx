@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Events } from "../../types";
+import SearchBox from "../../components/SearchBox";
 
 export default function FilterPageDetails() {
   const [category, setCategory] = useState<Events[]>([]);
@@ -35,6 +36,7 @@ export default function FilterPageDetails() {
   return (
     <div className="filter-page-container">
       <h3 className="filter-page-left">FilterPageDetails</h3>
+      <SearchBox/>
       <div className="filter-page-left input">
         <label>
           {" "}

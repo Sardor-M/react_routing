@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import runnerHero from "../assets/images/running_banner_img.png";
 import styled from "styled-components";
 import React from "react";
-import Button from "../components/UI/Button";
+
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
 const PageContainer = styled.div`

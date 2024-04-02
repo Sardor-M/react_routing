@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
-
+import runner_logo from "../assets/images/runner_logo.png";
 
 // header {
 //   height: 110px;
@@ -47,21 +47,31 @@ const HeaderElement = styled.header`
     padding-block: 10px;
 `
 
-const SiteLogo = styled(HeaderElement).attrs({as: "a"})`
+const SiteLogoWrapper = styled(HeaderElement).attrs({as: "a"})`
     color: black;
     margin-right: auto;
+    padding-inline: 10px;
     text-transform: uppercase;
     font-weight: 900;
-    font-size: 35px;
+    font-size: 80px;
 `
 
-
+const SiteLogoImg = styled.img`
+     width:110px;
+     height: 60px;
+     margin-right: auto;
+     font-weight: 1500;
+`
 
 export default function Navbar() {
   return (
     <HeaderElement>
       <Link className="site-logo" to="/">
-        #RunWithUs
+        <SiteLogoWrapper>
+          <SiteLogoImg
+            src={runner_logo}
+            />
+        </SiteLogoWrapper>
       </Link>
       <nav>
         <NavLink
