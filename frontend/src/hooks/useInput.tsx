@@ -15,14 +15,6 @@ export function useInput(
     const valueIsValid = validationFcn(inputValues);
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        // const {name, value} = event.target;
-        // setInputValues((prevValues) => ({
-        //     ...prevValues,
-        //     [name]: value
-        // }))
-        // if(!validationFcn(value)){
-        //     setDidEdit(false);
-        // }
         const {name, value} = event.target;
         setInputValues(prevValues => {
             const updatedValues = {...prevValues, [name]: value};

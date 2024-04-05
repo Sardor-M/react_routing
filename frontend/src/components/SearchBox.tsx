@@ -25,7 +25,6 @@ const SearchButton = styled.button`
     border-radius: 5px;
     cursor: pointer;
 `
-
 //     .search-container button {
 //     padding: 8px 15px;
 //     background-color: #007bff;
@@ -38,9 +37,6 @@ const SearchButton = styled.button`
 // .search-container button:hover {
 //     background-color: #0056b3;
 // }
-
-
-
 
 interface Tag {
     id: number;
