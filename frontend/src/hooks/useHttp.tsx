@@ -38,6 +38,10 @@ export default function useHttp(
       setIsLoading(true);
 
       try {
+
+          if(config.method && (config.method.toUpperCase() === "GET" || config.method.toUpperCase() === "HEAD")) {
+              delete config.body;
+          }
         // merging the data with the config
         const resData = await sendHttpRequest(url, { ...config, body: data });
         setData(data);
