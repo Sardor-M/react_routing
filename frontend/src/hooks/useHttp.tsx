@@ -33,18 +33,24 @@ export default function useHttp(
   }
 
   const sendRequest = useCallback(
-      // now the sendRequest can be used such that it can be called with the url and the config
+    // now the sendRequest can be used such that it can be called with the url and the config
     async function sendRequest() {
       setIsLoading(true);
 
       try {
-
-          if(config.method && (config.method.toUpperCase() === "GET" || config.method.toUpperCase() === "HEAD")) {
-              delete config.body;
-          }
+        // let finalConfig = { ...config };
+        // if (
+        //   config.method &&
+        //   (config.method.toUpperCase() === "GET" ||
+        //     config.method.toUpperCase() === "HEAD")
+        // ) {
+        //   delete finalConfig.body;
+        // } else {
+        //   finalConfig = { ...finalConfig, body: data };
+        // }
         // merging the data with the config
         const resData = await sendHttpRequest(url, { ...config, body: data });
-        setData(data);
+        setData(resData);
       } catch (error: any) {
         setError(error.message || "Something went wrong");
       }
