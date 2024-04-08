@@ -11,7 +11,6 @@ import Error from "../../components/UI/Error";
 //   return getEvents();
 // }
 
-
 const EventsListSection = styled.div`
   padding: 10px;
   margin-bottom: 540px;
@@ -34,7 +33,6 @@ export default function UpcomingEventsList() {
     if (error) {
         return <Error title={"Failed to fetch the events"} message={error} />;
     }
-
 
     // const upcomingEvents = useLoaderData() as Events[];
     console.log("Log event from the upcoming", upcomingEvents);

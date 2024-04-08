@@ -33,10 +33,12 @@ export default function useHttp(
   }
 
   const sendRequest = useCallback(
+      // now the sendRequest can be used such that it can be called with the url and the config
     async function sendRequest() {
       setIsLoading(true);
 
       try {
+        // merging the data with the config
         const resData = await sendHttpRequest(url, { ...config, body: data });
         setData(data);
       } catch (error: any) {
