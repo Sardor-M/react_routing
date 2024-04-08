@@ -1,21 +1,46 @@
 import {Link, useLoaderData} from "react-router-dom";
 import {Events} from "../../types";
 import styled from "styled-components";
+import requireAuth from "../../utils/utils";
+import {getEvents} from "../../api/api";
+import useHttp from "../../hooks/useHttp";
+import Error from "../../components/UI/Error";
 
-// export async function loader() {
-//   await requireAuth();
-//   return getUpcomingEventsList();
+// export function loader() {
+//   // await requireAuth();
+//   return getEvents();
 // }
+
 
 const EventsListSection = styled.div`
   padding: 10px;
   margin-bottom: 540px;
 `
 
-export default function UpcomingEventsList() {
-    const upcomingEvents = useLoaderData() as Events[];
+const requestConfig = {};
 
-    const upcomingEventsData = upcomingEvents?.map((event) => {
+export default function UpcomingEventsList() {
+    const {
+        data: upcomingEvents,
+        error,
+        isLoading,
+        clearData
+    } = useHttp("http://localhost:4000/api/events/upcoming", requestConfig, [] );
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <Error title={"Failed to fetch the events"} message={error} />;
+    }
+
+
+    // const upcomingEvents = useLoaderData() as Events[];
+    console.log("Log event from the upcoming", upcomingEvents);
+
+    const upcomingEventsData = upcomingEvents?.map((event: Events) => {
+        console.log("Event: ", event)
         return (
 
             <Link
