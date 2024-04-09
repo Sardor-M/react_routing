@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Events } from "../../types";
 import styled from "styled-components";
-import Error from "../../components/UI/Error";
+import Error from "../../components/atoms/Error/Error";
 import useHttpNew from "../../hooks/useHttp";
 
 // export function loader() {
