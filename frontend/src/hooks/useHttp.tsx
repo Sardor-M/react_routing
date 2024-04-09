@@ -1,75 +1,40 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-interface ConfigProps {
-  method?: string;
-  body?: any;
+interface FetchState<T> {
+  data: T | null;
+  isLoading: boolean;
+  error: string | null;
 }
-
-// helper function to fetch the details
-async function sendHttpRequest(url: string, config: ConfigProps) {
-  const response = await fetch(url, config);
-  const resData = await response.json();
-
-  if (!response.ok) {
-    throw new Error(
-      resData.message || "Encountered an error and failed to make a request"
-    );
-  }
-  return resData;
-}
-
-export default function useHttp(
-  url: string,
-  config: ConfigProps,
-  initialData: any
-) {
-  const [data, setData] = useState(initialData);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const useHttpNew = <T,>(url: string, options?: RequestInit): FetchState<T> => {
+  const [data, setData] = useState<T | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // this is used to clear the data in the state
-  function clearData() {
-    setData(initialData);
-  }
-
-  const sendRequest = useCallback(
-    // now the sendRequest can be used such that it can be called with the url and the config
-    async function sendRequest() {
+  useEffect(() => {
+    const fetchData = async () => {
       setIsLoading(true);
-
       try {
-        // let finalConfig = { ...config };
-        // if (
-        //   config.method &&
-        //   (config.method.toUpperCase() === "GET" ||
-        //     config.method.toUpperCase() === "HEAD")
-        // ) {
-        //   delete finalConfig.body;
-        // } else {
-        //   finalConfig = { ...finalConfig, body: data };
-        // }
-        // merging the data with the config
-        const resData = await sendHttpRequest(url, { ...config, body: data });
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error("Failed to fetch");
+        }
+
+        const resData = await response.json();
         setData(resData);
+        setIsLoading(false);
       } catch (error: any) {
-        setError(error.message || "Something went wrong");
+        setError(error.message);
       }
       setIsLoading(false);
-    },
-    [url, config]
-  );
-
-  useEffect(() => {
-    if (config && (config.method === "GET" || !config?.method)) {
-      sendRequest().then((r) => console.log(r));
-    }
-  }, [sendRequest, config]);
+    };
+    fetchData();
+  }, [url, options]);
 
   return {
     data,
     isLoading,
     error,
-    setIsLoading,
-    clearData,
   };
-}
+};
+
+export default useHttpNew;
