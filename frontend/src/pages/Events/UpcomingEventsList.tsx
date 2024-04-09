@@ -34,7 +34,7 @@ export default function UpcomingEventsList() {
 
   const upcomingEventsData = (upcomingEvents as Events[])?.map(
     (event: Events) => {
-      console.log("Event: ", event);
+      //   console.log("Event: ", event);
       return (
         <Link
           key={event.id}

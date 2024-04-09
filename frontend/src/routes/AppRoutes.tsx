@@ -30,7 +30,6 @@ import LoginPage, { loader as loginPageLoader } from "../pages/LoginPage";
 import requireAuth from "../utils/utils";
 import SignUpPage from "../pages/SignUpPage";
 
-
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
   return form;
@@ -81,29 +80,29 @@ const router = createBrowserRouter(
           path="upcoming"
           element={<UpcomingEventsList />}
           // loader={upcomingEventLoader}
-          errorElement={<Error />}
+          // errorElement={<Error />}
         />
         <Route
           path="upcoming/:id"
           element={<UpcomingDetails />}
 
-            // loader={async () => {
+          // loader={async () => {
           //   return requireAuth();
           // }}
         >
           <Route
             index
             element={<UpcomingEventDetails />}
-            loader={async () => {
-              return requireAuth();
-            }}
+            // loader={async () => {
+            //   return requireAuth();
+            // }}
           />
           <Route
             path="photos"
             element={<UpcomingEventDetailsPhotos />}
-            loader={async () => {
-              return requireAuth();
-            }}
+            // loader={async () => {
+            //   return requireAuth();
+            // }}
           />
         </Route>
       </Route>

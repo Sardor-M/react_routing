@@ -27,9 +27,10 @@ export default function RunnersDetail() {
       setRunnerDetails(data[0]);
       console.log("Runner Details: ", runnerDetails);
     };
-    fetchRunnersDetails()
-        .then(r => console.log("Runner Details fetched: ", r))
-  }, [id]);
+    fetchRunnersDetails().then((r) =>
+      console.log("Runner Details fetched: ", r)
+    );
+  }, [id, runnerDetails]);
 
   const searchData = location.state?.search || "";
   const type = location.state?.type || "";
