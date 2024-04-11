@@ -34,67 +34,72 @@ export default function FilterPageDetails() {
   };
 
   return (
-    <div className="filter-page-container">
-      <h3 className="filter-page-left">FilterPageDetails</h3>
-      <SearchBox />
-      <div className="filter-page-left input">
-        <label>
-          {" "}
-          <input
-            type="radio"
-            value="simple"
-            name="filter"
-            onChange={(event) => handleFilterChange(event.target.value)}
-          />{" "}
-          short run{" "}
-        </label>
-        <label>
-          {" "}
-          <input
-            type="radio"
-            value="luxury"
-            name="filter"
-            onChange={(event) => handleFilterChange(event.target.value)}
-          />{" "}
-          long run{" "}
-        </label>
-        <label>
-          {" "}
-          <input
-            type="radio"
-            value="rugged"
-            name="filter"
-            onChange={(event) => handleFilterChange(event.target.value)}
-          />{" "}
-          marathon{" "}
-        </label>
-        <label>
-          {" "}
-          <input
-            type="radio"
-            value="simple"
-            name="filter"
-            onChange={(event) => handleFilterChange(event.target.value)}
-          />{" "}
-          short-distance race{" "}
-        </label>
-      </div>
-      <div className="filtered-event-list">
-        <h2 className="events-filtered"> Events </h2>
-        <ul>
-          {category.map((event) => (
-            <div className="filtered-event-result-list" key={event.id}>
-              {event.id}
-              <h2 key={event.description}>{event.description}</h2>
-              <li key={event.id}>{event.id}</li>
-              <li key={event.imageUrl}>{event.imageUrl}</li>
-              <li key={event.name}>{event.name}</li>
-              <li key={event.price}>{event.price}</li>
-              <li key={event.type}>{event.type}</li>
-              <li key={event.upcomingId}>{event.upcomingId}</li>
-            </div>
-          ))}
-        </ul>
+    <div className="event-list-section">
+      <div className="filter-page-container">
+        <h3 className="filter-page-left">FilterPageDetails</h3>
+        <SearchBox />
+        <div className="filter-page-left input">
+          <label>
+            {" "}
+            <input
+              type="radio"
+              value="simple"
+              name="filter"
+              onChange={(event) => handleFilterChange(event.target.value)}
+            />{" "}
+            short run{" "}
+          </label>
+          <label>
+            {" "}
+            <input
+              type="radio"
+              value="luxury"
+              name="filter"
+              onChange={(event) => handleFilterChange(event.target.value)}
+            />{" "}
+            long run{" "}
+          </label>
+          <label>
+            {" "}
+            <input
+              type="radio"
+              value="rugged"
+              name="filter"
+              onChange={(event) => handleFilterChange(event.target.value)}
+            />{" "}
+            marathon{" "}
+          </label>
+          <label>
+            {" "}
+            <input
+              type="radio"
+              value="simple"
+              name="filter"
+              onChange={(event) => handleFilterChange(event.target.value)}
+            />{" "}
+            short-distance race{" "}
+          </label>
+        </div>
+        {/* has to define the css for the grid container */}
+        <div className="events-grid-container">
+          <div className="filtered-event-list">
+            <h2 className="events-filtered"> Events </h2>
+            <ul>
+              {category.map((event) => (
+                <div className="filtered-event-result-list" key={event.id}>
+                  {event.id}
+                  <h2 key={event.description}>{event.description}</h2>
+                  <li key={event.id}>{event.id}</li>
+                  <li key={event.imageUrl}>{event.imageUrl}</li>
+                  <li key={event.name}>{event.name}</li>
+                  <li key={event.price}>{event.price}</li>
+                  <li key={event.type}>{event.type}</li>
+                  <li key={event.upcomingId}>{event.upcomingId}</li>
+                </div>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );
