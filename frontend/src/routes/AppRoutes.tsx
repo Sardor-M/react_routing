@@ -25,7 +25,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import Error from "../components/Error";
+import Error from "../components/atoms/Error/RouterError/ErrorRouter";
 import LoginPage, { loader as loginPageLoader } from "../pages/LoginPage";
 import requireAuth from "../utils/utils";
 import SignUpPage from "../pages/SignUpPage";

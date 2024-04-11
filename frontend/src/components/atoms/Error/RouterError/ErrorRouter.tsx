@@ -1,6 +1,6 @@
 import { useRouteError } from "react-router";
 
-export default function Error() {
+export default function ErrorRouter() {
   const error = useRouteError() as {
     message: string;
     status: number;
