@@ -1,5 +1,5 @@
 import { Link, useLocation, useParams } from "react-router-dom";
-import { Events } from "../../types";
+import { Events } from "../../../types";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 

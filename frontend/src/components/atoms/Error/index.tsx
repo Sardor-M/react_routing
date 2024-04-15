@@ -1,7 +1,6 @@
 import React from "react";
 
-function index() {
+const index: React.FC = () => {
   return <div>index</div>;
-}
-
+};
 export default index;

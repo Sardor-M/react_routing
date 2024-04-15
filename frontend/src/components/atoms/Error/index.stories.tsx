@@ -1,9 +1,8 @@
-import Button from "./Button";
+import Error from "./Error";
 
 export default {
-  title: "Button",
+  title: "Error",
   args: { primary: true },
-  component: Button,
+  component: Error,
 };
-
 export const Primary = {};

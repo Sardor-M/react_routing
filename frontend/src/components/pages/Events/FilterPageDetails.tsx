@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { Events } from "../../types";
-import SearchBox from "../../components/SearchBox";
+import { Events } from "../../../types";
+import SearchBox from "../../SearchBox";
 
 export default function FilterPageDetails() {
   const [category, setCategory] = useState<Events[]>([]);

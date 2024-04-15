@@ -1,9 +1,9 @@
-import Button from "./Button";
+import Input from "./Input";
 
 export default {
-  title: "Button",
+  title: "Input",
   args: { primary: true },
-  component: Button,
+  component: Input,
 };
 
 export const Primary = {};

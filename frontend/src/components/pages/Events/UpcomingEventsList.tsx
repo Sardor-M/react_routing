@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Events } from "../../types";
+import { Events } from "../../../types";
 import styled from "styled-components";
-import Error from "../../components/atoms/Error/Error";
-import useHttpNew from "../../hooks/useHttp";
+import Error from "../../atoms/Error/Error";
+import useHttpNew from "../../../hooks/useHttp";
 
 // export function loader() {
 //   // await requireAuth();

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Input from "../components/atoms/Input/Input";
+import Input from "../atoms/Input/Input";
 import { useLoaderData } from "react-router-dom";
-import { useInput } from "../hooks/useInput";
-import { isEmail, isNotEmpty, hasMinLength } from "../utils/validation";
+import { useInput } from "../../hooks/useInput";
+import { isEmail, isNotEmpty, hasMinLength } from "../../utils/validation";
 
 const SectionContainer = styled.section`
   display: flex;

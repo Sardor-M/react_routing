@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { getEvents } from "../api/api";
+import { getEvents } from "../../api/api";
 
 const ContactPageContainer = styled.form`
   display: flex;
@@ -37,7 +37,7 @@ const SubmitButton = styled.button`
   color: #0d0d0d;
   background-color: #f5a646;
   font-size: 18px;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   text-align: center;
 
   &:hover {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router";
 import { Link, NavLink } from "react-router-dom";
-import { Events } from "../../types";
+import { Events } from "../../../types";
 import styled from "styled-components";
 
 const UpcomingEventLayoutContainer = styled.div`

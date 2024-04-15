@@ -1,24 +1,24 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import AboutPage from "../pages/AboutPage";
+import HomePage from "../components/pages/HomePage";
+import AboutPage from "../components/pages/AboutPage";
 import ContactPage, {
   loader as contactUsPageLoader,
-} from "../pages/ContactPage";
-import Runners from "../pages/Runners/Runners";
-import RunnersDetail from "../pages/Runners/RunnersDetail";
+} from "../components/pages/ContactPage";
+import Runners from "../components/pages/Runners/Runners";
+import RunnersDetail from "../components/pages/Runners/RunnersDetail";
 import Layout from "../components/Layout";
-import EventsPage from "../pages/Events/EventsPage";
+import EventsPage from "../components/pages/Events/EventsPage";
 import DashboardPage, {
   loader as dashboardLoader,
-} from "../pages/Events/DashboardPage";
+} from "../components/pages/Events/DashboardPage";
 import ReviewsPages, {
   loader as reviewsLoader,
-} from "../pages/Events/ReviewsPage";
-import UpcomingEventsList from "../pages/Events/UpcomingEventsList";
-import UpcomingDetails from "../pages/Events/UpcomingEventsCard";
+} from "../components/pages/Events/ReviewsPage";
+import UpcomingEventsList from "../components/pages/Events/UpcomingEventsList";
+import UpcomingDetails from "../components/pages/Events/UpcomingEventsCard";
 import EventLayout from "../components/EventLayout";
-import UpcomingEventDetailsPhotos from "../pages/Events/UpcomingEventsPhotos";
-import UpcomingEventDetails from "../pages/Events/UpcomingEventsDetails";
+import UpcomingEventDetailsPhotos from "../components/pages/Events/UpcomingEventsPhotos";
+import UpcomingEventDetails from "../components/pages/Events/UpcomingEventsDetails";
 import NotFound from "../components/NotFound";
 import {
   RouterProvider,
@@ -26,9 +26,11 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Error from "../components/atoms/Error/RouterError/ErrorRouter";
-import LoginPage, { loader as loginPageLoader } from "../pages/LoginPage";
+import LoginPage, {
+  loader as loginPageLoader,
+} from "../components/pages/LoginPage";
 import requireAuth from "../utils/utils";
-import SignUpPage from "../pages/SignUpPage";
+import SignUpPage from "../components/pages/SignUpPage";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);

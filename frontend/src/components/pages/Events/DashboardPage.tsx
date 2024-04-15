@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Events } from "../../types";
-import { getEvents } from "../../api/api";
+import { Events } from "../../../types";
+import { getEvents } from "../../../api/api";
 import styled from "styled-components";
 
 const DashBoardContainer = styled.div`

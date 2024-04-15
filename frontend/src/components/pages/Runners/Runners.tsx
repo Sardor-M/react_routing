@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Events } from "../../types";
+import { Events } from "../../../types";
 
 export default function Runners() {
   const [searchParams, setSearchParams] = useSearchParams();
