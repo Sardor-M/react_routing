@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { Events } from "../../../types";
 import SearchBox from "../../SearchBox";
+import CustomCard from "../../Material";
+import imageSample from "../../../assets/images/running_banner_img.png";
 
 export default function FilterPageDetails() {
   const [category, setCategory] = useState<Events[]>([]);
@@ -84,6 +86,13 @@ export default function FilterPageDetails() {
         <div className="events-grid-container">
           <div className="filtered-event-list">
             <h2 className="events-filtered"> Events </h2>
+            <CustomCard
+              imageUrl={imageSample}
+              title="2024 Global Workforce Management Conference"
+              description="Join industry leaders to discuss..."
+              date="April 29th, 2024"
+              price="110,000₩"
+            />
             <ul>
               {category.map((event) => (
                 <div className="filtered-event-result-list" key={event.id}>

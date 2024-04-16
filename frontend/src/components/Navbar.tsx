@@ -32,6 +32,8 @@ const SiteLogoImg = styled.img`
 // `;
 
 export default function Navbar() {
+  // const { toggleColorMode } = useContext(ColorModeContext);
+
   return (
     <HeaderElement>
       <Link className="site-logo" to="/">
@@ -64,6 +66,7 @@ export default function Navbar() {
         >
           Contact
         </NavLink>
+        {/* <button onClick={toggleColorMode}>Toggle me</button> */}
         <NavLink
           to="login"
           className={({ isActive }) => (isActive ? "active-link" : "")}
