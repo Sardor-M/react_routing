@@ -31,6 +31,7 @@ import LoginPage, {
 } from "../components/pages/LoginPage";
 import requireAuth from "../utils/utils";
 import SignUpPage from "../components/pages/SignUpPage";
+import HomePageMolecul from "../components/pages/HomePage/HomePageHere";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
       <Route path="/" element={<HomePage images={[]} />} />
+      {/* <Route path="home" element={<HomePageMolecul />} /> */}
       <Route path="*" element={<NotFound />} />
       <Route path="about" element={<AboutPage />} />
       <Route

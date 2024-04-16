@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import runnerHero from "../assets/images/running_banner_img.png";
+import runnerHero from "../../assets/images/running_banner_img.png";
 import styled from "styled-components";
 import React from "react";
 
