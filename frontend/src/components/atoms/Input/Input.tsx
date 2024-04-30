@@ -20,17 +20,22 @@ const StyledInput = styled.input`
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 62, 213, 0.1);
   outline: none;
-
-  &:hover {
+  /* &:hover {
     box-shadow: 0 0 5px rgba(247, 88, 204);
-  }
+  } */
+  border: 1px solid #b1bdc8;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 `;
 const StyledErrorText = styled.p`
   display: block;
   color: red;
   font-size: 12px;
   margin: -20px;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
+  /* align-items: flex-start; */
   text-align: left;
 `;
 

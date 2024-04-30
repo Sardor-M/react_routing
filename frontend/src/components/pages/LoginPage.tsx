@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Input from "../atoms/Input/Input";
@@ -14,7 +14,7 @@ const SectionContainer = styled.section`
 `;
 const LoginPageTitle = styled.h1`
   display: flex;
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: -10px;
 `;
 
@@ -24,18 +24,19 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 165px;
+  padding-top: 110px;
+  padding-bottom: 255px;
   margin: 10px;
 `;
 
 const SignInButton = styled.button`
-  width: 109%;
-  padding: 9px;
-  margin-top: 20px;
+  width: 110%;
+  padding: 12px;
+  margin-top: 30px;
   border: none;
   border-radius: 5px;
-  background-color: #f5a646;
-  color: #000000;
+  background-color: #0f32fa;
+  color: #ffffff;
   font-size: 18px;
   transition: all 0.5s ease;
   text-align: center;
@@ -50,7 +51,7 @@ const SignUpLink = styled.p`
   font-size: 14px;
   margin-top: 10px;
   margin-left: -20px;
-  margin-right: 60px;
+  margin-right: 41px;
   overflow: auto;
 `;
 

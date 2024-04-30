@@ -1,9 +1,6 @@
-import React from "react";
 import { useState } from "react";
 import { Events } from "../../../types";
-import SearchBox from "../../SearchBox";
-import CustomCard from "../../Material";
-import imageSample from "../../../assets/images/running_banner_img.png";
+import EventLists from "./EventLists";
 
 export default function FilterPageDetails() {
   const [category, setCategory] = useState<Events[]>([]);
@@ -39,7 +36,7 @@ export default function FilterPageDetails() {
     <div className="event-list-section">
       <div className="filter-page-container">
         <h3 className="filter-page-left">FilterPageDetails</h3>
-        <SearchBox />
+        {/* <SearchBox /> */}
         <div className="filter-page-left input">
           <label>
             {" "}
@@ -86,13 +83,10 @@ export default function FilterPageDetails() {
         <div className="events-grid-container">
           <div className="filtered-event-list">
             <h2 className="events-filtered"> Events </h2>
-            <CustomCard
-              imageUrl={imageSample}
-              title="2024 Global Workforce Management Conference"
-              description="Join industry leaders to discuss..."
-              date="April 29th, 2024"
-              price="110,000₩"
-            />
+            {/* New Component that receives the filtered events from the server */}
+            {/* New Component that receives the filtered events from the filter */}
+            {/* New Component that receives the filtered events from the filter */}
+            <EventLists />
             <ul>
               {category.map((event) => (
                 <div className="filtered-event-result-list" key={event.id}>

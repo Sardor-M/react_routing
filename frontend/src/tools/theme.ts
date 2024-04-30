@@ -1,49 +1,36 @@
-export type Font = {
-  fontSize: string;
-  size: string;
-  weight: number;
-  lineHeight: string;
-  family: string;
-};
-
-export type Theme = {
+export const theme = {
   colors: {
-    primary: string;
-    secondary: string;
-    tertiary: string;
-    background: string;
-    text: string;
-  };
-  fonts: {
-    body: Font;
-    heading: Font;
-  };
-};
-
-const theme: Theme = {
-  colors: {
-    primary: "#007bff",
-    secondary: "#6c757d",
-    tertiary: "#6c757d",
-    background: "#f8f9fa",
-    text: "#343a40",
+    white: "#ffffff",
+    black: "#444444",
+    white1: "#fafbfc",
+    gray1: "#fafafa",
+    gray2: "#eeeeee",
+    gray3: "#d9d9d9",
+    gray4: "#b6b6b6",
+    gray5: "#8c8c8c",
+    gray6: "#555555",
+    grayTrans: "rgba(85, 85, 85, 0.1)",
+    blue1: "#fafcff",
+    blue2: "#e7f0ff",
+    blue3: "#bfdcff",
+    blue4: "#6eabf4",
+    blue5: "#2f80de",
+    blue6: "#065dac",
+    blue7: "#0365ab",
+    purple2: "#f6eefe", // purple-light
+    purple6: "#9836ef", // purple
+    orange2: "#fdf7e6", // orange-light
+    orange6: "#ff9211", // orange
+    green2: "#e9f9ef", // green-light
+    green6: "#008b1c", // green
   },
-  fonts: {
-    body: {
-      fontSize: "1rem",
-      size: "16px",
-      weight: 400,
-      lineHeight: "1.5",
-      family: "Arial, sans-serif",
-    },
-    heading: {
-      fontSize: "2rem",
-      size: "24px",
-      weight: 700,
-      lineHeight: "1.5",
-      family: "Arial, sans-serif",
-    },
-  },
-};
+  shape: {
+    borderRadius: "5px",
+    borderRadiusSmall: "3px",
+  } as const,
+} as const;
 
-export default theme;
+export type Theme = typeof theme;
+export const Color = theme.colors;
+
+

@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Events } from "../../../types";
+import styled from "styled-components";
+
+const StyledHead = styled.h1`
+  margin-top: 50px;
+  margin-bottom: 50px;
+`;
 
 export default function Runners() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -59,34 +65,34 @@ export default function Runners() {
 
   return (
     <div className="runner-list-container">
-      <h1> Explore running communities around you.</h1>
+      <StyledHead> Explore running communities around you.</StyledHead>
       <div className="runner-list-filter-button">
         <button
-          onClick={() => handleFilterChange("type", "simple")}
+          onClick={() => handleFilterChange("type", "marathon")}
           className={`runner-type simple ${
             typeFilter === "simple" ? "selected" : ""
           }`}
         >
           {" "}
-          Simple
+          # Marathon
         </button>
         <button
-          onClick={() => handleFilterChange("type", "luxury")}
+          onClick={() => handleFilterChange("type", "short")}
           className={`runner-type luxury ${
             typeFilter === "luxury" ? "selected" : ""
           }`}
         >
           {" "}
-          Luxury
+          # Short Distance
         </button>
         <button
-          onClick={() => handleFilterChange("type", "rugged")}
+          onClick={() => handleFilterChange("type", "swimming")}
           className={`runner-type rugged ${
             typeFilter === "rugged" ? "selected" : ""
           }`}
         >
           {" "}
-          Rugged
+          # Swimming
         </button>
         {typeFilter ? (
           <button

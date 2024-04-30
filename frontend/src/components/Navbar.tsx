@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
-import runner_logo from "../assets/images/runner_logo.png";
-
+import run_with_us from "../assets/images/run_with_us.png";
 const HeaderElement = styled.header`
+  background-color: #ebff00;
   height: 110px;
   display: flex;
   align-items: center;
@@ -10,7 +10,7 @@ const HeaderElement = styled.header`
 `;
 
 const SiteLogoWrapper = styled(HeaderElement).attrs({ as: "a" })`
-  color: black;
+  color: #0f0f19;
   margin-right: auto;
   padding-inline: 10px;
   text-transform: uppercase;
@@ -19,8 +19,8 @@ const SiteLogoWrapper = styled(HeaderElement).attrs({ as: "a" })`
 `;
 
 const SiteLogoImg = styled.img`
-  width: 90px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   margin-right: auto;
   font-weight: 1500;
 `;
@@ -38,15 +38,15 @@ export default function Navbar() {
     <HeaderElement>
       <Link className="site-logo" to="/">
         <SiteLogoWrapper>
-          <SiteLogoImg src={runner_logo} />
+          <SiteLogoImg src={run_with_us} />
         </SiteLogoWrapper>
       </Link>
       <nav>
         <NavLink
-          to="/about"
+          to="/homepage"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
-          About
+          Home
         </NavLink>
         <NavLink
           to="/events"

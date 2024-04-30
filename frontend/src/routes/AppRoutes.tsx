@@ -39,9 +39,10 @@ const onSubmit = (form: { name: string; email: string; message: string }) => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
-      <Route path="/" element={<HomePage images={[]} />} />
+      <Route path="/" element={<AboutPage />} />
       <Route path="*" element={<NotFound />} />
-      <Route path="about" element={<AboutPage />} />
+      <Route path="homepage" element={<HomePage images={[]} />} />
+      {/*  */}
       <Route
         path="contact"
         element={<ContactPage onSubmit={onSubmit} />}

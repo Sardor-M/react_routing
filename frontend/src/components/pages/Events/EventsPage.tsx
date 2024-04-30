@@ -1,18 +1,18 @@
 import FilterPageDetails from "./FilterPageDetails";
 import styled from "styled-components";
-
+import { TextForSubPages } from "../../atoms/Subtitle";
 
 const EventPageContainer = styled.div`
   padding: 10px;
   margin-bottom: 340px;
-
-`
+`;
 export default function EventsPage() {
   return (
     <EventPageContainer>
-      <h1>Events Goes Here</h1>
+      <TextForSubPages textAlign="left">
+        All the Upcoming Events in South Korea{" "}
+      </TextForSubPages>
       <FilterPageDetails />
     </EventPageContainer>
   );
 }
-

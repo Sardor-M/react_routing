@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { EventTypes } from "./EventTypes";
+import { PopularEvents } from "./PopularEvents";
+import { TextForSubPages } from "../atoms/Subtitle";
+import { Text } from "../atoms/Text";
+import { ParagraphElement, TextElement } from "./AboutPage";
+import { CardHeader } from "../molecules/EventCard";
 
 interface CarouselImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   active: boolean;
@@ -15,7 +21,7 @@ const images: string[] = [
 
 const CarouselContainer = styled.div`
   position: relative;
-  margin-bottom: 600px;
+  margin-bottom: 120px;
   width: 100%;
   height: 400px;
   overflow: hidden;
@@ -97,7 +103,7 @@ export default function HomePage({ images: [], interval = 3600 }) {
     return () => {
       clearInterval(timer);
     };
-  }, [images, interval]);
+  });
 
   const handleNextClick = () => {
     setActiveIndex((prevIndex) => {
@@ -115,36 +121,60 @@ export default function HomePage({ images: [], interval = 3600 }) {
     );
   };
   return (
-    <CarouselContainer>
-      <h2> Explore the running events near you</h2>
-      {images.map((imageUrl, index) => (
-        <CarouselImage
-          key={index}
-          src={imageUrl}
-          alt={"carousel image"}
-          // style={{opacity: index === activeIndex ? 1 : 0}}
-          active={index === activeIndex}
-        />
-      ))}
-      <CarouselControls>
-        <CarouselControl onClick={handlePrevClick}> &#8249; </CarouselControl>
-        <CarouselControl onClick={handleNextClick}> &#8250; </CarouselControl>
-      </CarouselControls>
-      <CarouselDots>
-        {images.map((_, index) => (
-          <CarouselDot
+    <div>
+      <CarouselContainer>
+        <h2> Explore the running events near you</h2>
+        {images.map((imageUrl, index) => (
+          <CarouselImage
             key={index}
-            onClick={() => setActiveIndex(index)}
-            style={{
-              backgroundColor:
-                index === activeIndex
-                  ? "rgba(255, 255, 255, 0.8)"
-                  : "rgba(255, 255, 255, 0.5)",
-            }}
+            src={imageUrl}
+            alt={"carousel image"}
+            // style={{opacity: index === activeIndex ? 1 : 0}}
+            active={index === activeIndex}
           />
         ))}
-      </CarouselDots>
-    {/* <Map/> */}
-    </CarouselContainer>
+        <CarouselControls>
+          <CarouselControl onClick={handlePrevClick}> &#8249; </CarouselControl>
+          <CarouselControl onClick={handleNextClick}> &#8250; </CarouselControl>
+        </CarouselControls>
+        <CarouselDots>
+          {images.map((_, index) => (
+            <CarouselDot
+              key={index}
+              onClick={() => setActiveIndex(index)}
+              style={{
+                backgroundColor:
+                  index === activeIndex
+                    ? "rgba(255, 255, 255, 0.8)"
+                    : "rgba(255, 255, 255, 0.5)",
+              }}
+            />
+          ))}
+        </CarouselDots>
+        {/* <Map/> */}
+      </CarouselContainer>
+      <div>
+        <TextElement> # Your Journey of Running begins here #</TextElement>{" "}
+        <Text>
+          Don't wait at home thinking about when to run or where to run or with
+          whom to run with. Just run here with the people you want to run with.
+          Join the community of runners and find your running buddy. It is never
+          late to start running. Just run here. In our platform you can find the
+          running events near you and join them. You can also create your own
+          running event and invite others to join.{" "}
+        </Text>
+      </div>
+      <PopularEvents />
+      {/* <EventTypes /> */}
+      <div>
+        <TextForSubPages marginBottom="120px"></TextForSubPages>
+        <ParagraphElement marginBottom="120px">
+          Dont wait at home thinking about when to run or where to run or with
+          whom to run with. Just run here with the people you want to run with.
+          Join the community of runners and find your running buddy. It is never
+          late to start running. Just run here. :
+        </ParagraphElement>
+      </div>
+    </div>
   );
 }

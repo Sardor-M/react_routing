@@ -4,10 +4,11 @@
 
 html,
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #fff7ed;
-  font-family: "Inter", sans-serif;
+  background-color: #ffffff;
+  font-family: "Poppins", sans-serif;
   flex-direction: column;
 }
 
@@ -33,7 +34,6 @@ header {
   align-items: center;
   padding-block: 10px;
   /*overflow: hidden;*/
-
 }
 
 header .site-logo {
@@ -66,7 +66,6 @@ header .login-icon {
   height: 18px;
   width: 18px;
 }
-
 
 .back-button {
   display: block;
@@ -106,7 +105,8 @@ header .login-icon {
   -o-background-size: cover;
   background-size: cover;
   min-height: 350px;
-  color: white;
+  color: #ebff00;
+  /* background-color: #ebff00; */
   padding: 45px 23px;
 }
 
@@ -141,7 +141,7 @@ header .login-icon {
 }
 .home-container .link-button {
   background-color: #ffce1f;
-  color: white;
+  color: #ebff00;
   font-size: 1.125rem;
   margin-top: 27px;
   max-width: 200px;
@@ -194,6 +194,7 @@ header .login-icon {
   padding-inline: 23px;
   padding-left: 10px;
   padding-right: 10px;
+  margin-bottom: 250px;
 }
 
 .runner-list {
@@ -207,6 +208,7 @@ header .login-icon {
 .runner-title a {
   color: #161616;
   text-decoration: none;
+  margin-bottom: 100px;
 }
 
 .runner-title img {
@@ -239,6 +241,7 @@ header .login-icon {
   background-color: #ffead0;
   color: #4d4d4d;
   transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
+  /* margin-bottom: 20px; */
 }
 
 .runner-type:hover {
@@ -251,6 +254,7 @@ header .login-icon {
 
 .runner-type.selected {
   color: #ffead0;
+  margin-bottom: 20px;
 }
 
 .runner-type.simple:hover,
@@ -340,6 +344,8 @@ i[class*="van-type-"] {
 
 .navbar-event {
   display: flex;
+  margin-top: 20px;
+  margin-left: 14px;
 }
 
 .navbar-event a {
@@ -351,7 +357,7 @@ i[class*="van-type-"] {
 a.navbar-link {
   font-weight: bold;
   text-decoration: underline;
-  color: #f4c350;
+  color: #ffdc5c;
 }
 
 .navbar-event a:hover {
@@ -368,7 +374,7 @@ a.navbar-link {
   text-align: center;
   justify-content: center;
   padding: 40px 0;
-  margin-top: 30px;
+  margin-top: -10px;
 }
 
 .social-icons {
@@ -520,10 +526,9 @@ upcoming-event-details-img {
   border-radius: 5px;
 }
 
-
 /* FilterComponent Styling */
 
-.filter-page-container{
+.filter-page-container {
   display: flex;
   flex-direction: column;
 }
@@ -551,7 +556,6 @@ upcoming-event-details-img {
   margin-bottom: 5px;
 }
 
-
 .not-found {
   padding-inline: 26px;
   width: 20%;
@@ -561,7 +565,7 @@ upcoming-event-details-img {
   font-weight: 500;
   border: none;
   border-radius: 5px;
-  background-color:  #161616;
+  background-color: #161616;
   color: #fffefe;
   transition: 200ms all cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -578,3 +582,13 @@ upcoming-event-details-img {
 .login-text {
   color: #f04c00;
 }
+
+/* .MessageForm_rotate_infinite {
+  animation: rotate_image_360 1s ease infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotate_image_360 {
+  100% {
+    transform: rotate(-360deg);
+  } */

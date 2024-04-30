@@ -1,46 +1,31 @@
-// import React, { ReactNode } from "react";
-// import PropTypes from "prop-types";
-
-// interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-//   children?: ReactNode;
-//   textOnly?: boolean;
-//   className?: string;
-//   onClick?: () => void;
-// }
-
-// const Button: React.FC<ButtonProps> = ({
-//   children,
-//   textOnly,
-//   className,
-//   onClick,
-//   ...props
-// }) => {
-//   let cssClasses = textOnly ? "text-button" : "button";
-//   cssClasses += "" + (className || "");
-
-//   return (
-//     <button className={cssClasses} {...props}>
-//       {children}
-//     </button>
-//   );
-// };
-
-// Button.propTypes = {
-//   textOnly: PropTypes.bool,
-//   className: PropTypes.string,
-//   onClick: PropTypes.func,
-// };
-
-// export default Button;
+// thbis is the custom atom button component to use everywhere
 
 import React from "react";
+import styled from "styled-components";
 
 interface ButtonProps {
-  onClick?: () => void;
+  onClick: () => void;
+  text: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick }) => {
-  return <button onClick={onClick}>Click me</button>;
+const ButtonWrapper = styled.button`
+  background-color: #2529f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #ff4d4d;
+  }
+`;
+
+const Button: React.FC<ButtonProps> = ({ onClick, text }) => {
+  return <ButtonWrapper onClick={onClick}>{text}</ButtonWrapper>;
 };
 
 export default Button;

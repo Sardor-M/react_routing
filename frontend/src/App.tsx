@@ -1,13 +1,13 @@
-import React from "react";
 import "./App.css";
 import AppRoutes from "./routes/AppRoutes";
-// import ToggleColorMode from "./tools/toggleTheme";
 
 function App() {
   return (
+    // <ThemeProvider theme={theme}>
     <div className="App">
       <AppRoutes />
     </div>
+    // </ThemeProvider>
   );
 }
 

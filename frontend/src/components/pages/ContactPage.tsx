@@ -8,24 +8,44 @@ const ContactPageContainer = styled.form`
   align-items: center;
   flex-direction: column;
   padding: 60px;
-  margin: 10px;
+  margin-bottom: 50px;
+  color: #0d0d0d;
+  width: 100%;
 `;
 
 const InputField = styled.input`
+  /* color: #0d0d0d; */
   width: 30%;
   padding: 13px;
-  margin: 15px 0;
+  margin: 10px 0;
   border: none;
   border-radius: 5px;
+  /* border-color: #494949; */
+  /* &:hover {
+    box-shadow: 0 0 5px rgba(247, 88, 204);
+  } */
+  border: 1px solid #b1bdc8;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 `;
 
 const MessageField = styled.textarea`
   width: 30%;
   padding: 30px;
   margin: 15px 0;
-  border: none;
+  /* border: none; */
   border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 62, 213, 0.1);
+  /* border-color: #494949; */
+  /* width: 20%; */
   height: 200px;
+  border: 1px solid #b1bdc8;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 `;
 
 const SubmitButton = styled.button`
@@ -34,8 +54,8 @@ const SubmitButton = styled.button`
   margin: 15px;
   border: none;
   border-radius: 5px;
-  color: #0d0d0d;
-  background-color: #f5a646;
+  color: #ffffff;
+  background-color: #0f32fa;
   font-size: 18px;
   transition: all 0.5s ease;
   text-align: center;
