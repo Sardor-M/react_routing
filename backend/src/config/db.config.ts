@@ -1,5 +1,5 @@
 import { DataSourceOptions } from "typeorm";
-import { User } from "../entity/User";
+import { Product } from "../entity/Product";
 
 export const config: DataSourceOptions = {
   type: "postgres",
@@ -10,7 +10,7 @@ export const config: DataSourceOptions = {
   database: process.env.DB_NAME || "run_with_us",
 
   // entities: ["./src/entity/*/.ts"],
-  entities: [User],
+  entities: [Product],
   synchronize: true,
 };
 

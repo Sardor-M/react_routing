@@ -81,14 +81,6 @@ const runners: RunnerModel[] = [
   },
 ];
 
-// const runners = await Runner.find(); // Fetch all runners from your data source
-
-// if (!runners || runners.length === 0){
-//   res.status(404).json({ message: "No runners found is an error from the server" });
-//   return;
-// }
-// res.json(runners);
-
 export async function getAllRunners(req: Request, res: Response) {
   if (!runners || runners.length === 0) {
     res
