@@ -10,7 +10,7 @@ export default function FilterPageDetails() {
     try {
       const fetchedData: Events[] = await fetch(
         `http://localhost:4000/api/runners?type=${category}`
-      )
+      ) 
         .then((response) => response.json())
         .then((data) => data);
       console.log(fetchedData, "Fetched Data!");
