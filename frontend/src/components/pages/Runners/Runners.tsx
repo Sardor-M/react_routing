@@ -16,7 +16,7 @@ export default function Runners() {
 
   useEffect(() => {
     const fetchRunnersData = async () => {
-      const response = await fetch("http://localhost:8080/api/runners");
+      const response = await fetch("http://localhost:4000/api/runners");
       const data = await response.json();
       if (Array.isArray(data)) {
         setRunners(data);
