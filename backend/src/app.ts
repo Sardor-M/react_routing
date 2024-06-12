@@ -6,12 +6,16 @@ import cors from "cors";
 const app = express();
 const port = process.env.PORT || 8080;
 
-const corsOptions = {
-  origin: "http://localhost:3000",
-  optionsSuccessStatus: 200,
-};
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
-app.use(cors(corsOptions));
+// app.use(cors);
 app.use(express.json());
 
 connectToDatabase()

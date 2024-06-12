@@ -1,10 +1,15 @@
 async function fetchData(url: string): Promise<any> {
-  const response = await fetch(url);
+  try {
+    const response = await fetch(url);
 
-  if (!response.ok) {
-    throw new Error("Error from data server is thrown by Runner's side");
+    if (!response.ok) {
+      throw new Error("Error from data server is thrown by Runner's side");
+    }
+    return response.json();
+  } catch (err) {
+    console.error("Fetch Error: ", err);
+    throw err;
   }
-  return response.json();
 }
 
 export async function getEvents() {

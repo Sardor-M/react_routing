@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Events } from "../../../types";
 import { getEvents } from "../../../api/api";
 import styled from "styled-components";
@@ -11,15 +11,42 @@ const DashBoardContainer = styled.div`
 export const loader = async () => {
   // added getEvents function to the loader for the purpose of testing,
   // but it is not used in the DashboardPage component
-  return getEvents();
+  console.log("Loader is working: ", getEvents());
+  return await getEvents();
 };
 
 export default function DashboardPage() {
   const [dashboard, setDashboard] = useState<Events | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  return (
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const events = await getEvents();
+        setDashboard(events);
+      } catch (err) {
+        setError("Failed to fetch the events");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+  return isLoading ? (
+    <div> Loading ...</div>
+  ) : (
     <DashBoardContainer>
-      <h1>Dashboard page goes here</h1>
+      {dashboard && (
+        <div>
+          <pre>{JSON.stringify(dashboard, null, 2)}</pre>
+        </div>
+      )}
     </DashBoardContainer>
   );
 }
