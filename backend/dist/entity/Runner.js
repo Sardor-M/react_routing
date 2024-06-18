@@ -9,27 +9,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Runner = void 0;
 const typeorm_1 = require("typeorm");
-let User = class User {
+let Runner = class Runner {
 };
-exports.User = User;
+exports.Runner = Runner;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], User.prototype, "id", void 0);
+], Runner.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
-], User.prototype, "firstName", void 0);
+], Runner.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], User.prototype, "lastName", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)("float"),
     __metadata("design:type", Number)
-], User.prototype, "age", void 0);
-exports.User = User = __decorate([
-    (0, typeorm_1.Entity)()
-], User);
+], Runner.prototype, "price", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "text" }),
+    __metadata("design:type", String)
+], Runner.prototype, "description", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Runner.prototype, "imageurl", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: "text" }),
+    __metadata("design:type", String)
+], Runner.prototype, "type", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Number)
+], Runner.prototype, "upcomingid", void 0);
+exports.Runner = Runner = __decorate([
+    (0, typeorm_1.Entity)("products")
+], Runner);

@@ -19,7 +19,7 @@ export default function UpcomingEventsList() {
     data: upcomingEvents,
     isLoading,
     error,
-  } = useHttpNew("http://localhost:4000/api/events/upcoming");
+  } = useHttpNew("http://localhost:8080/api/events/upcoming");
 
   if (isLoading) {
     return <div>Loading...</div>;

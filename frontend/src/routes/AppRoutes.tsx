@@ -71,7 +71,7 @@ const router = createBrowserRouter(
         <Route
           path="dashboard"
           element={<DashboardPage />}
-          loader={dashboardLoader}
+          // loader={dashboardLoader}
         />
         <Route
           path="review"

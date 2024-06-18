@@ -2,9 +2,12 @@ import express from "express";
 import { connectToDatabase } from "./database/db";
 import router from "./api/routes/runner.routes";
 import cors from "cors";
+import morgan from "morgan";
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = 8080;
+
+app.use(morgan("dev"));
 
 app.use(
   cors({
@@ -15,7 +18,11 @@ app.use(
   })
 );
 
-// app.use(cors);
+app.use((req, res, next) => {
+  console.log("CORS headers set:", res.getHeaders());
+  next();
+});
+
 app.use(express.json());
 
 connectToDatabase()

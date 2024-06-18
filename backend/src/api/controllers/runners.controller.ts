@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
-import { Product } from "../../entity/Product";
+import { Runner } from "../../entity/Runner";
 import { dataSource } from "../../database/db";
-import { getRepository, getIdFromRequest } from "../../utils/fetch";
-
+import {
+  getRepository,
+  getIdFromRequest,
+} from "../../repositories/ProductRepository";
 export async function getAllRunners(req: Request, res: Response) {
   try {
     const runnerRepository = getRepository();
     const runners = await runnerRepository.find();
+    console.log("Runners data in the response: ", runnerRepository, runners);
     if (!runners || runners.length === 0) {
       res
         .status(404)
@@ -24,7 +27,7 @@ export async function getAllRunners(req: Request, res: Response) {
 
 export async function getRunnerById(req: Request, res: Response) {
   const id = getIdFromRequest(req);
-  const runnerRepository = dataSource.getRepository(Product);
+  const runnerRepository = dataSource.getRepository(Runner);
   const runner = await runnerRepository.findOne({ where: { id: id } });
 
   runner
@@ -37,13 +40,13 @@ export async function getUpcomingRunningEvents(req: Request, res: Response) {
   const typeFilter = req.query.type as string;
   const runnerRepository = getRepository();
   const runners = await runnerRepository.find();
-  let upcomingEvents = runners.map(({ id, type, name, price, imageUrl }) => {
+  let upcomingEvents = runners.map(({ id, type, name, price, imageurl }) => {
     return {
       id,
       type,
       name,
       price,
-      imageUrl,
+      imageurl,
     };
   });
 
@@ -61,7 +64,7 @@ export async function getUpcomingRunningEventsById(
   res: Response
 ) {
   const id = getIdFromRequest(req);
-  const runnerRepository = dataSource.getRepository(Product);
+  const runnerRepository = dataSource.getRepository(Runner);
   const runners = await runnerRepository.find();
   const upcomingRunningEventId = runners.find((r) => r.id === id);
 

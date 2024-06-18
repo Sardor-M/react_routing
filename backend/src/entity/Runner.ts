@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity()
-export class Product {
+@Entity("runner")
+export class Runner {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -14,12 +14,12 @@ export class Product {
   @Column({ type: "text" })
   description!: string;
 
-  @Column()
+  @Column({ nullable: true })
   imageUrl!: string;
 
   @Column()
   type!: string;
 
-  @Column()
-  upcomingEventId!: string;
+  @Column({ nullable: true })
+  upcomingEventId!: number;
 }

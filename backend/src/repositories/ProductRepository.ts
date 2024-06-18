@@ -1,12 +1,11 @@
 import { dataSource } from "../database/db";
-import { Repository, EntityTarget } from "typeorm";
-// import { Product } from "../entity/Product";
+import { Runner } from "../entity/Runner";
+import { Request } from "express";
 
-export function getRepository<T>(entity: EntityTarget<T>): Repository<T> {
-  return dataSource.getRepository(entity);
+export function getRepository() {
+  return dataSource.getRepository(Runner);
 }
 
-// export async function findByName(name: string) {
-//   const productRepository = dataSource.getRepository(Product);
-//   return productRepository.findOneBy({ name });
-// }
+export function getIdFromRequest(req: Request): number {
+  return Number(req.params.id);
+}
