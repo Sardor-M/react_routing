@@ -39,13 +39,13 @@ async function getUpcomingRunningEvents(req, res) {
     const typeFilter = req.query.type;
     const runnerRepository = (0, ProductRepository_1.getRepository)();
     const runners = await runnerRepository.find();
-    let upcomingEvents = runners.map(({ id, type, name, price, imageurl }) => {
+    let upcomingEvents = runners.map(({ id, type, name, price, imageUrl }) => {
         return {
             id,
             type,
             name,
             price,
-            imageurl,
+            imageUrl,
         };
     });
     if (typeFilter) {

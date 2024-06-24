@@ -19,7 +19,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Runner.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "text" }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Runner.prototype, "name", void 0);
 __decorate([
@@ -33,15 +33,15 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Runner.prototype, "imageurl", void 0);
+], Runner.prototype, "imageUrl", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "text" }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Runner.prototype, "type", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
-], Runner.prototype, "upcomingid", void 0);
+], Runner.prototype, "upcomingEventId", void 0);
 exports.Runner = Runner = __decorate([
-    (0, typeorm_1.Entity)("products")
+    (0, typeorm_1.Entity)("runner")
 ], Runner);

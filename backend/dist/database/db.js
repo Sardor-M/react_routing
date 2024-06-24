@@ -1,13 +1,22 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectToDatabase = exports.dataSource = void 0;
-// import "reflect-metadata";
+exports.connectToDatabase = exports.dataSource = exports.config = void 0;
 const typeorm_1 = require("typeorm");
-const db_config_1 = __importDefault(require("../config/db.config"));
-exports.dataSource = new typeorm_1.DataSource(db_config_1.default);
+const Runner_1 = require("../entity/Runner");
+exports.config = {
+    type: "postgres",
+    host: "localhost",
+    port: 5454,
+    username: "steve",
+    password: "12345",
+    database: "run_with_us",
+    logging: true,
+    // entities: ["./src/entity/*/.ts"],
+    entities: [Runner_1.Runner],
+    synchronize: false,
+    migrations: ["src/migration/**/*.ts"],
+};
+exports.dataSource = new typeorm_1.DataSource(exports.config);
 const connectToDatabase = async () => {
     try {
         await exports.dataSource.initialize();
