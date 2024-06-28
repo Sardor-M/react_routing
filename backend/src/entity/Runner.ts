@@ -1,12 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity("runner")
+@Entity("Runner")
 export class Runner {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
-  name!: string;
+  title!: string;
 
   @Column("float")
   price!: number;
@@ -18,7 +18,7 @@ export class Runner {
   imageUrl!: string;
 
   @Column()
-  type!: string;
+  category!: string;
 
   @Column({ nullable: true })
   upcomingEventId!: number;

@@ -40,19 +40,21 @@ export async function getUpcomingRunningEvents(req: Request, res: Response) {
   const typeFilter = req.query.type as string;
   const runnerRepository = getRepository();
   const runners = await runnerRepository.find();
-  let upcomingEvents = runners.map(({ id, type, name, price, imageUrl }) => {
-    return {
-      id,
-      type,
-      name,
-      price,
-      imageUrl,
-    };
-  });
+  let upcomingEvents = runners.map(
+    ({ id, category, title, price, imageUrl }) => {
+      return {
+        id,
+        category,
+        title,
+        price,
+        imageUrl,
+      };
+    }
+  );
 
   if (typeFilter) {
     upcomingEvents = upcomingEvents.filter(
-      (event) => event.type === typeFilter
+      (event) => event.category === typeFilter
     );
   }
 
