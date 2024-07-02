@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import FilterSearchBar from "../organisms/FilterSearchBar";
+import FilterSidebar from "../organisms/FilterSidebar";
 import SearchBar from "../molecules/SearchBar";
-import { EventCardProps } from "../../types";
 
-const TemplateContainer = styled.div`
+const SearchFilterContainer = styled.div`
   display: flex;
 `;
 
@@ -15,7 +14,7 @@ const ContentContainer = styled.div`
 
 const MapContainer = styled.div`
   flex: 1;
-  /* Add map styling here */
+  // map styles will go here later
 `;
 
 interface EventSearchTemplateProps {
@@ -25,15 +24,15 @@ const EventSearchTemplate: React.FC<EventSearchTemplateProps> = ({
   children,
 }) => {
   return (
-    <div>
-      <TemplateContainer>
-        <FilterSearchBar />
+    <div style={{ marginTop: "20px" }}>
+      <SearchFilterContainer>
+        <FilterSidebar />
         <ContentContainer>
           <SearchBar />
           {children}
         </ContentContainer>
         <MapContainer>{/* Map goes here */}</MapContainer>
-      </TemplateContainer>
+      </SearchFilterContainer>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-interface Filters {
+export interface Filters {
   distance: string[];
   month: string[];
   eventType: string[];

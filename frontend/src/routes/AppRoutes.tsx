@@ -31,6 +31,7 @@ import LoginPage, {
 } from "../components/pages/LoginPage";
 import SignUpPage from "../components/pages/SignUpPage";
 import EventSearchPage from "../components/pages/Events/EventSearchPage";
+import { FilterProvider } from "../hooks/useFilterContext";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
@@ -119,7 +120,9 @@ export default function AppRoutes() {
   return (
     <>
       {/* <ThemeProvider theme={{}}> */}
-      <RouterProvider router={router} />
+      <FilterProvider>
+        <RouterProvider router={router} />
+      </FilterProvider>
       {/* </ThemeProvider> */}
     </>
   );
