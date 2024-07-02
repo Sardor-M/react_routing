@@ -7,8 +7,8 @@ export interface Reviews {
 }
 export interface Events {
   imageUrl: string;
-  type: string;
-  name: string;
+  category: string;
+  title: string;
   price: number;
   description: string;
   id: number;
@@ -41,19 +41,22 @@ export interface TextProps {
 }
 
 export interface EventCardProps {
-  imageSrc: string;
+  imageSrc?: string;
   title?: string;
   eventName?: string;
   name?: string;
-  date?: string;
   location?: string;
-  priceRange?: string;
+  price?: number;
   src?: string;
   alt?: string;
   width?: string;
   height?: string;
   objectFit?: "cover" | "contain" | "none" | "scale-down" | "fill";
   isIcon?: boolean;
+  description?: string;
+  category?: string;
+  date?: string;
+  type?: string;
 }
 
 export interface ImageProps {

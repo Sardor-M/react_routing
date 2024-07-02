@@ -29,7 +29,7 @@ export default function Runners() {
   }, []);
 
   const displayRunner = typeFilter
-    ? runners.filter((runner) => runner.type === typeFilter)
+    ? runners.filter((runner) => runner.category === typeFilter)
     : runners;
 
   const runnersArray = displayRunner
@@ -38,18 +38,18 @@ export default function Runners() {
           {" "}
           <Link
             to={runner.id.toString()}
-            aria-label={`View details for ${runner.name}`}
+            aria-label={`View details for ${runner.title}`}
           >
-            <img src={runner.imageUrl} alt={runner.name} />
+            <img src={runner.imageUrl} alt={runner.title} />
             <div className="runner-info">
-              <h2>{runner.name}</h2>
+              <h2>{runner.title}</h2>
               <p>
                 ${runner.price}
                 <span>/day</span>
               </p>
             </div>
-            <i className={`runner-type ${runner.type} selected`}>
-              {runner.type}
+            <i className={`runner-type ${runner.category} selected`}>
+              {runner.category}
             </i>
           </Link>
         </div>

@@ -5,7 +5,6 @@ import { PopularEvents } from "./PopularEvents";
 import { TextForSubPages } from "../atoms/Subtitle";
 import { Text } from "../atoms/Text";
 import { ParagraphElement, TextElement } from "./AboutPage";
-import { CardHeader } from "../molecules/EventCard";
 
 interface CarouselImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   active: boolean;

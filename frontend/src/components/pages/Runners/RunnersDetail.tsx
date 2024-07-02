@@ -42,11 +42,11 @@ export default function RunnersDetail() {
       </Link>
 
       <div className="runner-detail">
-        <img src={runnerDetails?.imageUrl} alt={runnerDetails?.name} />
-        <i className={`runner-type ${runnerDetails?.type} selected`}>
-          {runnerDetails?.type}
+        <img src={runnerDetails?.imageUrl} alt={runnerDetails?.title} />
+        <i className={`runner-type ${runnerDetails?.category} selected`}>
+          {runnerDetails?.category}
         </i>
-        <h2> {runnerDetails?.name}</h2>
+        <h2> {runnerDetails?.title}</h2>
         <p className="runner-price">
           <span>${runnerDetails?.price}</span> /day
         </p>

@@ -6,6 +6,10 @@ import styled from "styled-components";
 interface ButtonProps {
   onClick: () => void;
   text: string;
+  children?: React.ReactNode;
+  type?: "purple" | "purple_inset" | "gray" | "white";
+  disabled?: boolean;
+  css?: React.CSSProperties;
 }
 
 const ButtonWrapper = styled.button`

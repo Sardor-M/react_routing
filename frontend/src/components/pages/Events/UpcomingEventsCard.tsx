@@ -110,15 +110,15 @@ export default function UpcomingDetails() {
         <UpcomingEventDetails>
           <EventDetailsImg
             src={eventDetails?.imageUrl}
-            alt={`Pic of ${eventDetails?.name}`}
+            alt={`Pic of ${eventDetails?.title}`}
           />
           <EventDetailsIntoText>
             <EventDetailsTypeText
-              className={`runner-type runner-type ${eventDetails?.type}`}
+              className={`runner-type runner-type ${eventDetails?.category}`}
             >
-              {eventDetails?.type}
+              {eventDetails?.category}
             </EventDetailsTypeText>
-            <h3> {eventDetails?.name}</h3>
+            <h3> {eventDetails?.title}</h3>
             <h4> ${eventDetails?.price}</h4>
             {/* <p> {eventsDetails?.description}</p> */}
           </EventDetailsIntoText>

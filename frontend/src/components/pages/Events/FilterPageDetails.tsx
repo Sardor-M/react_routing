@@ -10,7 +10,7 @@ export default function FilterPageDetails() {
     try {
       const fetchedData: Events[] = await fetch(
         `http://localhost:4000/api/runners?type=${category}`
-      ) 
+      )
         .then((response) => response.json())
         .then((data) => data);
       console.log(fetchedData, "Fetched Data!");
@@ -94,9 +94,9 @@ export default function FilterPageDetails() {
                   <h2 key={event.description}>{event.description}</h2>
                   <li key={event.id}>{event.id}</li>
                   <li key={event.imageUrl}>{event.imageUrl}</li>
-                  <li key={event.name}>{event.name}</li>
+                  <li key={event.title}>{event.title}</li>
                   <li key={event.price}>{event.price}</li>
-                  <li key={event.type}>{event.type}</li>
+                  <li key={event.category}>{event.category}</li>
                   <li key={event.upcomingId}>{event.upcomingId}</li>
                 </div>
               ))}

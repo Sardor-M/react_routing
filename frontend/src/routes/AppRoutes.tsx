@@ -30,6 +30,7 @@ import LoginPage, {
   loader as loginPageLoader,
 } from "../components/pages/LoginPage";
 import SignUpPage from "../components/pages/SignUpPage";
+import EventSearchPage from "../components/pages/Events/EventSearchPage";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
@@ -63,11 +64,13 @@ const router = createBrowserRouter(
       <Route path="events" element={<EventLayout />}>
         <Route
           index
-          element={<EventsPage />}
+          element={<EventSearchPage />}
+          // element={<EventsPage />}
           //  loader={async () => {
           //     return requireAuth();
           // }}
         />
+
         <Route
           path="dashboard"
           element={<DashboardPage />}

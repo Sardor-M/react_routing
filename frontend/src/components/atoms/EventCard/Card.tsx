@@ -1,5 +1,59 @@
-// import styled, { css } from "styled-components";
-// import { theme } from "../../../tools/theme";
+import styled, { css } from "styled-components";
+
+const Card = styled.div<{
+  bold?: boolean;
+  border?: string;
+  borderRadius?: string;
+  padding?: "16px" | string;
+  margin?: string;
+  display?: string;
+  marginButtom?: string;
+  background?: string;
+  clickable?: boolean;
+  whileHover?: { scale: number };
+}>(
+  ({
+    bold,
+    border,
+    borderRadius,
+    padding,
+    margin,
+    display,
+    marginButtom,
+    background,
+    clickable,
+  }) => css`
+    border: 1px solid;
+    border-radius: ${borderRadius};
+    padding: ${padding};
+    margin: ${margin};
+    display: ${display};
+    margin-bottom: ${marginButtom};
+    background: ${background};
+    flex-direction: column;
+    ${clickable &&
+    css`
+      cursor: pointer;
+    `}
+  `
+);
+
+export const Location = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #666;
+`;
+
+export const Details = styled.div`
+  display: flex;
+  margin: 0 auto;
+`;
+export const List = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+export default Card;
 
 // const Card = styled.div<{
 //   primary?: boolean;
@@ -20,7 +74,7 @@
 //     round = 5,
 //     align = "start",
 //     justify = "start",
-//   }) => css`
+//   }) => css`;
 //     border-radius: ${round}px;
 //     background-color: ${primary ? theme.colors.blue1 : theme.colors.white};
 //     border: 1px solid
@@ -45,5 +99,3 @@
 // );
 
 // export default Card;
-
-export {};

@@ -39,13 +39,13 @@ export default function UpcomingEventsList() {
         <Link
           key={event.id}
           to={`/events/upcoming/${event.id}`}
-          aria-label={`View details for ${event.name}`}
+          aria-label={`View details for ${event.title}`}
           className="upcoming-event-title"
         >
           <div className="upcoming-event-single" key={event.id}>
-            <img src={event.imageUrl} alt={`Pic of ${event.name}`} />
+            <img src={event.imageUrl} alt={`Pic of ${event.title}`} />
             <div className="upcoming-event-info">
-              <h3>{event.name}</h3>
+              <h3>{event.title}</h3>
               <p>${event.price}</p>
             </div>
           </div>{" "}
