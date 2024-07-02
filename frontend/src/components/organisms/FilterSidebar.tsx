@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { Filters, useFilters } from "../../hooks/useFilterContext";
 import Collapsible from "../atoms/Collapsible";
+import StarRating from "../atoms/StarRating";
+import { useState } from "react";
 
 const SidebarContainer = styled.div`
   bottom: 0;
@@ -31,9 +33,15 @@ const FilterLabel = styled.label`
 
 const FilterSidebar: React.FC = () => {
   const { filters, updateFilters } = useFilters();
+  const [rating, setRating] = useState<number>(0);
 
   const handleFilterChange = (filterType: keyof Filters, value: string) => {
     updateFilters(filterType, value);
+  };
+
+  const handleRatingChange = (newRating: number) => {
+    setRating(newRating);
+    updateFilters("reviewScore", `${newRating}`);
   };
 
   const distanceOptions = ["5km", "10km", "Half-Marathon", "Marathon"];
@@ -48,8 +56,6 @@ const FilterSidebar: React.FC = () => {
   ];
 
   const eventTypeOptions = ["Virtual", "In-Person"];
-
-  const reviewStarOptions = ["1,0", "2.0", "3.0", "4.0+", "5.0"];
 
   return (
     <SidebarContainer>
@@ -101,8 +107,8 @@ const FilterSidebar: React.FC = () => {
 
       <Collapsible title="Reviews">
         {/* <FilterTitle>Reviews</FilterTitle> */}
-        <FilterList>
-          {reviewStarOptions.map((review) => (
+        {/* <FilterList> */}
+        {/* {reviewStarOptions.map((review) => (
             <FilterItem key={review}>
               <input
                 type="checkbox"
@@ -111,8 +117,12 @@ const FilterSidebar: React.FC = () => {
               />
               <FilterLabel>{review}</FilterLabel>
             </FilterItem>
-          ))}
-        </FilterList>
+          ))} */}
+        {/* </FilterList> */}
+        <StarRating
+          rating={rating}
+          onRatingChange={handleRatingChange}
+        ></StarRating>
       </Collapsible>
     </SidebarContainer>
   );
