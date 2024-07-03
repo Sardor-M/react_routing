@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import FilterSidebar from "../organisms/FilterSidebar";
-import SearchBar from "../molecules/SearchBar";
+// import SearchBar from "../molecules/SearchBar";
 
 const SearchFilterContainer = styled.div`
   display: flex;
@@ -27,10 +27,7 @@ const EventSearchTemplate: React.FC<EventSearchTemplateProps> = ({
     <div style={{ marginTop: "20px" }}>
       <SearchFilterContainer>
         <FilterSidebar />
-        <ContentContainer>
-          <SearchBar />
-          {children}
-        </ContentContainer>
+        <ContentContainer>{children}</ContentContainer>
         <MapContainer>{/* Map goes here */}</MapContainer>
       </SearchFilterContainer>
     </div>

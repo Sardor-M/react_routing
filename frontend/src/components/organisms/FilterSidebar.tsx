@@ -3,13 +3,15 @@ import { Filters, useFilters } from "../../hooks/useFilterContext";
 import Collapsible from "../atoms/Collapsible";
 import StarRating from "../atoms/StarRating";
 import { useState } from "react";
+import InputSearch from "../atoms/Input/InputSearch";
+import { IoIosSearch } from "react-icons/io";
 
 const SidebarContainer = styled.div`
   bottom: 0;
   margin-left: 10px;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 250px;
   padding: 16px;
   border-right: 1px solid #eee;
 `;
@@ -59,6 +61,7 @@ const FilterSidebar: React.FC = () => {
 
   return (
     <SidebarContainer>
+      <InputSearch placeholder="Search for events" icon={<IoIosSearch />} />
       {/* <FilterTitle>Distance</FilterTitle> */}
       <Collapsible title="Distance">
         <FilterList>

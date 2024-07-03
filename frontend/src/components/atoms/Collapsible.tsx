@@ -28,7 +28,7 @@ interface CollapsibleProps {
 }
 
 const Collapsible: React.FC<CollapsibleProps> = ({ title, children }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   };
