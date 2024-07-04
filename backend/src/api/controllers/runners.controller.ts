@@ -25,6 +25,32 @@ export async function getAllRunners(req: Request, res: Response) {
   }
 }
 
+export async function getFilteredEvent(req: Request, res: Response) {
+  const { distance, month, eventType, reviewScore } = req.body;
+  const eventsRepository = dataSource.getRepository(Runner);
+
+  try {
+    let query = eventsRepository.createQueryBuilder("event");
+
+    if (distance.length > 0) {
+      query = query.andWhere("event.title IN (:...distance)", { distance });
+    }
+
+    const events = await query.getMany();
+    res.json(events);
+  } catch (error) {
+    console.error("There was error fetching the data", error);
+    res.status(500).json({ message: "Error fetching events" });
+  }
+  // const eventsRepository = dataSource.getRepository(Runner);
+  // const events = await eventsRepository.find();
+  // const dataFiltered = events.filter((events) =>
+  //   events.title.includes(events.title)
+  // );
+
+  // res.json(dataFiltered);
+}
+
 export async function getRunnerById(req: Request, res: Response) {
   const id = getIdFromRequest(req);
   const runnerRepository = dataSource.getRepository(Runner);

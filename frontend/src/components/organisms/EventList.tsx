@@ -3,8 +3,8 @@ import React from "react";
 import { EventCard } from "../molecules/EventCard";
 import styled from "styled-components";
 import { EventCardProps, Events } from "../../types";
-import useHttpNew from "../../hooks/useHttp";
 import { List } from "../atoms/EventCard/Card";
+import { useFilters } from "../../hooks/useFilterContext";
 
 const StyledCard = styled.div`
   box-shadow: 0px 3px 6px #00000029;
@@ -17,36 +17,60 @@ const StyledCard = styled.div`
 `;
 
 export const EventList: React.FC<EventCardProps> = () => {
-  const {
-    data: eventList,
-    isLoading,
-    error,
-  } = useHttpNew("http://localhost:8080/api/runners");
+  const { events } = useFilters() as { events: Events[] };
+  console.log("filtered events are returned", events);
 
-  if (isLoading) {
-    return <div> Loading ...</div>;
-  }
+  return (
+    <div>
+      <List>
+        {events.length > 0 ? (
+          events.map((event) => (
+            <EventCard
+              key={event.id}
+              aria-label={event.id}
+              imageSrc={event.imageUrl}
+              title={event.title}
+              description={event.description}
+              price={event.price}
+            />
+          ))
+        ) : (
+          <p>No events found</p>
+        )}
+      </List>
+    </div>
+  );
 
-  if (error) {
-    return <div> Error: {error}</div>;
-  }
+  // const {
+  //   data: eventList,
+  //   isLoading,
+  //   error,
+  // } = useHttpNew("http://localhost:8080/api/runners");
 
-  const eventListData = (eventList as Events[])?.map((event: Events) => {
-    return (
-      <div>
-        <List>
-          <EventCard
-            key={event.id}
-            aria-label={event.id}
-            imageSrc={event.imageUrl}
-            title={event.title}
-            description={event.description}
-            price={event.price}
-          />
-        </List>
-      </div>
-    );
-  });
+  // if (isLoading) {
+  //   return <div> Loading ...</div>;
+  // }
 
-  return <StyledCard>{eventListData}</StyledCard>;
+  // if (error) {
+  //   return <div> Error: {error}</div>;
+  // }
+
+  // const eventListData = (eventList as Events[])?.map((event: Events) => {
+  //   return (
+  //     <div>
+  //       <List>
+  //         <EventCard
+  //           key={event.id}
+  //           aria-label={event.id}
+  //           imageSrc={event.imageUrl}
+  //           title={event.title}
+  //           description={event.description}
+  //           price={event.price}
+  //         />
+  //       </List>
+  //     </div>
+  //   );
+  // });
+
+  // return <StyledCard>{eventListData}</StyledCard>;
 };

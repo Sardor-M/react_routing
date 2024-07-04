@@ -46,7 +46,12 @@ const FilterSidebar: React.FC = () => {
     updateFilters("reviewScore", `${newRating}`);
   };
 
-  const distanceOptions = ["5km", "10km", "Half-Marathon", "Marathon"];
+  const distanceOptions = [
+    "Marathon",
+    "Swimming",
+    "Short Distance",
+    "Distance Running",
+  ];
   const monthOptions = [
     "January",
     "February",
