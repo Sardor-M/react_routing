@@ -32,23 +32,31 @@ export async function getFilteredEvent(req: Request, res: Response) {
   try {
     let query = eventsRepository.createQueryBuilder("event");
 
-    if (distance.length > 0) {
-      query = query.andWhere("event.title IN (:...distance)", { distance });
-    }
+    const filters = [
+      { field: "title", values: distance },
+      { field: "month", values: month },
+      { field: "eventType", values: eventType },
+      { field: "reviewScore", values: reviewScore },
+    ];
+
+    // will filter the events dynamically
+    filters.forEach((filter) => {
+      if (filter.values && filter.values.length > 0) {
+        query = query.andWhere(
+          `event.${filter.field} IN (:...${filter.field})`,
+          { [filter.field]: filter.values }
+        );
+      }
+    });
 
     const events = await query.getMany();
     res.json(events);
+
+    console.log("Filtered Event:", events);
   } catch (error) {
     console.error("There was error fetching the data", error);
     res.status(500).json({ message: "Error fetching events" });
   }
-  // const eventsRepository = dataSource.getRepository(Runner);
-  // const events = await eventsRepository.find();
-  // const dataFiltered = events.filter((events) =>
-  //   events.title.includes(events.title)
-  // );
-
-  // res.json(dataFiltered);
 }
 
 export async function getRunnerById(req: Request, res: Response) {

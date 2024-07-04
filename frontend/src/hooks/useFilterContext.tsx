@@ -56,18 +56,23 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
       const updatedFilters = { ...prevFilter };
 
       // here we clear the previeous value and set the new value for the single-selection filters
-
-      if (filterType === "distance") {
-        updatedFilters[filterType] = [value];
+      // tooggle selection: this will unslect the input selection box if the value is already present
+      if (updatedFilters[filterType].includes(value)) {
+        updatedFilters[filterType] = updatedFilters[filterType].filter(
+          (item) => item !== value
+        );
       } else {
-        if (updatedFilters[filterType].includes(value)) {
-          updatedFilters[filterType] = updatedFilters[filterType].filter(
-            (item) => item !== value
-          );
-        } else {
-          updatedFilters[filterType].push(value);
-        }
+        updatedFilters[filterType] = [...updatedFilters[filterType], value];
       }
+
+      // if (updatedFilters[filterType].includes(value)) {
+      //   updatedFilters[filterType] = updatedFilters[filterType].filter(
+      //     (item) => item !== value
+      //   );
+      // } else {
+      //   updatedFilters[filterType].push(value);
+      // }
+
       return updatedFilters;
     });
   };
