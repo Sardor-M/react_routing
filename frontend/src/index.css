@@ -348,9 +348,11 @@ i[class*="van-type-"] {
 }
 
 .navbar-event {
+  background-color: #f9f9fd;
   display: flex;
-  margin-top: 20px;
-  margin-left: 14px;
+  padding: 20px;
+  padding-left: 1ch;
+  /* margin-left: 14px; */
 }
 
 .navbar-event a {
