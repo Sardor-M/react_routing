@@ -13,6 +13,9 @@ export interface Events {
   description: string;
   id: number;
   upcomingId: string;
+  location: string;
+  date: string;
+  month: string;
 }
 
 export interface GetEvent {
@@ -41,11 +44,11 @@ export interface TextProps {
 }
 
 export interface EventCardProps {
+  location?: string;
   imageSrc?: string;
   title?: string;
   eventName?: string;
   name?: string;
-  location?: string;
   price?: number;
   src?: string;
   alt?: string;

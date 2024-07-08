@@ -22,4 +22,13 @@ export class Runner {
 
   @Column({ nullable: true })
   upcomingEventId!: number;
+
+  @Column({ nullable: true })
+  location!: string;
+
+  @Column()
+  date!: Date;
+
+  @Column()
+  month!: string;
 }

@@ -8,8 +8,9 @@ const SearchFilterContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  flex: 1;
+  flex: 0.6;
   padding: 16px;
+  margin: 0 10px;
 `;
 
 const MapContainer = styled.div`

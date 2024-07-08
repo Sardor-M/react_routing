@@ -1,4 +1,3 @@
-import FilterPageDetails from "./FilterPageDetails";
 import styled from "styled-components";
 import { TextForSubPages } from "../../atoms/Subtitle";
 
@@ -12,7 +11,6 @@ export default function EventsPage() {
       <TextForSubPages textAlign="left">
         All the Upcoming Events in South Korea{" "}
       </TextForSubPages>
-      <FilterPageDetails />
     </EventPageContainer>
   );
 }

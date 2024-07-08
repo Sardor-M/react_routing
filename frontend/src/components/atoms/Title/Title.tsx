@@ -1,16 +1,20 @@
 import styled, { css } from "styled-components";
 
-const Title = styled.h1<{
+const Title = styled.h3<{
   margin?: string;
   padding?: string;
   fontSize?: string;
   fontWeight?: string;
+  padddingLeft?: string;
+  display?: string;
 }>(
-  ({ margin, padding, fontSize, fontWeight }) => css`
-    font-size: ${fontSize || "1.5rem"};
-    font-weight: ${fontWeight || "bold"};
-    margin: ${margin || "0"};
-    padding: ${padding || "0"};
+  ({ margin, padding, fontSize, fontWeight, padddingLeft, display }) => css`
+    font-size: ${fontSize};
+    font-weight: ${fontWeight};
+    margin: ${margin};
+    padding: ${padding};
+    padding-left: ${padddingLeft};
+    display: ${display};
   `
 );
 

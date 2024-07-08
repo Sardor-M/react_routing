@@ -26,7 +26,8 @@ export async function getAllRunners(req: Request, res: Response) {
 }
 
 export async function getFilteredEvent(req: Request, res: Response) {
-  const { category, month, eventType, reviewScore } = req.body;
+  const { category, month, eventType, reviewScore, location, date, price } =
+    req.body;
   const eventsRepository = dataSource.getRepository(Runner);
 
   try {
@@ -37,6 +38,9 @@ export async function getFilteredEvent(req: Request, res: Response) {
       { field: "month", values: month },
       { field: "eventType", values: eventType },
       { field: "reviewScore", values: reviewScore },
+      { field: "location", values: location },
+      { field: "date", values: date },
+      { field: "price", values: price },
     ];
 
     // will filter the events dynamically

@@ -1,6 +1,7 @@
+import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 
-const Card = styled.div<{
+const Card = styled(motion.div)<{
   bold?: boolean;
   border?: string;
   borderRadius?: string;
@@ -10,7 +11,9 @@ const Card = styled.div<{
   marginButtom?: string;
   background?: string;
   clickable?: boolean;
+  overflow?: boolean;
   whileHover?: { scale: number };
+  width?: string;
 }>(
   ({
     bold,
@@ -22,6 +25,8 @@ const Card = styled.div<{
     marginButtom,
     background,
     clickable,
+    overflow,
+    width,
   }) => css`
     border: 1px solid;
     border-radius: ${borderRadius};
@@ -30,7 +35,8 @@ const Card = styled.div<{
     display: ${display};
     margin-bottom: ${marginButtom};
     background: ${background};
-    flex-direction: column;
+    overflow: ${overflow ? "hidden" : "visible"};
+    width: ${width};
     ${clickable &&
     css`
       cursor: pointer;
@@ -47,7 +53,7 @@ export const Location = styled.div`
 
 export const Details = styled.div`
   display: flex;
-  margin: 0 auto;
+  margin: 0 10px;
 `;
 export const List = styled.div`
   display: flex;

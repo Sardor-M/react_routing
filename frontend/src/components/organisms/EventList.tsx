@@ -1,22 +1,21 @@
 // Organisms/EventCard.tsx
 import React from "react";
 import { EventCard } from "../molecules/EventCard";
-import styled from "styled-components";
 import { EventCardProps, Events } from "../../types";
 import { List } from "../atoms/EventCard/Card";
 import { useFilters } from "../../hooks/useFilterContext";
 
-const StyledCard = styled.div`
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 6px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: translateY(-5px);
-  }
-`;
+// const StyledCard = styled.div`
+//   box-shadow: 0px 3px 6px #00000029;
+//   border-radius: 6px;
+//   overflow: hidden;
+//   transition: transform 0.3s ease;
+//   &:hover {
+//     transform: translateY(-5px);
+//   }
+// `;
 
-export const EventList: React.FC<EventCardProps> = () => {
+export const EventResultList: React.FC<EventCardProps> = () => {
   const { events } = useFilters() as { events: Events[] };
   console.log("filtered events are returned", events);
 
@@ -29,9 +28,17 @@ export const EventList: React.FC<EventCardProps> = () => {
               key={event.id}
               aria-label={event.id}
               imageSrc={event.imageUrl}
+              location={event.location}
               title={event.title}
               description={event.description}
               price={event.price}
+              category={event.category}
+              date={new Date(event.date).toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             />
           ))
         ) : (
