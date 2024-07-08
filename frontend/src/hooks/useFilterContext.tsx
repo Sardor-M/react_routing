@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 export interface Filters {
-  distance: string[];
+  category: string[];
   month: string[];
   eventType: string[];
   reviewScore: string[];
@@ -19,7 +19,7 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [filters, setFilters] = useState<Filters>({
-    distance: [],
+    category: [],
     month: [],
     eventType: [],
     reviewScore: [],

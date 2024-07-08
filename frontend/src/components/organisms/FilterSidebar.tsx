@@ -46,12 +46,15 @@ const FilterSidebar: React.FC = () => {
     updateFilters("reviewScore", `${newRating}`);
   };
 
-  const distanceOptions = [
+  const categoryOptions = [
+    "Trail Running",
+    "Half-Marathon",
     "Marathon",
     "Swimming",
-    "Short Distance",
-    "Distance Running",
+    "Short Run",
+    "Cycling",
   ];
+
   const monthOptions = [
     "January",
     "February",
@@ -70,14 +73,14 @@ const FilterSidebar: React.FC = () => {
       {/* <FilterTitle>Distance</FilterTitle> */}
       <Collapsible title="Distance">
         <FilterList>
-          {distanceOptions.map((distance) => (
-            <FilterItem key={distance}>
+          {categoryOptions.map((category) => (
+            <FilterItem key={category}>
               <input
                 type="checkbox"
-                checked={filters.distance.includes(distance)}
-                onChange={() => handleFilterChange("distance", distance)}
+                checked={filters.category.includes(category)}
+                onChange={() => handleFilterChange("category", category)}
               />
-              <FilterLabel>{distance}</FilterLabel>
+              <FilterLabel>{category}</FilterLabel>
             </FilterItem>
           ))}
         </FilterList>

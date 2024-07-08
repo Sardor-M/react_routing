@@ -26,14 +26,14 @@ export async function getAllRunners(req: Request, res: Response) {
 }
 
 export async function getFilteredEvent(req: Request, res: Response) {
-  const { distance, month, eventType, reviewScore } = req.body;
+  const { category, month, eventType, reviewScore } = req.body;
   const eventsRepository = dataSource.getRepository(Runner);
 
   try {
     let query = eventsRepository.createQueryBuilder("event");
 
     const filters = [
-      { field: "title", values: distance },
+      { field: "category", values: category },
       { field: "month", values: month },
       { field: "eventType", values: eventType },
       { field: "reviewScore", values: reviewScore },
