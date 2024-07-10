@@ -1,7 +1,7 @@
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
 export default function ResultMap() {
-  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || "";
+  const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
   if (!API_KEY) {
     console.error("Google API key is missing");

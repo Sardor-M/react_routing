@@ -1,10 +1,29 @@
 import { Request, Response } from "express";
 import { Runner } from "../../entity/Runner";
 import { dataSource } from "../../database/db";
+import axios from "axios";
 import {
   getRepository,
   getIdFromRequest,
 } from "../../repositories/ProductRepository";
+
+// const GEOCODING_API_KEY = process.env.GEOCODING_API_KEY;
+
+// async function getGeoLocation(location: string) {
+//   const response = await axios.get(
+//     "https://maps.googleapis.com/maps/api/geocode/json",
+//     {
+//       params: {
+//         address: location,
+//         key: GEOCODING_API_KEY,
+//       },
+//     }
+//   );
+
+//   const { lat, lng } = response.data.results[0].geometry.location;
+//   return { lat, lng };
+// }
+
 export async function getAllRunners(req: Request, res: Response) {
   try {
     const runnerRepository = getRepository();
@@ -54,6 +73,18 @@ export async function getFilteredEvent(req: Request, res: Response) {
     });
 
     const events = await query.getMany();
+
+    // const geoLocationEvents = await Promise.all(
+    //   events.map(async (event) => {
+    //     const { lat, lng } = await getGeoLocation(event.location);
+    //     return {
+    //       ...event,
+    //       latitude: lat,
+    //       langitude,
+    //     };
+    //   })
+    // );
+
     res.json(events);
 
     console.log("Filtered Event:", events);

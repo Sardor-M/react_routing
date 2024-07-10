@@ -6,11 +6,19 @@ export interface Filters {
   eventType: string[];
   reviewScore: string[];
 }
+export interface Event {
+  id: string;
+  title: string;
+  location: string;
+  latitude: number;
+  longitude: number;
+  date?: string;
+}
 
 interface FilterContextType {
   filters: Filters;
   updateFilters: (filterType: keyof Filters, value: string) => void;
-  events: [];
+  events: Event[];
   visible?: number;
 }
 
@@ -26,7 +34,7 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
     reviewScore: [],
   });
 
-  const [events, setEvents] = useState<[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
 
   const fetchEvents = async (filters: Filters) => {
     try {
@@ -41,7 +49,13 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
         }
       );
       const data = await response.json();
-      setEvents(data);
+
+      if (Array.isArray(data) && data.length > 0) {
+        setEvents(data);
+      } else {
+        console.log("No events found", data);
+      }
+      // setEvents(data);
       console.log("Data returned from the server: ", data);
     } catch (error) {
       console.error("there was an error fetching the data: ", error);

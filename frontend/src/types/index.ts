@@ -5,17 +5,20 @@ export interface Reviews {
   rating: number;
   event: number;
 }
+
 export interface Events {
-  imageUrl: string;
-  category: string;
-  title: string;
-  price: number;
-  description: string;
-  id: number;
-  upcomingId: string;
-  location: string;
-  date: string;
-  month: string;
+  imageUrl?: string;
+  category?: string;
+  title?: string;
+  price?: number;
+  description?: string;
+  id?: string;
+  upcomingEventId?: string;
+  location?: string;
+  date?: string;
+  month?: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface GetEvent {

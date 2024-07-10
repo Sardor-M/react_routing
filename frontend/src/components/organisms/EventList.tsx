@@ -1,10 +1,11 @@
 // Organisms/EventCard.tsx
 import React, { useState } from "react";
 import { EventCard } from "../molecules/EventCard";
-import { EventCardProps, Events } from "../../types";
+import { EventCardProps } from "../../types";
 import { List } from "../atoms/EventCard/Card";
 import { useFilters } from "../../hooks/useFilterContext";
 import styled from "styled-components";
+import { Events } from "../../types";
 
 // const StyledCard = styled.div`
 //   box-shadow: 0px 3px 6px #00000029;
@@ -45,7 +46,11 @@ export const EventResultList: React.FC<EventCardProps> = () => {
   };
 
   // we only show 25 events at a time
-  const visibleEvents = events.slice(0, visibleCount);
+  const visibleEvents = Array.isArray(events)
+    ? events.slice(0, visibleCount)
+    : [];
+
+  console.log("visible events", events);
 
   return (
     <List>
@@ -63,12 +68,16 @@ export const EventResultList: React.FC<EventCardProps> = () => {
             description={event.description}
             price={event.price}
             category={event.category}
-            date={new Date(event.date).toLocaleDateString("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            date={
+              event.date
+                ? new Date(event.date).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : ""
+            }
           />
         ))
       ) : (
