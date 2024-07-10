@@ -11,7 +11,8 @@ const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 16px;
+  padding: 10px;
+  margin: 10px;
 `;
 
 export const EventCard: React.FC<EventCardProps> = ({
@@ -25,6 +26,7 @@ export const EventCard: React.FC<EventCardProps> = ({
 }) => {
   return (
     <Card
+      max-width="350px"
       whileHover={{ scale: 1.02 }}
       display="flex"
       flex-direction="row"
@@ -32,10 +34,11 @@ export const EventCard: React.FC<EventCardProps> = ({
       overflow={true}
       borderRadius="10px"
       padding="16px"
-      margin="10px 0"
-      margin-buttom="20px"
+      margin=" 10px 0"
+      margin-left="auto"
+      margin-right="auto"
+      // margin-buttom="20px"
       width="100%"
-      max-width="350px"
       background="#fff"
       box-shadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
       clickable={true}
@@ -47,9 +50,9 @@ export const EventCard: React.FC<EventCardProps> = ({
           width: "240px",
           height: "200px",
           borderRadius: "10px",
-          marginBottom: "10px",
+          // marginBottom: "10px",
         }}
-        object-fit="cover"
+        // object-fit="cover"
       />
       <CardContent>
         <Title margin="0 0 10px">

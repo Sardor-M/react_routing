@@ -7,11 +7,12 @@ import InputSearch from "../atoms/Input/InputSearch";
 import { IoIosSearch } from "react-icons/io";
 
 const SidebarContainer = styled.div`
+  margin-top: 17px;
   bottom: 0;
   margin-left: 10px;
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 300px;
   padding: 16px;
   border-right: 1px solid #eee;
 `;

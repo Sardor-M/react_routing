@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import FilterSidebar from "../organisms/FilterSidebar";
-// import SearchBar from "../molecules/SearchBar";
+import ResultMap from "../molecules/ResultMap";
 
 const SearchFilterContainer = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ const ContentContainer = styled.div`
 `;
 
 const MapContainer = styled.div`
-  flex: 1;
+  flex: 0.6;
   // map styles will go here later
 `;
 
@@ -25,13 +25,15 @@ const EventSearchTemplate: React.FC<EventSearchTemplateProps> = ({
   children,
 }) => {
   return (
-    <div style={{ marginTop: "20px" }}>
-      <SearchFilterContainer>
-        <FilterSidebar />
-        <ContentContainer>{children}</ContentContainer>
-        <MapContainer>{/* Map goes here */}</MapContainer>
-      </SearchFilterContainer>
-    </div>
+    // <div style={{ marginTop: "20px" }}>
+    <SearchFilterContainer>
+      <FilterSidebar />
+      <ContentContainer> {children}</ContentContainer>
+      <MapContainer>
+        <ResultMap />
+      </MapContainer>
+    </SearchFilterContainer>
+    // </div>
   );
 };
 
