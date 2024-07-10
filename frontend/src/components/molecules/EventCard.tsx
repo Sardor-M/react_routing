@@ -1,7 +1,7 @@
 // Molecules/CardHeader.tsx
 import React from "react";
 import { EventCardProps } from "../../types";
-import Card, { Details, Location } from "../atoms/EventCard/Card";
+import Card from "../atoms/EventCard/Card";
 import Title from "../atoms/Title/Title";
 import { Image } from "../atoms/Image";
 import styled from "styled-components";

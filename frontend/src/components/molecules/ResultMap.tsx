@@ -11,7 +11,7 @@ export default function ResultMap() {
   return (
     <APIProvider apiKey={API_KEY}>
       <Map
-        style={{ width: "100%", height: "850px" }}
+        style={{ width: "100%", objectFit: "cover" }}
         defaultCenter={{ lat: 37.774929, lng: -122.419416 }}
         defaultZoom={11}
         gestureHandling={"greedy"}

@@ -1,5 +1,5 @@
 // Organisms/EventCard.tsx
-import React from "react";
+import React, { useState } from "react";
 import { EventCard } from "../molecules/EventCard";
 import { EventCardProps, Events } from "../../types";
 import { List } from "../atoms/EventCard/Card";
@@ -22,17 +22,38 @@ const ResultsListTitleContainer = styled.h3`
   margin-right: 20px;
 `;
 
+const ShowMoreButton = styled.button`
+  background-color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+  border-radius: 12px;
+  margin: 20px auto;
+  padding: 10px 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: #b9dbff;
+  }
+`;
+
 export const EventResultList: React.FC<EventCardProps> = () => {
   const { events } = useFilters() as { events: Events[] };
+  const [visibleCount, setVisibelCount] = useState<number>(25);
   console.log("filtered events are returned", events);
+
+  // this shows more item when the button is clicked
+  const showMoreItems = () => {
+    setVisibelCount((prevCount) => prevCount + 25);
+  };
+
+  // we only show 25 events at a time
+  const visibleEvents = events.slice(0, visibleCount);
 
   return (
     <List>
       <ResultsListTitleContainer>
-        Running Events found:
+        Running Events found near you:
       </ResultsListTitleContainer>
       {events.length > 0 ? (
-        events.map((event) => (
+        visibleEvents.map((event) => (
           <EventCard
             key={event.id}
             aria-label={event.id}
@@ -53,39 +74,9 @@ export const EventResultList: React.FC<EventCardProps> = () => {
       ) : (
         <p>No events found</p>
       )}
+      {events.length > visibleCount && (
+        <ShowMoreButton onClick={showMoreItems}>Show More</ShowMoreButton>
+      )}
     </List>
   );
-
-  // const {
-  //   data: eventList,
-  //   isLoading,
-  //   error,
-  // } = useHttpNew("http://localhost:8080/api/runners");
-
-  // if (isLoading) {
-  //   return <div> Loading ...</div>;
-  // }
-
-  // if (error) {
-  //   return <div> Error: {error}</div>;
-  // }
-
-  // const eventListData = (eventList as Events[])?.map((event: Events) => {
-  //   return (
-  //     <div>
-  //       <List>
-  //         <EventCard
-  //           key={event.id}
-  //           aria-label={event.id}
-  //           imageSrc={event.imageUrl}
-  //           title={event.title}
-  //           description={event.description}
-  //           price={event.price}
-  //         />
-  //       </List>
-  //     </div>
-  //   );
-  // });
-
-  // return <StyledCard>{eventListData}</StyledCard>;
 };

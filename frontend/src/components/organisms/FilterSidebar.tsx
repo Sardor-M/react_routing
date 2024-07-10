@@ -7,6 +7,8 @@ import InputSearch from "../atoms/Input/InputSearch";
 import { IoIosSearch } from "react-icons/io";
 
 const SidebarContainer = styled.div`
+  /* top: 0; */
+  position: sticky;
   margin-top: 17px;
   bottom: 0;
   margin-left: 10px;
@@ -116,21 +118,7 @@ const FilterSidebar: React.FC = () => {
           ))}
         </FilterList>
       </Collapsible>
-
       <Collapsible title="Reviews">
-        {/* <FilterTitle>Reviews</FilterTitle> */}
-        {/* <FilterList> */}
-        {/* {reviewStarOptions.map((review) => (
-            <FilterItem key={review}>
-              <input
-                type="checkbox"
-                checked={filters.reviewScore.includes(review)}
-                onChange={() => handleFilterChange("reviewScore", review)}
-              />
-              <FilterLabel>{review}</FilterLabel>
-            </FilterItem>
-          ))} */}
-        {/* </FilterList> */}
         <StarRating
           rating={rating}
           onRatingChange={handleRatingChange}

@@ -11,6 +11,7 @@ interface FilterContextType {
   filters: Filters;
   updateFilters: (filterType: keyof Filters, value: string) => void;
   events: [];
+  visible?: number;
 }
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
