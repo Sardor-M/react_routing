@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { Runner } from "../../entity/Runner";
 import { dataSource } from "../../database/db";
-import axios from "axios";
 import {
   getRepository,
   getIdFromRequest,

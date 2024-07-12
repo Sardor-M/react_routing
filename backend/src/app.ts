@@ -1,6 +1,6 @@
 import express from "express";
 import { connectToDatabase } from "./database/db";
-import router from "./api/routes/runner.routes";
+import router from "./api/routes/events.routes";
 import cors from "cors";
 import morgan from "morgan";
 
@@ -28,6 +28,8 @@ app.use(express.json());
 connectToDatabase()
   .then(() => {
     app.use("/api", router);
+
+    app.use("/auth", router);
 
     app.listen(port, () => {
       console.log(`Server is running on port: 8080`);

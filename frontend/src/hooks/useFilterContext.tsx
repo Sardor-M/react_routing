@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { Events } from "../types";
 
 export interface Filters {
   category: string[];
@@ -18,7 +19,7 @@ export interface Event {
 interface FilterContextType {
   filters: Filters;
   updateFilters: (filterType: keyof Filters, value: string) => void;
-  events: Event[];
+  events: Events[];
   visible?: number;
 }
 
@@ -34,7 +35,7 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
     reviewScore: [],
   });
 
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Events[]>([]);
 
   const fetchEvents = async (filters: Filters) => {
     try {
