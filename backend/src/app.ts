@@ -1,13 +1,19 @@
 import express from "express";
 import { connectToDatabase } from "./database/db";
-import router from "./api/routes/events.routes";
 import cors from "cors";
 import morgan from "morgan";
+import userRouters from "./api/routes/events.routes";
+import authRouter from "./api/routes/auth.routes";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 
 const app = express();
 const port = 8080;
 
+dotenv.config();
+
 app.use(morgan("dev"));
+app.use(cookieParser());
 
 app.use(
   cors({
@@ -27,9 +33,8 @@ app.use(express.json());
 
 connectToDatabase()
   .then(() => {
-    app.use("/api", router);
-
-    app.use("/auth", router);
+    app.use("/api", userRouters);
+    app.use("/auth", authRouter);
 
     app.listen(port, () => {
       console.log(`Server is running on port: 8080`);

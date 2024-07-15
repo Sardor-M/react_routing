@@ -1,22 +1,10 @@
 import React, { useState } from "react";
 
 export function useInput(
-  defaultValue: string,
-  validationFcn: ({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }) => boolean
+  defaultValue: { email: string; password: string },
+  validationFcn: (inputValues: { email: string; password: string }) => boolean
 ) {
-  const [inputValues, setInputValues] = useState<{
-    email: string;
-    password: string;
-  }>({
-    email: "",
-    password: "",
-  });
+  const [inputValues, setInputValues] = useState(defaultValue);
   const [didEdit, setDidEdit] = useState<boolean>(false);
 
   const valueIsValid = validationFcn(inputValues);

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { EventTypes } from "./EventTypes";
 import { PopularEvents } from "./PopularEvents";
 import { TextForSubPages } from "../atoms/Subtitle";
 import { Text } from "../atoms/Text";

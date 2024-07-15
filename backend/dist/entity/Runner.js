@@ -21,7 +21,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Runner.prototype, "name", void 0);
+], Runner.prototype, "title", void 0);
 __decorate([
     (0, typeorm_1.Column)("float"),
     __metadata("design:type", Number)
@@ -37,11 +37,23 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Runner.prototype, "type", void 0);
+], Runner.prototype, "category", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
 ], Runner.prototype, "upcomingEventId", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Runner.prototype, "location", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], Runner.prototype, "date", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Runner.prototype, "month", void 0);
 exports.Runner = Runner = __decorate([
-    (0, typeorm_1.Entity)("runner")
+    (0, typeorm_1.Entity)("Runner")
 ], Runner);

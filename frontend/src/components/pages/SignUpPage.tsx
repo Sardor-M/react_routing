@@ -1,7 +1,9 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Input from "../atoms/Input/Input";
+import axios from "axios";
+
 const SectionContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -62,33 +64,54 @@ const ControlError = styled.div`
   }
 `;
 export default function SignUpPage() {
-  const [inputValues, setInputValues] = useState<{
-    input: string;
-    pwd: string;
-  }>({
-    input: "string",
-    pwd: "",
-  });
+  const [userName, setUserName] = useState<string>("");
   const [emailValue, setEmailValue] = useState<string>("");
   const [pwdValue, setPwdValue] = useState<string>("");
-
+  const [confirmPwdValue, setConfirmPwdValue] = useState<string>("");
   const [pwdIsNotEqual, setPwdIsNotEqual] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
-    // const checkBox = formData.getAll("nicknames");
-    const data = Object.fromEntries(formData.entries());
-
-    // data.nicknames = checkBox;
-
-    if (data.password !== data["check-password"]) {
+    if (pwdValue !== confirmPwdValue) {
       setPwdIsNotEqual(true);
-      console.log(pwdIsNotEqual);
       return;
     }
+
+    try {
+      const response = await axios.post("http://localhost:8080/auth/register", {
+        username: userName,
+        email: emailValue,
+        password: pwdValue,
+      });
+
+      console.log("response", response.data);
+    } catch (error) {
+      console.error("Failed to sign up", error);
+    }
+
+    // const formData = new FormData(event.currentTarget);
+    // // const checkBox = formData.getAll("nicknames");
+    // const data = Object.fromEntries(formData.entries());
+
+    // // data.nicknames = checkBox;
+
+    // if (data.password !== data["check-password"]) {
+    //   setPwdIsNotEqual(true);
+    //   console.log(pwdIsNotEqual);
+    //   return;
+    // }
   }
+
+  const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPwdValue(e.target.value);
+    if (e.target.value !== pwdValue) {
+      setPwdIsNotEqual(true);
+    } else {
+      setPwdIsNotEqual(false);
+    }
+  };
 
   return (
     <>
@@ -104,18 +127,25 @@ export default function SignUpPage() {
           <FormContainer onSubmit={handleSubmit}>
             <FormTitleElement>Sign Up - New Account </FormTitleElement>
             <Input
+              error={emailValue === ""}
+              type="email"
+              id="email"
+              placeholder="Email"
+              aria-describedby="uidnote"
+              value={emailValue}
+              autoComplete="off"
+              onChange={(e: any) => setEmailValue(e.target.value)}
+              required
+            />
+            <Input
               error={pwdIsNotEqual}
               type="username"
               id="username"
               placeholder="Username"
               aria-describedby="uidnote"
-              // aria-invalid={validUser ? "false" : "true"}
-              // ref={emailRef}
-              value={emailValue}
+              value={userName}
               autoComplete="off"
-              onChange={(e: any) => setEmailValue(e.target.value)}
-              // onFocus={() => setUserFocus(true)}
-              // onBlur={() => setValidUser(true)}
+              onChange={(e: any) => setUserName(e.target.value)}
               required
             />
             <Input
@@ -124,10 +154,7 @@ export default function SignUpPage() {
               id="password"
               placeholder="Password"
               value={pwdValue}
-              // aria-invalid={validPwd ? " false" : "true"}
               onChange={(e) => setPwdValue(e.target.value)}
-              // onFocus={() => setPwdFocus(true)}
-              // onBlur={() => setPwdFocus(false)}
               required
             />
             <Input
@@ -135,9 +162,7 @@ export default function SignUpPage() {
               type="password"
               id="check-password"
               placeholder="Re-enter your Password "
-              // onChange={(e) => setMatchPwd(e.target.value)}
-              // onFocus={() => setMatchFocus(true)}
-              // onBlur={() => setMatchFocus(false)}
+              onChange={(e) => handleConfirmPassword(e)}
               required
             />
             <ControlError>

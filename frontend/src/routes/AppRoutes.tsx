@@ -7,7 +7,6 @@ import ContactPage, {
 import Runners from "../components/pages/Runners/Runners";
 import RunnersDetail from "../components/pages/Runners/RunnersDetail";
 import Layout from "../components/Layout";
-import EventsPage from "../components/pages/Events/EventsPage";
 import DashboardPage, {
   loader as dashboardLoader,
 } from "../components/pages/Events/DashboardPage";
@@ -31,7 +30,8 @@ import LoginPage, {
 } from "../components/pages/LoginPage";
 import SignUpPage from "../components/pages/SignUpPage";
 import EventSearchPage from "../components/pages/Events/EventSearchPage";
-import { FilterProvider } from "../hooks/useFilterContext";
+import { FilterProvider } from "../hooks/FilterContext";
+import { AuthProvider } from "../context/AuthContext";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
@@ -50,8 +50,12 @@ const router = createBrowserRouter(
         element={<ContactPage onSubmit={onSubmit} />}
         loader={contactUsPageLoader}
       />
-      <Route path="login" element={<LoginPage />} loader={loginPageLoader} />
-      <Route path="signup" element={<SignUpPage />} errorElement={<Error />} />
+      <Route path="/login" element={<LoginPage />} loader={loginPageLoader} />
+      <Route
+        path="/register"
+        element={<SignUpPage />}
+        errorElement={<Error />}
+      />
 
       <Route path="runner">
         <Route index element={<Runners />} errorElement={<Error />} />
@@ -120,9 +124,11 @@ export default function AppRoutes() {
   return (
     <>
       {/* <ThemeProvider theme={{}}> */}
-      <FilterProvider>
-        <RouterProvider router={router} />
-      </FilterProvider>
+      <AuthProvider>
+        <FilterProvider>
+          <RouterProvider router={router} />
+        </FilterProvider>
+      </AuthProvider>
       {/* </ThemeProvider> */}
     </>
   );

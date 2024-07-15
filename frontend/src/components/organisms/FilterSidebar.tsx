@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Filters, useFilters } from "../../hooks/useFilterContext";
+import { Filters, useFilters } from "../../hooks/FilterContext";
 import Collapsible from "../atoms/Collapsible";
 import StarRating from "../atoms/StarRating";
 import { useState } from "react";

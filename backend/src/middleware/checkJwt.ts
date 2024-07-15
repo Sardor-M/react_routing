@@ -1,20 +1,23 @@
-import { Request, Response, NextFunction } from "express";
-import * as jwt from "jsonwebtoken";
+import { Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+import { UserRequestInfo } from "../../../backend/src/types/userRequest";
 
-export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
-  const token = <string>req.headers["authorization"];
-  let jwtPayload;
+export const checkJwt = (
+  req: UserRequestInfo,
+  res: Response,
+  next: NextFunction
+) => {
+  const token = req.cookies.token;
 
-  try {
-    jwtPayload = jwt.verify(token, process.env.JWT_TOKEN_SECRET || "");
-    res.locals.jwtPayload = jwtPayload;
-  } catch (error) {
+  if (!token) {
     return res.status(401).send("Unauthorized");
   }
 
-  const { userId } = jwtPayload;
-  const newToken = jwt.sign({ userId }, process.env.JWT_TOKEN_SECRET || "", {
-    expiresIn: "1h",
-  });
-  res.setHeader("token", newToken);
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_TOKEN_SECRET as string);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).send("Unauthorized");
+  }
 };

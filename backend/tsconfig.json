@@ -12,6 +12,6 @@
     "emitDecoratorMetadata": true,
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../frontend/src/middleware"],
   "exclude": ["node_modules", "dist"]
 }

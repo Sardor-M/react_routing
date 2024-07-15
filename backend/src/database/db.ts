@@ -1,5 +1,6 @@
 import { DataSource, DataSourceOptions } from "typeorm";
 import { Runner } from "../entity/Runner";
+import { User } from "../entity/User";
 
 export const config: DataSourceOptions = {
   type: "postgres",
@@ -9,12 +10,11 @@ export const config: DataSourceOptions = {
   password: "12345",
   database: "run_with_us",
   logging: true,
-
   // entities: ["./src/entity/*/.ts"],
-  entities: [Runner],
+  entities: [Runner, User],
   synchronize: false,
   migrations: ["src/migration/**/*.ts"],
-  migrationsTableName: "Creating_New_Runners_Table",
+  // migrationsTableName: "Creating_New_Runners_Table",
 };
 
 export const dataSource = new DataSource(config);

@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Input from "../atoms/Input/Input";
-import { useLoaderData } from "react-router-dom";
 import { useInput } from "../../hooks/useInput";
 import { isEmail, isNotEmpty, hasMinLength } from "../../utils/validation";
+import axios from "axios";
 
 const SectionContainer = styled.section`
   display: flex;
@@ -62,34 +62,35 @@ export async function loader({ request }: { request: Request }) {
 }
 
 export default function LoginPage() {
-  const messageData = useLoaderData() as string | "";
-
-  // const [inputValues, setInputValues] = useState<{ email: string, password: string }>({email: "", password: ""});
-  // const [didEdit, setDidEdit] = useState<{ email: boolean, password: boolean }>({email: false, password: false});
-
-  // const emailIsValid = didEdit.email && !inputValues.email.includes("@");
-  // const pwdIsValid = didEdit.password && inputValues.password.trim().length < 8;
-
+  // set the input values for both email and password
   const {
-    values: emailValue,
-    handleInputChange: handleEmailChange,
-    handleInputBlur: handleEmailBlur,
-    hasAnError: emailHasAnError,
+    values: inputValues,
+    handleInputChange: handleBothInputChanges,
+    handleInputBlur: handleBothInputBlur,
+    hasAnError: hasError,
   } = useInput(
-    "",
-    (values) => isEmail(values.email) && isNotEmpty(values.email)
+    {
+      email: "",
+      password: "",
+    },
+    (events) =>
+      hasMinLength(events.password, 6) &&
+      isNotEmpty(events.email) &&
+      isEmail(events.email)
   );
 
-  const {
-    values: pwdValue,
-    handleInputChange: handlePwdChange,
-    handleInputBlur: handlePwdBlur,
-    hasAnError: pwdHasAnError,
-  } = useInput("", (values) => hasMinLength(values.password, 8));
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // console.log(inputValues);
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/auth/login",
+        inputValues,
+        { withCredentials: true }
+      );
+      console.log("User logged in", response.data);
+    } catch (error) {
+      console.error("Failed to login", error);
+    }
   }
   return (
     <>
@@ -98,31 +99,32 @@ export default function LoginPage() {
       <SectionContainer>
         <StyledForm onSubmit={handleSubmit}>
           <LoginPageTitle>Sign in to your account</LoginPageTitle>
-
           <Input
+            value={inputValues.email}
             id="email"
             type="email"
             name="email"
             placeholder="Email"
-            onBlur={handleEmailBlur}
-            onChange={handleEmailChange}
-            error={emailHasAnError ? "Please enter a valid email" : ""}
+            onBlur={handleBothInputBlur}
+            onChange={handleBothInputChanges}
+            error={hasError ? "Please enter a valid email" : ""}
           />
           <Input
+            value={inputValues.password}
             id="password"
             type="password"
             name="password"
             placeholder="Password"
-            onBlur={handlePwdBlur}
-            onChange={handlePwdChange}
-            error={pwdHasAnError ? "Enter a valid password" : ""}
+            onBlur={handleBothInputBlur}
+            onChange={handleBothInputChanges}
+            error={hasError ? "Enter a valid password" : ""}
           />
           {/*// when working with forms, always use the type="button" to avoid the default behavior of the form*/}
           <SignInButton type="submit">Login</SignInButton>
           <SignUpLink>
             Not Registered yet ?{" "}
             <Link
-              to={"/signup"}
+              to={"/register"}
               style={{ color: "inherit", textDecoration: "underline" }}
             >
               Sign Up

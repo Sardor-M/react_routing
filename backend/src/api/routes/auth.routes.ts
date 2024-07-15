@@ -1,14 +1,19 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import { UserController } from "../controllers/user.controller";
-import { Request, Response } from "express";
+import { Response } from "express";
 import { checkJwt } from "../../middleware/checkJwt";
+import { UserRequestInfo } from "../../types/userRequest";
 
-const router = express.Router();
+const authRouter = express.Router();
 
-router.post("/register", UserController.register);
-router.post("/login", UserController.login);
-router.get("/myPage", [checkJwt], (req: Request, res: Response) => {
-  res.send("This is a protected route");
-});
+authRouter.post("/register", UserController.register);
+authRouter.post("/login", UserController.login);
+authRouter.get(
+  "/myPage",
+  checkJwt,
+  (req: UserRequestInfo, res: Response, next: NextFunction) => {
+    res.send("This is a protected route");
+  }
+);
 
-export default router;
+export default authRouter;

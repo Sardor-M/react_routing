@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { EventCard } from "../molecules/EventCard";
 import { EventCardProps } from "../../types";
 import { List } from "../atoms/EventCard/Card";
-import { useFilters } from "../../hooks/useFilterContext";
+import { useFilters } from "../../hooks/FilterContext";
 import styled from "styled-components";
 import { Events } from "../../types";
 

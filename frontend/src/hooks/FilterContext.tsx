@@ -81,14 +81,6 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
         updatedFilters[filterType] = [...updatedFilters[filterType], value];
       }
 
-      // if (updatedFilters[filterType].includes(value)) {
-      //   updatedFilters[filterType] = updatedFilters[filterType].filter(
-      //     (item) => item !== value
-      //   );
-      // } else {
-      //   updatedFilters[filterType].push(value);
-      // }
-
       return updatedFilters;
     });
   };
@@ -107,3 +99,11 @@ export const useFilters = () => {
   }
   return context;
 };
+
+// if (updatedFilters[filterType].includes(value)) {
+//   updatedFilters[filterType] = updatedFilters[filterType].filter(
+//     (item) => item !== value
+//   );
+// } else {
+//   updatedFilters[filterType].push(value);
+// }
