@@ -1,7 +1,7 @@
 // Pages/HomePage.tsx
 import React from "react";
 import { EventCardsTemplate } from "../templates/EventCardsTemplate";
-import { ButtonColor, JoinButton } from "./AboutPageThree";
+import { ButtonColor, JoinButton } from "./AboutPageEvents";
 import { Link } from "react-router-dom";
 import { Wrapper } from "../atoms/Wrapper";
 

@@ -80,7 +80,6 @@ export default function ContactPage({ onSubmit }: FormProps) {
     email: "",
     message: "",
   });
-  const [errors, setErrors] = React.useState({});
 
   const validateEmail = (email: string) => {
     const re = /\S+@\S+\.\S+/;

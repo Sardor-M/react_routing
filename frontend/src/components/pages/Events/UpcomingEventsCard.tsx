@@ -83,7 +83,7 @@ export default function UpcomingDetails() {
   const [eventDetails, setEventsDetails] = useState<Events | null>(null);
   const { id } = useParams<{ id: string }>();
 
-  const urlPath = `http://localhost:4000/api/events/upcoming/${id}`;
+  const urlPath = `http://localhost:8080/api/events/upcoming/${id}`;
 
   useEffect(() => {
     const fetchData = async () => {

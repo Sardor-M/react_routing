@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import homepage_video from "../../assets/images/Homepage.mp4";
 

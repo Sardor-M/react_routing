@@ -8,7 +8,7 @@ const StyledHead = styled.h1`
   margin-bottom: 50px;
 `;
 
-export default function Runners() {
+export default function PastEvents() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [runners, setRunners] = useState<Events[]>([]);
 

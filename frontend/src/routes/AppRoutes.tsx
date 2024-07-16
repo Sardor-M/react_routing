@@ -4,8 +4,8 @@ import AboutPage from "../components/pages/AboutPage";
 import ContactPage, {
   loader as contactUsPageLoader,
 } from "../components/pages/ContactPage";
-import Runners from "../components/pages/Runners/Runners";
-import RunnersDetail from "../components/pages/Runners/RunnersDetail";
+import Runners from "../components/pages/Past_Events/PastEvents";
+import RunnersDetail from "../components/pages/Past_Events/PastEventDetails";
 import Layout from "../components/Layout";
 import DashboardPage, {
   loader as dashboardLoader,

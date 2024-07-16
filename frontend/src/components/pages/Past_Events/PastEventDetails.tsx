@@ -7,7 +7,7 @@ const RunnerDetailContainer = styled.div`
   padding: 27px;
 `;
 
-export default function RunnersDetail() {
+export default function PastEventDetails() {
   const [runnerDetails, setRunnerDetails] = useState<Events>();
 
   const location = useLocation();
