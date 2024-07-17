@@ -41,7 +41,7 @@ const StyledErrorText = styled.p`
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  error: string | boolean;
+  error?: string | boolean;
 }
 
 export default function Input({ id, error, ...props }: InputProps) {

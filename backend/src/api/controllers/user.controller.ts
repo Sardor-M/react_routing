@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../../entity/User";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
-import { dataSource } from "../../database/db";
+import { dataSource, userSchema } from "../../database/db";
 
 export class UserController {
   static get jwtToken(): string {
@@ -14,7 +14,16 @@ export class UserController {
   }
 
   static register = async (req: Request, res: Response) => {
-    const { username, email, password } = req.body;
+    const result = userSchema.safeParse(req.body);
+
+    if (!result.success) {
+      return res.status(400).json(result.error.errors);
+    }
+
+    const { username, email, password } = result.data;
+
+    // const result = userSchema.safeParse(req.body)
+
     const userRepository = dataSource.getRepository(User);
     const user = new User();
     user.username = username;

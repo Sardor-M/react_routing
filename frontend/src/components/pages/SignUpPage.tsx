@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Input from "../atoms/Input/Input";
 import axios from "axios";
+import { userSchema } from "../../schemas/userSchemas";
 
 const SectionContainer = styled.section`
   display: flex;
@@ -63,61 +64,76 @@ const ControlError = styled.div`
     margin: 0;
   }
 `;
+
+interface FormInterfae {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 export default function SignUpPage() {
-  const [userName, setUserName] = useState<string>("");
-  const [emailValue, setEmailValue] = useState<string>("");
-  const [pwdValue, setPwdValue] = useState<string>("");
-  const [confirmPwdValue, setConfirmPwdValue] = useState<string>("");
+  // const [userName, setUserName] = useState<string>("");
+  // const [emailValue, setEmailValue] = useState<string>("");
+  // const [pwdValue, setPwdValue] = useState<string>("");
+
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const [pwdIsNotEqual, setPwdIsNotEqual] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
+  const [error, setError] = useState<string[]>([]);
+  const [confirmPwdValue, setConfirmPwdValue] = useState<string>("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (pwdValue !== confirmPwdValue) {
-      setPwdIsNotEqual(true);
-      return;
+    const result = userSchema.safeParse(formData);
+    console.log(result);
+
+    // if (formData.password !== formData.confirmPassword) {
+    //   setPwdIsNotEqual(true);
+    //   return;
+    // }
+    if (!result.success) {
+      setError(result.error.errors.map((error) => error.message));
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/auth/register", {
-        username: userName,
-        email: emailValue,
-        password: pwdValue,
-      });
-
+      const response = await axios.post(
+        "http://localhost:8080/auth/register",
+        result.data
+      );
       console.log("response", response.data);
+      setSuccess(true);
     } catch (error) {
       console.error("Failed to sign up", error);
     }
-
-    // const formData = new FormData(event.currentTarget);
-    // // const checkBox = formData.getAll("nicknames");
-    // const data = Object.fromEntries(formData.entries());
-
-    // // data.nicknames = checkBox;
-
-    // if (data.password !== data["check-password"]) {
-    //   setPwdIsNotEqual(true);
-    //   console.log(pwdIsNotEqual);
-    //   return;
-    // }
   }
 
   const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPwdValue(e.target.value);
-    if (e.target.value !== pwdValue) {
+    if (e.target.value !== formData.password) {
       setPwdIsNotEqual(true);
     } else {
       setPwdIsNotEqual(false);
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
   return (
     <>
       {success ? (
         <section>
-          <h1>Successfully Logged in ! </h1>
+          <h1>Successfully registered! </h1>
           <p>
             <Link to="/login">Back to Login page</Link>
           </p>
@@ -127,42 +143,48 @@ export default function SignUpPage() {
           <FormContainer onSubmit={handleSubmit}>
             <FormTitleElement>Sign Up - New Account </FormTitleElement>
             <Input
-              error={emailValue === ""}
+              name="email"
+              // error={formData.email}
               type="email"
               id="email"
               placeholder="Email"
               aria-describedby="uidnote"
-              value={emailValue}
+              value={formData.email}
               autoComplete="off"
-              onChange={(e: any) => setEmailValue(e.target.value)}
+              onChange={handleChange}
               required
             />
             <Input
-              error={pwdIsNotEqual}
+              name="username"
+              // error={pwdIsNotEqual}
               type="username"
               id="username"
               placeholder="Username"
               aria-describedby="uidnote"
-              value={userName}
+              value={formData.username}
               autoComplete="off"
-              onChange={(e: any) => setUserName(e.target.value)}
+              onChange={handleChange}
               required
             />
             <Input
+              name="password"
               error={pwdIsNotEqual}
               type="password"
               id="password"
               placeholder="Password"
-              value={pwdValue}
-              onChange={(e) => setPwdValue(e.target.value)}
+              value={formData.password}
+              onChange={handleChange}
               required
             />
             <Input
+              name="confirmPassword"
+              value={formData.confirmPassword}
               error={pwdIsNotEqual}
               type="password"
               id="check-password"
               placeholder="Re-enter your Password "
-              onChange={(e) => handleConfirmPassword(e)}
+              onChange={handleChange}
+              onBlur={(e) => handleConfirmPassword(e)}
               required
             />
             <ControlError>
@@ -170,7 +192,7 @@ export default function SignUpPage() {
                 <p>Password entered does not match. Try again.</p>
               )}
             </ControlError>
-            <SubmitButton>Sign up </SubmitButton>
+            <SubmitButton type="submit">Sign up </SubmitButton>
             <div>
               <SignInLink>
                 {" "}

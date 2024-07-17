@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Input from "../atoms/Input/Input";
@@ -63,6 +63,9 @@ export async function loader({ request }: { request: Request }) {
 
 export default function LoginPage() {
   // set the input values for both email and password
+
+  const [success, setSuccess] = useState<boolean>(false);
+
   const {
     values: inputValues,
     handleInputChange: handleBothInputChanges,
@@ -87,6 +90,7 @@ export default function LoginPage() {
         inputValues,
         { withCredentials: true }
       );
+      setSuccess(true);
       console.log("User logged in", response.data);
     } catch (error) {
       console.error("Failed to login", error);
@@ -94,44 +98,51 @@ export default function LoginPage() {
   }
   return (
     <>
-      {/* <h1> Sign in to your account</h1> */}
-      {/*{messageData && <h3 className="login-text">{messageData} </h3>}*/}
-      <SectionContainer>
-        <StyledForm onSubmit={handleSubmit}>
-          <LoginPageTitle>Sign in to your account</LoginPageTitle>
-          <Input
-            value={inputValues.email}
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Email"
-            onBlur={handleBothInputBlur}
-            onChange={handleBothInputChanges}
-            error={hasError ? "Please enter a valid email" : ""}
-          />
-          <Input
-            value={inputValues.password}
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onBlur={handleBothInputBlur}
-            onChange={handleBothInputChanges}
-            error={hasError ? "Enter a valid password" : ""}
-          />
-          {/*// when working with forms, always use the type="button" to avoid the default behavior of the form*/}
-          <SignInButton type="submit">Login</SignInButton>
-          <SignUpLink>
-            Not Registered yet ?{" "}
-            <Link
-              to={"/register"}
-              style={{ color: "inherit", textDecoration: "underline" }}
-            >
-              Sign Up
-            </Link>
-          </SignUpLink>
-        </StyledForm>
-      </SectionContainer>
+      {success ? (
+        <section>
+          <h1> Successfully logged in</h1>
+          <p>
+            <Link to="/mypage">Go to My Account Page</Link>
+          </p>
+        </section>
+      ) : (
+        <SectionContainer>
+          <StyledForm onSubmit={handleSubmit}>
+            <LoginPageTitle>Sign in to your account</LoginPageTitle>
+            <Input
+              value={inputValues.email}
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Email"
+              onBlur={handleBothInputBlur}
+              onChange={handleBothInputChanges}
+              error={hasError ? "Please enter a valid email" : ""}
+            />
+            <Input
+              value={inputValues.password}
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              onBlur={handleBothInputBlur}
+              onChange={handleBothInputChanges}
+              error={hasError ? "Enter a valid password" : ""}
+            />
+            {/*// when working with forms, always use the type="button" to avoid the default behavior of the form*/}
+            <SignInButton type="submit">Login</SignInButton>
+            <SignUpLink>
+              Not Registered yet ?{" "}
+              <Link
+                to={"/register"}
+                style={{ color: "inherit", textDecoration: "underline" }}
+              >
+                Sign Up
+              </Link>
+            </SignUpLink>
+          </StyledForm>
+        </SectionContainer>
+      )}
     </>
   );
 }
