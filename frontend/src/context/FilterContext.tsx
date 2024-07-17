@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Events } from "../types";
+import { useLocation } from "react-router-dom";
 
 export interface Filters {
   category: string[];
@@ -37,6 +38,9 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const [events, setEvents] = useState<Events[]>([]);
 
+  const location = useLocation();
+  console.log("Printing out the location: ", location);
+
   const fetchEvents = async (filters: Filters) => {
     try {
       const response = await fetch(
@@ -64,8 +68,10 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
-    fetchEvents(filters);
-  }, [filters]);
+    if (location.pathname === "/events") {
+      fetchEvents(filters);
+    }
+  }, [filters, location.pathname]);
 
   const updateFilters = (filterType: keyof Filters, value: string) => {
     setFilters((prevFilter) => {

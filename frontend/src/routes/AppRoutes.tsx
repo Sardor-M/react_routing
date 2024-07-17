@@ -30,7 +30,7 @@ import LoginPage, {
 } from "../components/pages/LoginPage";
 import SignUpPage from "../components/pages/SignUpPage";
 import EventSearchPage from "../components/pages/Events/EventSearchPage";
-import { FilterProvider } from "../hooks/FilterContext";
+import { FilterProvider } from "../context/FilterContext";
 import { AuthProvider } from "../context/AuthContext";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
@@ -69,7 +69,11 @@ const router = createBrowserRouter(
       <Route path="events" element={<EventLayout />}>
         <Route
           index
-          element={<EventSearchPage />}
+          element={
+            <FilterProvider>
+              <EventSearchPage />
+            </FilterProvider>
+          }
           // element={<EventsPage />}
           //  loader={async () => {
           //     return requireAuth();
@@ -125,11 +129,9 @@ export default function AppRoutes() {
     <>
       {/* <ThemeProvider theme={{}}> */}
       <AuthProvider>
-        <FilterProvider>
-          <RouterProvider router={router} />
-        </FilterProvider>
+        {" "}
+        <RouterProvider router={router} />
       </AuthProvider>
-      {/* </ThemeProvider> */}
     </>
   );
 }
