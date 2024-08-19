@@ -1,8 +1,6 @@
-import React from 'react';
+import React from "react";
 
+// this is the user profile page
 export default function UserProfilePage() {
-    return (
-        <div></div>
-    );
+  return <div></div>;
 }
-

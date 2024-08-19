@@ -10,7 +10,7 @@ import { EventRegistration } from "./EventRegistration";
 import { Comment } from "./Comment";
 import { Rating } from "./Rating";
 
-@Entity("Runner")
+@Entity("Event")
 export class Event {
   @PrimaryGeneratedColumn()
   id!: number;

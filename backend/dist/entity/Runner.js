@@ -9,51 +9,71 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Runner = void 0;
+exports.Event = void 0;
 const typeorm_1 = require("typeorm");
-let Runner = class Runner {
+const User_1 = require("./User");
+const EventRegistration_1 = require("./EventRegistration");
+const Comment_1 = require("./Comment");
+const Rating_1 = require("./Rating");
+let Event = class Event {
 };
-exports.Runner = Runner;
+exports.Event = Event;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Runner.prototype, "id", void 0);
+], Event.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Runner.prototype, "title", void 0);
+], Event.prototype, "title", void 0);
 __decorate([
     (0, typeorm_1.Column)("float"),
     __metadata("design:type", Number)
-], Runner.prototype, "price", void 0);
+], Event.prototype, "price", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: "text" }),
     __metadata("design:type", String)
-], Runner.prototype, "description", void 0);
+], Event.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Runner.prototype, "imageUrl", void 0);
+], Event.prototype, "imageUrl", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Runner.prototype, "category", void 0);
+], Event.prototype, "category", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
-], Runner.prototype, "upcomingEventId", void 0);
+], Event.prototype, "upcomingEventId", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
-], Runner.prototype, "location", void 0);
+], Event.prototype, "location", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Date)
-], Runner.prototype, "date", void 0);
+], Event.prototype, "date", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Runner.prototype, "month", void 0);
-exports.Runner = Runner = __decorate([
+], Event.prototype, "month", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => User_1.User, (user) => user.events),
+    __metadata("design:type", User_1.User)
+], Event.prototype, "creator", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => EventRegistration_1.EventRegistration, (registrations) => registrations.event),
+    __metadata("design:type", Array)
+], Event.prototype, "registrations", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Comment_1.Comment, (comment) => comment.event),
+    __metadata("design:type", Array)
+], Event.prototype, "comments", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Rating_1.Rating, (rating) => rating.user),
+    __metadata("design:type", Array)
+], Event.prototype, "ratings", void 0);
+exports.Event = Event = __decorate([
     (0, typeorm_1.Entity)("Runner")
-], Runner);
+], Event);

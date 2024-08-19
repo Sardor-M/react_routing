@@ -1,9 +1,9 @@
 import { dataSource } from "../database/db";
-import { Runner } from "../entity/Runner";
+import { Event } from "../entity/Event";
 import { Request } from "express";
 
 export function getRepository() {
-  return dataSource.getRepository(Runner);
+  return dataSource.getRepository(Event);
 }
 
 export function getIdFromRequest(req: Request): number {

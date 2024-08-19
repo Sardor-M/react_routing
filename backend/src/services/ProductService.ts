@@ -1,15 +1,15 @@
 // src/services/ProductService.ts
-import { Runner } from "../entity/Runner";
+import { Event } from "../entity/Event";
 import { getRepository } from "../repositories/ProductRepository";
 
 export class ProductService {
   private productRepository = getRepository();
 
-  async getAllProducts(): Promise<Runner[]> {
+  async getAllProducts(): Promise<Event[]> {
     return await this.productRepository.find();
   }
 
-  async getProductById(id: number): Promise<Runner | null> {
+  async getProductById(id: number): Promise<Event | null> {
     return await this.productRepository.findOneBy({ id });
   }
 

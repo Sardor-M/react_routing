@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import { User } from "../../entity/User";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
-import { dataSource, userSchema } from "../../database/db";
+import { dataSource } from "../../database/db";
+import { userRegistrationSchema } from "../../schemas/userSchema";
 
 export class UserController {
   static get jwtToken(): string {
@@ -14,7 +15,7 @@ export class UserController {
   }
 
   static register = async (req: Request, res: Response) => {
-    const result = userSchema.safeParse(req.body);
+    const result = userRegistrationSchema.safeParse(req.body);
 
     if (!result.success) {
       return res.status(400).json(result.error.errors);

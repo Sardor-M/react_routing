@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Runner } from "../../entity/Runner";
+import { Event } from "../../entity/Event";
 import { dataSource } from "../../database/db";
 import {
   getRepository,
@@ -46,7 +46,7 @@ export async function getAllRunners(req: Request, res: Response) {
 export async function getFilteredEvent(req: Request, res: Response) {
   const { category, month, eventType, reviewScore, location, date, price } =
     req.body;
-  const eventsRepository = dataSource.getRepository(Runner);
+  const eventsRepository = dataSource.getRepository(Event);
 
   try {
     let query = eventsRepository.createQueryBuilder("event");
@@ -95,7 +95,7 @@ export async function getFilteredEvent(req: Request, res: Response) {
 
 export async function getRunnerById(req: Request, res: Response) {
   const id = getIdFromRequest(req);
-  const runnerRepository = dataSource.getRepository(Runner);
+  const runnerRepository = dataSource.getRepository(Event);
   const runner = await runnerRepository.findOne({ where: { id: id } });
 
   runner
@@ -134,7 +134,7 @@ export async function getUpcomingRunningEventsById(
   res: Response
 ) {
   const id = getIdFromRequest(req);
-  const runnerRepository = dataSource.getRepository(Runner);
+  const runnerRepository = dataSource.getRepository(Event);
   const runners = await runnerRepository.find();
   const upcomingRunningEventId = runners.find((r) => r.id === id);
 
