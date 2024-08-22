@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Event } from "../../entity/Event";
+import { Runner } from "../../entity/Runner";
 import { dataSource } from "../../database/db";
 import {
   getRepository,
@@ -25,7 +25,7 @@ import {
 
 export async function getAllRunners(req: Request, res: Response) {
   try {
-    const runnerRepository = getRepository();
+    const runnerRepository = dataSource.getRepository(Runner);
     const runners = await runnerRepository.find();
     console.log("Runners data in the response: ", runnerRepository, runners);
     if (!runners || runners.length === 0) {
@@ -46,7 +46,7 @@ export async function getAllRunners(req: Request, res: Response) {
 export async function getFilteredEvent(req: Request, res: Response) {
   const { category, month, eventType, reviewScore, location, date, price } =
     req.body;
-  const eventsRepository = dataSource.getRepository(Event);
+  const eventsRepository = dataSource.getRepository(Runner);
 
   try {
     let query = eventsRepository.createQueryBuilder("event");
@@ -95,7 +95,7 @@ export async function getFilteredEvent(req: Request, res: Response) {
 
 export async function getRunnerById(req: Request, res: Response) {
   const id = getIdFromRequest(req);
-  const runnerRepository = dataSource.getRepository(Event);
+  const runnerRepository = dataSource.getRepository(Runner);
   const runner = await runnerRepository.findOne({ where: { id: id } });
 
   runner
@@ -106,7 +106,7 @@ export async function getRunnerById(req: Request, res: Response) {
 export async function getUpcomingRunningEvents(req: Request, res: Response) {
   // Get the filter value from the query parameter
   const typeFilter = req.query.type as string;
-  const runnerRepository = getRepository();
+  const runnerRepository = dataSource.getRepository(Runner);
   const runners = await runnerRepository.find();
   let upcomingEvents = runners.map(
     ({ id, category, title, price, imageUrl }) => {
@@ -134,7 +134,7 @@ export async function getUpcomingRunningEventsById(
   res: Response
 ) {
   const id = getIdFromRequest(req);
-  const runnerRepository = dataSource.getRepository(Event);
+  const runnerRepository = dataSource.getRepository(Runner);
   const runners = await runnerRepository.find();
   const upcomingRunningEventId = runners.find((r) => r.id === id);
 

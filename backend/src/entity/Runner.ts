@@ -11,7 +11,7 @@ import { Comment } from "./Comment";
 import { Rating } from "./Rating";
 
 @Entity("Runner")
-export class Event {
+export class Runner {
   @PrimaryGeneratedColumn()
   id!: number;
 

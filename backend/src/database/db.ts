@@ -1,7 +1,11 @@
 import { DataSource, DataSourceOptions } from "typeorm";
-import { Event } from "../entity/Event";
+import { Runner } from "../entity/Runner";
 import { User } from "../entity/User";
 import { z } from "zod";
+import { Comment } from "../entity/Comment";
+import { EventRegistration } from "../entity/EventRegistration";
+import { Event } from "../entity/Event";
+import { Rating } from "../entity/Rating";
 
 export const config: DataSourceOptions = {
   type: "postgres",
@@ -12,7 +16,7 @@ export const config: DataSourceOptions = {
   database: "run_with_us",
   logging: true,
   // entities: ["./src/entity/*/.ts"],
-  // entities: [Event, User],
+  entities: [Runner, User, Comment, Event, EventRegistration, Rating],
   synchronize: false,
   migrations: ["src/migration/**/*.ts"],
   // migrationsTableName: "Creating_New_Runners_Table",

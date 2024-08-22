@@ -10,6 +10,7 @@ import { Event } from "./Event";
 import { EventRegistration } from "./EventRegistration";
 import { Comment } from "./Comment";
 import { Rating } from "./Rating";
+import { Runner } from "./Runner";
 
 @Entity("User")
 @Unique(["email"])
@@ -29,8 +30,8 @@ export class User {
   @Length(6, 100)
   password?: string;
 
-  @OneToMany(() => Event, (event) => event.creator)
-  events!: Event[];
+  @OneToMany(() => Runner, (event) => event.creator)
+  events!: Runner[];
 
   @OneToMany(() => EventRegistration, (registration) => registration.user)
   registrations!: EventRegistration[];
