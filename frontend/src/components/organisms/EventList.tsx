@@ -37,12 +37,12 @@ const ShowMoreButton = styled.button`
 
 export const EventResultList: React.FC<EventCardProps> = () => {
   const { events } = useFilters() as { events: Events[] };
-  const [visibleCount, setVisibelCount] = useState<number>(25);
+  const [visibleCount, setVisibelCount] = useState<number>(7);
   console.log("filtered events are returned", events);
 
   // this shows more item when the button is clicked
   const showMoreItems = () => {
-    setVisibelCount((prevCount) => prevCount + 25);
+    setVisibelCount((prevCount) => prevCount + 10);
   };
 
   // we only show 25 events at a time
