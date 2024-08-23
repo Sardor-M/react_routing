@@ -22,15 +22,14 @@ body {
 }
 
 .site-wrapper {
-  flex: 1;
-  overflow: auto;
-  min-height: 100vh;
+  min-height: 1000vh;
+  /* overflow: auto; */
   display: flex;
   flex-direction: column;
 }
-
 .content-wrap {
   flex: 1;
+  overflow: auto;
 }
 
 header {
@@ -347,12 +346,11 @@ i[class*="van-type-"] {
   font-size: 1.125rem;
 }
 
-.navbar-event {
+/* .navbar-event {
   background-color: #f9f9fd;
   display: flex;
   padding: 20px;
   padding-left: 1ch;
-  /* margin-left: 14px; */
 }
 
 .navbar-event a {
@@ -364,14 +362,14 @@ i[class*="van-type-"] {
 a.navbar-link {
   font-weight: bold;
   text-decoration: underline;
-  color: #ffdc5c;
+  color: #3966fb;
 }
 
 .navbar-event a:hover {
   color: #161616;
   text-decoration: underline;
   font-weight: 600;
-}
+} */
 
 /* Footer Component Styling */
 

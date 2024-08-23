@@ -43,7 +43,6 @@
     "@types/winston": "^2.4.4",
     "eslint": "^9.9.0",
     "eslint-plugin-react": "^7.35.0",
-    "nodemon": "^3.1.4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript-eslint": "^8.2.0"

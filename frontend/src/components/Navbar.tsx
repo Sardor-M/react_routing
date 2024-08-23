@@ -2,8 +2,11 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import run_with_us from "../assets/images/run_with_us.png";
 const HeaderElement = styled.header`
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background-color: #ebff00;
-  height: 110px;
+  /* height: 110px; */
   display: flex;
   align-items: center;
   padding-block: 10px;
