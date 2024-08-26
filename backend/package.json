@@ -26,7 +26,10 @@
     "morgan": "^1.10.0",
     "pg": "^8.11.5",
     "reflect-metadata": "^0.2.2",
+    "routing-controllers": "^0.10.4",
+    "typedi": "^0.10.0",
     "typeorm": "^0.3.20",
+    "typeorm-typedi-extensions": "^0.4.1",
     "typescript": "^5.4.5",
     "winston": "^3.13.0",
     "zod": "^3.23.8"

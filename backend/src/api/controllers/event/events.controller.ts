@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
-import { Runner } from "../../entity/Runner";
-import { dataSource } from "../../database/db";
-import {
-  getRepository,
-  getIdFromRequest,
-} from "../../repositories/ProductRepository";
+import { Runner } from "../../../entity/Runner";
+import { dataSource } from "../../../database/db";
+import { getIdFromRequest } from "../../../repositories/ProductRepository";
+import { EventCreateService } from "../../../services/EventCreateService";
+import { User } from "../../../entity/User";
+import { CreateEventDto } from "../../../types/CreateEventDto";
+import { Event } from "../../../entity/Event";
+import { EventRegistration } from "../../../entity/EventRegistration";
+import { EventRegisterService } from "../../../services/EventRegisterService";
+import { UserRequestInfo } from "../../../types/userRequest";
 
 // const GEOCODING_API_KEY = process.env.GEOCODING_API_KEY;
 
@@ -98,9 +102,11 @@ export async function getRunnerById(req: Request, res: Response) {
   const runnerRepository = dataSource.getRepository(Runner);
   const runner = await runnerRepository.findOne({ where: { id: id } });
 
-  runner
-    ? res.json(runner)
-    : res.status(404).json({ message: "Runner not found" });
+  if (runner) {
+    res.json(runner);
+  } else {
+    res.status(404).json({ message: "Runner not found" });
+  }
 }
 
 export async function getUpcomingRunningEvents(req: Request, res: Response) {
@@ -138,7 +144,48 @@ export async function getUpcomingRunningEventsById(
   const runners = await runnerRepository.find();
   const upcomingRunningEventId = runners.find((r) => r.id === id);
 
-  upcomingRunningEventId
-    ? res.json(upcomingRunningEventId)
-    : res.status(404).json({ message: "Runner not found" });
+  if (upcomingRunningEventId) {
+    res.json(upcomingRunningEventId);
+  } else {
+    res.status(404).json({ message: "Runner not found" });
+  }
+}
+
+const eventService = new EventCreateService(dataSource.getRepository(Event));
+const eventRegistrationService = new EventRegisterService(
+  dataSource.getRepository(EventRegistration)
+);
+
+// this handles the event creation
+export async function createAnEvents(req: UserRequestInfo, res: Response) {
+  // const eventService = new EventCreateService(dataSource.getRepository(Event));
+
+  try {
+    const user: User = req.user as User;
+    const eventData: CreateEventDto = req.body;
+
+    const createdEvent = await eventService.createEvent(eventData, user);
+    return res.status(201).json(createdEvent);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Error creating the event: ", error });
+  }
+}
+
+// this will register the event
+export async function registerForEvent(req: UserRequestInfo, res: Response) {
+  try {
+    const user = req.user as User;
+    const eventId = parseInt(req.params.id);
+
+    const registration = await eventRegistrationService.registerEvent(
+      eventId,
+      user
+    );
+    return res.status(201).json(registration);
+  } catch (error) {
+    console.error("Error regsirtering for Event: ", error);
+    return res.status(500).json({ message: "Error registering for the event" });
+  }
 }

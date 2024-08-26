@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { User } from "../../entity/User";
+import { User } from "../../../entity/User";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
-import { dataSource } from "../../database/db";
-import { userRegistrationSchema } from "../../schemas/userSchema";
+import { dataSource } from "../../../database/db";
+import { userRegistrationSchema } from "../../../schemas/userSchema";
 
 export class UserController {
   static get jwtToken(): string {
@@ -33,7 +33,7 @@ export class UserController {
 
     try {
       await userRepository.save(user);
-    } catch (error) {
+    } catch (err) {
       return res.status(409).send("User already exits");
     }
 
@@ -60,7 +60,7 @@ export class UserController {
     }
 
     const token = jwt.sign({ userId: user.id }, this.jwtToken, {
-      expiresIn: "10min",
+      expiresIn: "60min",
     });
 
     res.cookie("token", token, {

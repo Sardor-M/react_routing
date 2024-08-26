@@ -12,6 +12,11 @@
     "emitDecoratorMetadata": true,
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["src/**/*", "../frontend/src/middleware", "../shared/schemas"],
+  "include": [
+    "src/**/*",
+    "../frontend/src/middleware",
+    "../shared/schemas",
+    "types/express.d.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

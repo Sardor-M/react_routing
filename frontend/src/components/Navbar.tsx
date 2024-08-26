@@ -61,13 +61,19 @@ export default function Navbar() {
           to="/runner"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
-          Runners
+          Runner's Community
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/contact"
           className={({ isActive }) => (isActive ? "active-link" : "")}
         >
           Contact
+        </NavLink> */}
+        <NavLink
+          to="/createAnEvent"
+          className={({ isActive }) => (isActive ? "active-link" : "")}
+        >
+          Create an Event
         </NavLink>
         {/* <button onClick={toggleColorMode}>Toggle me</button> */}
         <NavLink

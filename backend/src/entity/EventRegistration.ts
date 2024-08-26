@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  IntegerType,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 import { Event } from "./Event";
 
@@ -27,4 +21,7 @@ export class EventRegistration {
 
   @ManyToOne(() => Event, (event) => event.registrations)
   event!: Event;
+
+  // @ManyToOne(() => User, (user) => user.registrations)
+  // creator!: User;
 }

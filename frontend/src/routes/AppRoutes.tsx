@@ -4,8 +4,8 @@ import AboutPage from "../components/pages/AboutPage";
 import ContactPage, {
   loader as contactUsPageLoader,
 } from "../components/pages/ContactPage";
-import Runners from "../components/pages/Past_Events/PastEvents";
-import RunnersDetail from "../components/pages/Past_Events/PastEventDetails";
+import Runners from "../components/pages/RunningCommunity/RunningCommunity";
+import RunnersDetail from "../components/pages/RunningCommunity/RunningCommunityDetails";
 import Layout from "../components/Layout";
 import DashboardPage, {
   loader as dashboardLoader,
@@ -32,6 +32,9 @@ import SignUpPage from "../components/pages/SignUpPage";
 import EventSearchPage from "../components/pages/Events/EventSearchPage";
 import { FilterProvider } from "../context/FilterContext";
 import { AuthProvider } from "../context/AuthContext";
+import requireAuth from "../utils/requireAuth";
+import CreateAnEvent from "../components/pages/CreateAnEvent/CreateAnEvent";
+import EventRegistrationPage from "../components/organisms/EventRegistrationPage";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
@@ -50,6 +53,7 @@ const router = createBrowserRouter(
         element={<ContactPage onSubmit={onSubmit} />}
         loader={contactUsPageLoader}
       />
+      <Route path="createAnEvent" element={<EventRegistrationPage />} />
       <Route path="/login" element={<LoginPage />} loader={loginPageLoader} />
       <Route
         path="/register"
@@ -75,9 +79,9 @@ const router = createBrowserRouter(
             </FilterProvider>
           }
           // element={<EventsPage />}
-          //  loader={async () => {
-          //     return requireAuth();
-          // }}
+          loader={async () => {
+            return requireAuth();
+          }}
         />
 
         <Route

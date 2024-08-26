@@ -5,4 +5,5 @@ export default function requireAuth() {
   if (!isLogged) {
     throw redirect("/login?message=Please login in first ");
   }
+  return null; // return null if the user is logged in
 }
