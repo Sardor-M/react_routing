@@ -32,35 +32,32 @@ import SignUpPage from "../components/pages/SignUpPage";
 import EventSearchPage from "../components/pages/Events/EventSearchPage";
 import { FilterProvider } from "../context/FilterContext";
 import { AuthProvider } from "../context/AuthContext";
-import requireAuth from "../utils/requireAuth";
 import CreateAnEvent from "../components/pages/CreateAnEvent/CreateAnEvent";
-import EventRegistrationPage from "../components/organisms/EventRegistrationPage";
+import ProtectedRoute from "../components/protected/ProtectedRoute";
+import AccountPage from "../components/pages/UserPage/AccountPage";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
   return form;
 };
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
       <Route path="/" element={<AboutPage />} />
       <Route path="*" element={<NotFound />} />
       <Route path="homepage" element={<HomePage images={[]} />} />
-      {/*  */}
       <Route
         path="contact"
         element={<ContactPage onSubmit={onSubmit} />}
         loader={contactUsPageLoader}
       />
-      <Route path="createAnEvent" element={<EventRegistrationPage />} />
       <Route path="/login" element={<LoginPage />} loader={loginPageLoader} />
       <Route
         path="/register"
         element={<SignUpPage />}
         errorElement={<Error />}
       />
-
+      {/* Public routes */}
       <Route path="runner">
         <Route index element={<Runners />} errorElement={<Error />} />
         <Route
@@ -69,7 +66,6 @@ const router = createBrowserRouter(
           errorElement={<Error />}
         />
       </Route>
-
       <Route path="events" element={<EventLayout />}>
         <Route
           index
@@ -78,51 +74,24 @@ const router = createBrowserRouter(
               <EventSearchPage />
             </FilterProvider>
           }
-          // element={<EventsPage />}
-          loader={async () => {
-            return requireAuth();
-          }}
         />
-
-        <Route
-          path="dashboard"
-          element={<DashboardPage />}
-          // loader={dashboardLoader}
-        />
+        <Route path="dashboard" element={<DashboardPage />} />
         <Route
           path="review"
           element={<ReviewsPages />}
           loader={reviewsLoader}
         />
-        <Route
-          path="upcoming"
-          element={<UpcomingEventsList />}
-          // loader={upcomingEventLoader}
-          // errorElement={<Error />}
-        />
-        <Route
-          path="upcoming/:id"
-          element={<UpcomingDetails />}
-
-          // loader={async () => {
-          //   return requireAuth();
-          // }}
-        >
-          <Route
-            index
-            element={<UpcomingEventDetails />}
-            // loader={async () => {
-            //   return requireAuth();
-            // }}
-          />
-          <Route
-            path="photos"
-            element={<UpcomingEventDetailsPhotos />}
-            // loader={async () => {
-            //   return requireAuth();
-            // }}
-          />
+        <Route path="upcoming" element={<UpcomingEventsList />} />
+        <Route path="upcoming/:id" element={<UpcomingDetails />}>
+          <Route index element={<UpcomingEventDetails />} />
+          <Route path="photos" element={<UpcomingEventDetailsPhotos />} />
         </Route>
+      </Route>
+
+      {/* Protected routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/createEvent" element={<CreateAnEvent />} />
+        <Route path="/myPage" element={<AccountPage />} />
       </Route>
     </Route>
   )
@@ -130,12 +99,106 @@ const router = createBrowserRouter(
 
 export default function AppRoutes() {
   return (
-    <>
-      {/* <ThemeProvider theme={{}}> */}
-      <AuthProvider>
-        {" "}
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
+
+// const router = createBrowserRouter(
+//   createRoutesFromElements(
+//     <Route element={<Layout />}>
+//       <Route path="/" element={<AboutPage />} />
+//       <Route path="*" element={<NotFound />} />
+//       <Route path="homepage" element={<HomePage images={[]} />} />
+//       {/*  */}
+//       <Route
+//         path="contact"
+//         element={<ContactPage onSubmit={onSubmit} />}
+//         loader={contactUsPageLoader}
+//       />
+//       <Route path="/createEvent" element={<CreateAnEvent />} />
+//       <Route path="/login" element={<LoginPage />} loader={loginPageLoader} />
+//       <Route
+//         path="/register"
+//         element={<SignUpPage />}
+//         errorElement={<Error />}
+//       />
+
+//       <Route path="runner">
+//         <Route index element={<Runners />} errorElement={<Error />} />
+//         <Route
+//           path="/runner/:id"
+//           element={<RunnersDetail />}
+//           errorElement={<Error />}
+//         />
+//       </Route>
+
+//       <Route path="events" element={<EventLayout />}>
+//         <Route
+//           index
+//           element={
+//             <FilterProvider>
+//               <EventSearchPage />
+//             </FilterProvider>
+//           }
+//           // element={<EventsPage />}
+//           loader={async () => {
+//             return requireAuth();
+//           }}
+//         />
+
+//         <Route
+//           path="dashboard"
+//           element={<DashboardPage />}
+//           // loader={dashboardLoader}
+//         />
+//         <Route
+//           path="review"
+//           element={<ReviewsPages />}
+//           loader={reviewsLoader}
+//         />
+//         <Route
+//           path="upcoming"
+//           element={<UpcomingEventsList />}
+//           // loader={upcomingEventLoader}
+//           // errorElement={<Error />}
+//         />
+//         <Route
+//           path="upcoming/:id"
+//           element={<UpcomingDetails />}
+
+//           // loader={async () => {
+//           //   return requireAuth();
+//           // }}
+//         >
+//           <Route
+//             index
+//             element={<UpcomingEventDetails />}
+//             // loader={async () => {
+//             //   return requireAuth();
+//             // }}
+//           />
+//           <Route
+//             path="photos"
+//             element={<UpcomingEventDetailsPhotos />}
+//             // loader={async () => {
+//             //   return requireAuth();
+//             // }}
+//           />
+//         </Route>
+//       </Route>
+//     </Route>
+//   )
+// );
+
+// export default function AppRoutes() {
+//   return (
+//     <>
+//       <AuthProvider>
+//         {" "}
+//         <RouterProvider router={router} />
+//       </AuthProvider>
+//     </>
+//   );
+// }

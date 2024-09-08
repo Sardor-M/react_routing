@@ -41,7 +41,7 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    type: "purple",
+    type: "submit",
     disabled: false,
     children: "Button",
   },

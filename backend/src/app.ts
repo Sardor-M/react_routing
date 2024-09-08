@@ -13,7 +13,6 @@ const port = 8080;
 dotenv.config();
 
 app.use(morgan("dev"));
-app.use(cookieParser());
 
 app.use(
   cors({
@@ -24,12 +23,14 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+
+app.use(express.json());
+
 app.use((req, res, next) => {
   console.log("CORS headers set:", res.getHeaders());
   next();
 });
-
-app.use(express.json());
 
 connectToDatabase()
   .then(() => {

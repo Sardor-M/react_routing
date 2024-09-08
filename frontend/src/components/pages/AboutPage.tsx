@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import React from "react";
 import { Box } from "@mui/material";
 import homepage_video from "../../assets/images/Homepage.mp4";
@@ -25,11 +25,8 @@ const ImageElement = styled.img<ImageProps>`
 `;
 
 const VideoElement = styled.video<ImageProps>`
-  // new one
-  /* margin-top: 250px !important; */
-
   margin-bottom: 60px !important;
-  max-width: calc(100% - 150px); // assumes you want 20px space on each side
+  max-width: calc(100% - 350px);
   border-radius: 20px;
   height: auto;
   margin: 0 auto; // center the video
@@ -41,22 +38,35 @@ const VideoElement = styled.video<ImageProps>`
   @media (max-width: 430px) {
     max-width: 300px; // smaller space on smaller screens
   }
-
-  // this is the old style
-  /* margin-top: 250px;
-  width: 100%;
-  border-radius: 10px;
-  height: 100%; */
 `;
 
 export const PageContentElement = styled.div`
   padding-inline: 23px;
   color: #161616;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   line-height: 23px;
 `;
 
+const colorChange = keyframes`
+  0% { color: #ffd2d2; }
+  16.67% { color: #f3ff95; }
+  33.33% { color: #69a8ff; }
+  50% { color: #ff9914; }
+  66.67% { color: #cb70db; }
+  83.33% { color: #c74715; }
+  100% { color: #d2ffed; }
+`;
+
 export const TextElement = styled(PageContentElement).attrs({ as: "h1" })`
+  font-size: 35px;
+  font-weight: 700;
+  line-height: 38px;
+  margin-bottom: 60px;
+  margin-top: 60px;
+  animation: ${colorChange} 5s infinite; // Apply the animation
+`;
+
+const TextElementTitle = styled(PageContentElement).attrs({ as: "h1" })`
   font-size: 35px;
   font-weight: 700;
   line-height: 38px;
@@ -68,62 +78,14 @@ const TitleInsideContainer = styled.div`
   padding-block: 190px;
 `;
 
-const TextContainer = styled.div`
-  display: row;
-  background-color: #ebff00;
-  color: #0f0f19;
-  padding-inline: 32px;
-  padding-bottom: 32px;
-  margin-inline: 80px;
-  border-radius: 10px;
-  box-sizing: border-box; // include padding in width calculation
-`;
-export const ParagraphElement = styled(PageContentElement).attrs({ as: "p" })<{
-  marginBottom?: string;
-}>`
+export const ParagraphElement = styled(PageContentElement).attrs({ as: "p" })`
   line-height: 22px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  margin-bottom: 18px;
+  padding: 25px 10px;
+  /* padding-top: 10px; */
+  margin: 100px 100px 20px;
   border-bottom: 1px solid #161616;
   border-top: 1px solid #161616;
-  margin-bottom: ${(props) =>
-    props.marginBottom ? props.marginBottom : "0px"};
 `;
-
-const TextInsideContainer = styled(PageContentElement).attrs({ as: "h2" })`
-  margin-bottom: -19px;
-  padding-block: 27px;
-`;
-
-const JoinButton = styled(PageContentElement).attrs({ as: "button" })`
-  background-color: #0f32fa;
-  text-align: center;
-  border: none;
-  border-radius: 10px;
-  padding-bottom: 1px;
-  //padding-block: 10px;
-  font-size: 15px;
-  color: #ffffff;
-  transition: background-color 0.3s ease-in-out;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  &:hover {
-    background-color: #021b4d;
-  }
-`;
-
-const ButtonName = styled.a`
-  color: #ffffff;
-`;
-
-function handleJoinToCommunity() {
-  console.log("Join Now button clicked");
-  if (window.confirm("Do you want to join the community?")) {
-    console.log("User joined the community.");
-  }
-}
 
 export default function AboutPage() {
   return (
@@ -156,7 +118,7 @@ export default function AboutPage() {
           <EventTypes />
         </PageContentElement>
         <PageContentElement>
-          <TextElement> # Start your Journey From Here #</TextElement>{" "}
+          <TextElementTitle> # Start your Journey From Here #</TextElementTitle>{" "}
           <Text>
             Don't wait at home thinking about when to run or where to run or
             with whom to run with. Just run here with the people you want to run
@@ -167,32 +129,6 @@ export default function AboutPage() {
           </Text>
         </PageContentElement>
         <Box sx={{ margin: 3 }}></Box>
-        {/* <TextContainer>
-        <div>
-          <TextInsideContainer>
-            {" "}
-            A community of runners are waiting for you. Join now.
-          </TextInsideContainer>
-          <ParagraphElement>
-            Our mission is to help people to find their running buddy and start
-            running with them. Start your journey with us here and be the part
-            of the community.
-          </ParagraphElement>
-          <JoinButton onClick={handleJoinToCommunity}>
-            <Link className="link-button" to={"/register"}>
-              <ButtonName>Join Now</ButtonName>
-            </Link>
-          </JoinButton>
-        </div>
-        <div>
-          <Image
-            src={runner_hero}
-            width="50%"
-            height="50%"
-            alt="Runner community"
-          />
-        </div>
-      </TextContainer> */}
       </PageContainer>
       <AboutPageThree />
     </>

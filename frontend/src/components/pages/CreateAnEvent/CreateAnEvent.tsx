@@ -1,7 +1,10 @@
+import EventRegistrationLayout from "../../templates/EventRegistrationLayout";
+import EventRegistration from "../../organisms/EventRegistration";
+
 export default function CreateAnEvent() {
   return (
-    <>
-      <h3>Create an event</h3>
-    </>
+    <EventRegistrationLayout>
+      <EventRegistration />
+    </EventRegistrationLayout>
   );
 }

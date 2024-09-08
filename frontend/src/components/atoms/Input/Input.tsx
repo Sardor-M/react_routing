@@ -3,54 +3,82 @@ import styled from "styled-components";
 
 // added the custom input component which can be used in the login page
 
-const StyledDiv = styled.div`
-  display: flex;
+const StyledDivContainer = styled.div`
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  margin: 8px;
+  /* align-items: flex-start; */
+  position: relative;
+  /* display: flex; */
+  width: 100%;
 `;
 
 const StyledInput = styled.input`
-  width: 140%;
+  width: 100%;
   padding: 13px;
-  margin: 15px 0;
-  border: none;
+  margin: 1px 0;
+  border: 0.5px solid #b1bdc8;
   border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 62, 213, 0.1);
+  box-shadow: 0 0 5px rgba(229, 229, 229, 0.1);
   outline: none;
-  /* &:hover {
-    box-shadow: 0 0 5px rgba(247, 88, 204);
-  } */
-  border: 1px solid #b1bdc8;
-  -webkit-appearance: none;
-  appearance: none;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-size: 13px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:focus {
+    border-color: #3966fb;
+    box-shadow: 0 0 5px rgba(57, 102, 251, 0.5);
+  }
 `;
 const StyledErrorText = styled.p`
   display: block;
   color: red;
   font-size: 12px;
-  margin: -20px;
-  /* padding-bottom: 10px; */
-  /* align-items: flex-start; */
+  margin-top: 3.5 px; // input tag tagiga show qiladi,
   text-align: left;
+`;
+
+const InputIconContainer = styled.div`
+  position: absolute;
+  /* margin: 10px; */
+  padding: 12px 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  right: 10px;
+  pointer-events: none; /* Makes the icon non-interactive 
+  /* background-color: #f1f1f1;
+  border-radius: 5px 0 0 5px;
+  color: #b1bdc8; */
 `;
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   error?: string | boolean;
+  icon?: React.ReactNode;
 }
 
-export default function Input({ id, error, ...props }: InputProps) {
+export default function Input({ id, icon, error, ...props }: InputProps) {
+  const [showIcon, setShowIcon] = React.useState<boolean>(
+    !props.value || props.value === ""
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowIcon(e.target.value === "" || e.target.value === undefined);
+    if (props.onChange) {
+      props.onChange(e); // call rthe onchange function
+    }
+  };
+
+  // input value ni visinilitiesni korsatadi qachonki value o'zgarsa
+  React.useEffect(() => {
+    setShowIcon(!props.value || props.value === "");
+  }, [props.value]);
+
   return (
     <>
-      <StyledDiv>
-        <StyledInput id={id} {...props} />
-        <StyledErrorText>{error && <p> {error}</p>} </StyledErrorText>
-      </StyledDiv>
+      <StyledDivContainer>
+        <StyledInput id={id} {...props} onChange={handleChange} />
+        {error && <StyledErrorText> {error}</StyledErrorText>}
+        {icon && showIcon && <InputIconContainer>{icon}</InputIconContainer>}
+      </StyledDivContainer>
     </>
   );
 }

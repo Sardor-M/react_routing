@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Events } from "../../../types";
 import styled from "styled-components";
 import Error from "../../atoms/Error/Error";
-import useHttpNew from "../../../hooks/useHttp";
+import useHttp from "../../../hooks/useHttp";
 
 // export function loader() {
 //   // await requireAuth();
@@ -15,11 +15,9 @@ const EventsListSection = styled.div`
 `;
 
 export default function UpcomingEventsList() {
-  const {
-    data: upcomingEvents,
-    isLoading,
-    error,
-  } = useHttpNew("http://localhost:8080/api/events/upcoming");
+  const [{ data: upcomingEvents, isLoading, error }] = useHttp(
+    "http://localhost:8080/api/events/upcoming"
+  );
 
   if (isLoading) {
     return <div>Loading...</div>;

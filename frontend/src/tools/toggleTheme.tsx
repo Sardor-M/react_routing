@@ -1,5 +1,4 @@
 export {};
-
 // import * as React from "react";
 // import IconButton from "@mui/material/IconButton";
 // import Box from "@mui/material/Box";
@@ -71,8 +70,7 @@ export {};
 //   return (
 //     <ColorModeContext.Provider value={colorMode}>
 //       <ThemeProvider theme={theme}>
-//         <ToggleTheme />
-//         {children}
+//         {children} {/* Wrap children with ThemeProvider */}
 //       </ThemeProvider>
 //     </ColorModeContext.Provider>
 //   );

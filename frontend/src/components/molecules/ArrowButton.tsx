@@ -1,7 +1,7 @@
 import {
   ArrowButtonsProps,
   StyledArrowButtons,
-} from "../atoms/Button/ArrButtons";
+} from "../atoms/Button/ArrowButton";
 
 const ArrowButtons = ({ direction, onClick }: ArrowButtonsProps) => (
   <div>

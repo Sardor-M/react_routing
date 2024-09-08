@@ -3,7 +3,7 @@ import { Filters, useFilters } from "../../context/FilterContext";
 import Collapsible from "../atoms/Collapsible";
 import StarRating from "../atoms/StarRating";
 import { useState } from "react";
-import InputSearch from "../atoms/Input/InputSearch";
+import InputSearch from "../atoms/Input/SearchInput";
 import { IoIosSearch } from "react-icons/io";
 
 const SidebarContainer = styled.div`

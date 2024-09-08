@@ -1,14 +1,8 @@
 import express from "express";
 import * as RunnerController from "../controllers/event/events.controller";
-import { UserController } from "../controllers/user/user.controller";
 import { AuthMiddleware } from "../../middleware/auth.middleware";
 
 const userRouters = express.Router();
-
-// users routes
-userRouters.post("/register", UserController.register);
-userRouters.post("/login", UserController.login);
-userRouters.post("/logout", UserController.logout);
 
 // event routes
 userRouters.get("/runners", RunnerController.getAllRunners);
@@ -22,7 +16,7 @@ userRouters.get(
 
 // protected route for event creating
 userRouters.post(
-  "/createAnEvent",
+  "/createEvent",
   AuthMiddleware,
   RunnerController.createAnEvents
 );

@@ -7,6 +7,7 @@ interface TextProps {
 }
 
 export const Text = styled.p<TextProps>`
+  padding-bottom: 40px;
   font-size: 16px;
   font-weight: normal;
   text-align: ${(props) => props.textAlign || "center"};

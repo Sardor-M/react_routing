@@ -1,7 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+interface User {
+  id: number;
+  username: string;
+  email: string;
+  password: string;
+}
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  user: User | undefined;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
 }
@@ -12,6 +19,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [user, setUser] = useState<User | undefined>(undefined); // Replace 'any' with your User type
 
   const login = async (email: string, password: string) => {
     try {
@@ -23,20 +31,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         body: JSON.stringify({ email, password }),
         credentials: "include", // this is set for HttpOnly cookie - important
       });
-      if (!response.ok) {
+      if (response.ok) {
+        const userDaa = await response.json();
         setIsAuthenticated(true);
+        setUser(userDaa);
       } else {
-        console.error("Login failed.");
+        // setIsAuthenticated(false);
+        console.error("Login is failed.");
       }
     } catch (error) {
       console.error("Login error: ", error);
     }
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
+  const logout = async () => {
+    try {
+      await fetch("http://localhost:8080/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      setIsAuthenticated(false);
+      setUser(undefined); // clear user data
+      document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // will delete the cookie after logout
+    } catch (error) {
+      console.error("Logout error: ", error);
+    }
   };
-
   useEffect(() => {
     // checking if the user is already authenticated(by checking a cookie)
     const checkAuthStatus = async () => {
@@ -44,7 +64,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         const response = await fetch("http://localhost:8080/auth/status", {
           credentials: "include",
         });
-        setIsAuthenticated(response.ok);
+        if (response.ok) {
+          const userData = await response.json();
+          setIsAuthenticated(true);
+          setUser(userData);
+        } else {
+          setIsAuthenticated(false);
+        }
       } catch (error) {
         console.error("Error checking authentication status: ", error);
       }
@@ -53,7 +79,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

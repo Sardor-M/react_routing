@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { PopularEvents } from "./PopularEvents";
 import { TextForSubPages } from "../atoms/Subtitle";
 import { Text } from "../atoms/Text";
@@ -19,9 +19,9 @@ const images: string[] = [
 
 const CarouselContainer = styled.div`
   position: relative;
-  margin-bottom: 120px;
+  /* margin-bottom: 120px; */
   width: 100%;
-  height: 400px;
+  height: 490px;
   overflow: hidden;
 `;
 
@@ -121,7 +121,7 @@ export default function HomePage({ images: [], interval = 3600 }) {
   return (
     <div>
       <CarouselContainer>
-        <h2> Explore the running events near you</h2>
+        {/* <TitleOverlay> Explore the running events near you</TitleOverlay> */}
         {images.map((imageUrl, index) => (
           <CarouselImage
             key={index}
@@ -153,6 +153,7 @@ export default function HomePage({ images: [], interval = 3600 }) {
       </CarouselContainer>
       <div>
         <TextElement> # Your Journey of Running begins here #</TextElement>{" "}
+        {/* <TitleOverlay> Explore the running events near you</TitleOverlay> */}
         <Text>
           Don't wait at home thinking about when to run or where to run or with
           whom to run with. Just run here with the people you want to run with.
@@ -166,13 +167,14 @@ export default function HomePage({ images: [], interval = 3600 }) {
       {/* <EventTypes /> */}
       <div>
         <TextForSubPages marginBottom="120px"></TextForSubPages>
-        <ParagraphElement marginBottom="120px">
+        <ParagraphElement>
           Dont wait at home thinking about when to run or where to run or with
           whom to run with. Just run here with the people you want to run with.
           Join the community of runners and find your running buddy. It is never
           late to start running. Just run here. :
         </ParagraphElement>
       </div>
+      <div style={{ paddingBottom: "80px" }}></div>
     </div>
   );
 }
