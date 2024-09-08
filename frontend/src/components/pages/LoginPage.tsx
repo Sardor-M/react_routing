@@ -208,12 +208,12 @@ export default function LoginPage() {
   return (
     <>
       {success ? (
-        <section>
-          <h1> Successfully logged in</h1>
+        <Container>
+          <FormTitle> Successfully logged in</FormTitle>
           <p>
             <Link to="/mypage">Go to My Account Page</Link>
           </p>
-        </section>
+        </Container>
       ) : (
         <Container>
           <FormWrapper>

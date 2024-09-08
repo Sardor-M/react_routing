@@ -28,7 +28,7 @@ import Error from "../components/atoms/Error/RouterError/ErrorRouter";
 import LoginPage, {
   loader as loginPageLoader,
 } from "../components/pages/LoginPage";
-import SignUpPage from "../components/pages/SignUpPage";
+import SignUpPage from "../components/pages/ResgisterPage";
 import EventSearchPage from "../components/pages/Events/EventSearchPage";
 import { FilterProvider } from "../context/FilterContext";
 import { AuthProvider } from "../context/AuthContext";
@@ -81,7 +81,14 @@ const router = createBrowserRouter(
           element={<ReviewsPages />}
           loader={reviewsLoader}
         />
-        <Route path="upcoming" element={<UpcomingEventsList />} />
+        <Route
+          path="upcoming"
+          element={
+            <FilterProvider>
+              <UpcomingEventsList />
+            </FilterProvider>
+          }
+        />
         <Route path="upcoming/:id" element={<UpcomingDetails />}>
           <Route index element={<UpcomingEventDetails />} />
           <Route path="photos" element={<UpcomingEventDetailsPhotos />} />
