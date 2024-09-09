@@ -1,7 +1,7 @@
 // Assuming PageContentElement and ParagraphElement are styled similarly to above
 
 import styled from "styled-components";
-import { Image } from "../atoms/Image";
+import Image from "../atoms/Image";
 import { Link } from "react-router-dom";
 import runner_hero from "../../assets/images/running_banner_img.png";
 

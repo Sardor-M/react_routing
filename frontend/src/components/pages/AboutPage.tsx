@@ -3,7 +3,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import homepage_video from "../../assets/images/Homepage.mp4";
 import { Title } from "../atoms/Title";
-import { Text } from "../atoms/Text";
+import Text from "../atoms/Text";
 import AboutPageThree from "./AboutPageEvents";
 import { EventTypes } from "./EventTypes";
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {

@@ -1,64 +1,39 @@
 import { motion } from "framer-motion";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-const Card = styled(motion.div)<{
-  bold?: boolean;
-  border?: string;
+interface CardProps {
   borderRadius?: string;
-  padding?: "16px" | string;
+  padding?: string;
   margin?: string;
   display?: string;
-  marginButtom?: string;
-  background?: string;
-  clickable?: boolean;
-  overflow?: boolean;
-  whileHover?: { scale: number };
   width?: string;
-}>(
-  ({
-    bold,
-    border,
-    borderRadius,
-    padding,
-    margin,
-    display,
-    marginButtom,
-    background,
-    clickable,
-    overflow,
-    width,
-  }) => css`
-    border: 1px solid;
-    border-radius: ${borderRadius};
-    padding: ${padding};
-    margin: ${margin};
-    display: ${display};
-    margin-bottom: ${marginButtom};
-    background: ${background};
-    overflow: ${overflow ? "hidden" : "visible"};
-    width: ${width};
-    ${clickable &&
-    css`
-      cursor: pointer;
-    `}
-  `
-);
+  position?: string;
+  top?: string;
+  left?: string;
+  backgroundColor?: string;
+  height?: string;
+  children: React.ReactNode;
+}
 
-export const Location = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #666;
+const StyledCard = styled(motion.div)<CardProps>`
+  border: 1px solid #ddd;
+  border-radius: ${({ borderRadius }) => borderRadius || "8px"};
+  padding: ${({ padding }) => padding || "16px"};
+  margin: ${({ margin }) => margin || "0"};
+  display: ${({ display }) => display || "block"};
+  width: ${({ width }) => width || "auto"};
+  position: ${({ position }) => position || "relative"};
+  top: ${({ top }) => top || "auto"};
+  left: ${({ left }) => left || "auto"};
+  background-color: ${({ backgroundColor }) => backgroundColor || "#fff"};
+  height: ${({ height }) => height || "auto"};
+  overflow: hidden;
 `;
 
-export const Details = styled.div`
-  display: flex;
-  margin: 0 10px;
-`;
-export const List = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const Card: React.FC<CardProps> = ({ children, ...props }) => {
+  return <StyledCard {...props}>{children}</StyledCard>;
+};
+
 export default Card;
 
 // const Card = styled.div<{

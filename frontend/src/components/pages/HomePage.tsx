@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { PopularEvents } from "./PopularEvents";
-import { TextForSubPages } from "../atoms/Subtitle";
-import { Text } from "../atoms/Text";
+import TextForSubPages from "../atoms/Subtitle";
+import Text from "../atoms/Text";
 import { ParagraphElement, TextElement } from "./AboutPage";
 
 interface CarouselImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -166,7 +166,7 @@ export default function HomePage({ images: [], interval = 3600 }) {
       <PopularEvents />
       {/* <EventTypes /> */}
       <div>
-        <TextForSubPages marginBottom="120px"></TextForSubPages>
+        <TextForSubPages marginBottom="120px">{""}</TextForSubPages>
         <ParagraphElement>
           Dont wait at home thinking about when to run or where to run or with
           whom to run with. Just run here with the people you want to run with.

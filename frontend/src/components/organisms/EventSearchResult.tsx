@@ -2,20 +2,10 @@
 import React, { useState } from "react";
 import { EventCard } from "../molecules/EventCard";
 import { EventCardProps } from "../../types";
-import { List } from "../atoms/EventCard/Card";
+import List from "../atoms/EventCard/Card";
 import { useFilters } from "../../context/FilterContext";
 import styled from "styled-components";
 import { Events } from "../../types";
-
-// const StyledCard = styled.div`
-//   box-shadow: 0px 3px 6px #00000029;
-//   border-radius: 6px;
-//   overflow: hidden;
-//   transition: transform 0.3s ease;
-//   &:hover {
-//     transform: translateY(-5px);
-//   }
-// `;
 
 const ResultsListTitleContainer = styled.h3`
   /* display: block; */
@@ -35,7 +25,7 @@ const ShowMoreButton = styled.button`
   }
 `;
 
-export const EventResultList: React.FC<EventCardProps> = () => {
+export const EventSearchResult: React.FC<EventCardProps> = () => {
   const { events } = useFilters() as { events: Events[] };
   const [visibleCount, setVisibelCount] = useState<number>(7);
   console.log("filtered events are returned", events);

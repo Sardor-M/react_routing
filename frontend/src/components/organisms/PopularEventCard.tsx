@@ -5,7 +5,7 @@ import {
   PopularCardEventInfoProps,
   PopularEventCardInfo,
 } from "../molecules/PopularEventCardInfo";
-import { Image } from "../atoms/Image";
+import Image from "../atoms/Image";
 import { ReactComponent as LocationIcon } from "../../assets/images/card_icon/location.svg";
 import { ReactComponent as PriceIcon } from "../../assets/images/card_icon/ticket.svg";
 import { Link } from "react-router-dom";

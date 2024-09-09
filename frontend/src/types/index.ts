@@ -74,12 +74,3 @@ export interface EventCardProps {
   date?: string;
   type?: string;
 }
-
-export interface ImageProps {
-  src?: string;
-  alt?: string;
-  width?: string;
-  height?: string;
-  objectFit?: "cover" | "contain" | "none" | "scale-down" | "fill";
-  isIcon?: boolean;
-}

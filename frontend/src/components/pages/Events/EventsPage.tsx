@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TextForSubPages } from "../../atoms/Subtitle";
+import TextForSubPages from "../../atoms/Subtitle";
 
 const EventPageContainer = styled.div`
   padding: 10px;

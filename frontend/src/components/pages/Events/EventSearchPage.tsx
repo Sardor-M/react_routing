@@ -1,11 +1,11 @@
 import React from "react";
 import EventSearchTemplate from "../../templates/EventSearchTemplate";
-import { EventResultList } from "../../organisms/EventList";
+import { EventSearchResult } from "../../organisms/EventSearchResult";
 
 const EventSearchPage: React.FC = () => {
   return (
     <EventSearchTemplate>
-      <EventResultList />
+      <EventSearchResult />
     </EventSearchTemplate>
   );
 };

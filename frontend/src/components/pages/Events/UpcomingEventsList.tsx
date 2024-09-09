@@ -4,30 +4,29 @@ import styled from "styled-components";
 import Error from "../../atoms/Error/Error";
 import useHttp from "../../../hooks/useHttp";
 import { useEffect, useState } from "react";
-import { useFilters } from "../../../context/FilterContext";
+import { EventCard } from "../../molecules/EventCard";
+import SubTitle from "../../atoms/Subtitle";
 
-// export function loader() {
-//   // await requireAuth();
-//   return getEvents();
-// }
-
-// const EventsListSection = styled.div`
-//   padding: 10px;
-//   margin-bottom: 40px;
-// `;
-
-const EventsListSection = styled.div`
+// Container for the entire list of events
+const EventsListSection = styled.section`
   padding: 20px;
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 10px;
 `;
 
+// Grid to display the events in a grid format
 const EventsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 50px;
 `;
 
+// Each individual event item, wrapped around the EventCard molecule
 const EventItem = styled(Link)`
   text-decoration: none;
   color: #000;
@@ -40,35 +39,9 @@ const EventItem = styled(Link)`
   &:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
-
-  .upcoming-event-single {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-
-  .upcoming-event-info {
-    padding: 10px;
-    text-align: center;
-  }
-
-  h3 {
-    font-size: 16px;
-    margin: 10px 0;
-  }
-
-  p {
-    font-size: 14px;
-    color: #555;
-  }
 `;
 
+// Button to show more events
 const ShowMoreEvents = styled.button`
   background-color: #d7ebff;
   border: 1px solid #f8f9fa;
@@ -81,23 +54,14 @@ const ShowMoreEvents = styled.button`
   }
 `;
 
-const SectionTitle = styled.h2`
-  font-size: 1.5rem;
-  font-size: 21px;
-  margin-bottom: 20px;
-  display: flex;
-  font-weight: bold;
-  justify-content: center;
-  padding: 20px;
-`;
-
 export default function UpcomingEventsList() {
-  // const { events } = useFilters() as { events: Events[] };
   const [visibleCount, setVisibleCount] = useState<number>(24);
 
   const [{ data: upcomingEvents, isLoading, error }, fetchData] = useHttp(
     "http://localhost:8080/api/events/upcoming"
   );
+
+  // Function to load more events
   const showMoreItems = () => {
     setVisibleCount((prevCount) => prevCount + 20);
   };
@@ -114,45 +78,37 @@ export default function UpcomingEventsList() {
     return <Error title={"Failed to fetch the events"} message={error} />;
   }
 
-  // const upcomingEvents = useLoaderData() as Events[];
-  console.log("Log event from the upcoming", upcomingEvents);
-
+  // Ensure the upcomingEvents is an array and has events
   const upcomingEventsData =
     Array.isArray(upcomingEvents) && upcomingEvents.length > 0 ? (
-      (upcomingEvents as Events[])
-        ?.slice(0, visibleCount)
-        .map((event: Events) => (
-          <EventItem
-            key={event.id}
-            to={`/events/upcoming/${event.id}`}
-            aria-label={`View details for ${event.title}`}
-            className="upcoming-event-title"
-          >
-            <div className="upcoming-event-single" key={event.id}>
-              <img src={event.imageUrl} alt={`Pic of ${event.title}`} />
-              <div className="upcoming-event-info">
-                <h3>{event.title}</h3>
-                <p>${event.price}</p>
-              </div>
-            </div>
-          </EventItem>
-        ))
+      upcomingEvents.slice(0, visibleCount).map((event: Events) => (
+        <EventItem
+          key={event.id}
+          to={`/events/upcoming/${event.id}`}
+          aria-label={`View details for ${event.title}`}
+        >
+          {/* Wrap EventCard in EventItem */}
+          <EventCard
+            title={event.title}
+            price={event.price}
+            imageSrc={event.imageUrl}
+          />
+        </EventItem>
+      ))
     ) : (
-      <SectionTitle>No events found</SectionTitle>
+      <SubTitle>No events found</SubTitle>
     );
 
   return (
     <EventsListSection>
-      <SectionTitle>Upcoming Event's List</SectionTitle>
-      <div className="upcoming-event-list">
-        <EventsGrid>{upcomingEventsData}</EventsGrid>
-        {Array.isArray(upcomingEvents) &&
-          upcomingEvents.length > visibleCount && (
-            <ShowMoreEvents onClick={showMoreItems}>
-              Show more events
-            </ShowMoreEvents>
-          )}
-      </div>
+      <SubTitle>Upcoming Event's List</SubTitle>
+      <EventsGrid>{upcomingEventsData}</EventsGrid>
+      {Array.isArray(upcomingEvents) &&
+        upcomingEvents.length > visibleCount && (
+          <ShowMoreEvents onClick={showMoreItems}>
+            Show more events
+          </ShowMoreEvents>
+        )}
     </EventsListSection>
   );
 }

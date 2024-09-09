@@ -4,13 +4,17 @@ import styled from "styled-components";
 interface TextProps {
   textAlign?: string;
   display?: string;
+  fontSize?: string;
+  fontWeight?: string;
+  paddingBottom?: string;
+  children: React.ReactNode;
 }
 
-export const Text = styled.p<TextProps>`
-  padding-bottom: 40px;
-  font-size: 16px;
-  font-weight: normal;
-  text-align: ${(props) => props.textAlign || "center"};
+const TextWrapper = styled.p<TextProps>`
+  padding-bottom: ${(props) => props.paddingBottom || "40px"};
+  font-size: ${(props) => props.fontSize || "16px"};
+  font-weight: ${(props) => props.fontWeight || "normal"};
+  text-align: "center";
   display: flex; // Use flex to center content
   justify-content: center; // Horizontally center content in the flex container
   align-items: center; // Vertically center content in the flex container
@@ -24,18 +28,13 @@ export const Text = styled.p<TextProps>`
   }
 `;
 
-//  This is the old styling one for reference
-/* font-size: 16px;
-  font-weight: normal;
-  text-align: ${(props) => props.textAlign || "center"};
-  display: ${(props) => props.display || "block"};
-  margin-block-start: ${(props) => (props.display === "inline" ? "0" : "1em")};
-  margin-block-end: ${(props) => (props.display === "inline" ? "0" : "1em")};
-  margin-right: ${(props) => (props.display === "inline" ? "0" : "20em")};
-  margin-left: ${(props) => (props.display === "inline" ? "0" : "20em")};
+const Text: React.FC<TextProps> = ({ children, display, fontWeight }) => {
+  return (
+    <TextWrapper display={display} fontWeight={fontWeight}>
+      {" "}
+      {children}{" "}
+    </TextWrapper>
+  );
+};
 
-  @media (min-width: 300px) {
-    font-size: 18px;
-    margin-block-start: ${(props) =>
-    props.display === "inline" ? "0" : "1.5em"};
-  } */
+export default Text;

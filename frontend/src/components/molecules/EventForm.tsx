@@ -61,15 +61,6 @@ const ButtonContainer = styled.div`
   font-size: 14px;
 `;
 
-// const InfoText = styled.p`
-//   font-size: 12px;
-//   color: #888;
-//   margin: 10px 0;
-//   background: #f0f2f5;
-//   padding: 10px;
-//   border-radius: 4px;
-// `;
-
 const LabelContainer = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -78,17 +69,6 @@ const LabelContainer = styled.div`
 `;
 
 export default function EventForm() {
-  //   const [eventData, setEventData] = useState({
-  //     title: "",
-  //     category: "",
-  //     price: "",
-  //     description: "",
-  //     imageUrl: "",
-  //     location: "",
-  //     date: "",
-  //     month: "",
-  //   });
-
   const {
     values: eventData,
     handleInputChange,
