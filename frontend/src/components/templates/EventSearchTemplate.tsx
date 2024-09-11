@@ -16,13 +16,13 @@ const SidebarContainer = styled.div`
   height: 100vh;
   overflow-y: auto;
   background-color: #f5f5f5;
-  z-index: 1;
+  /* z-index: 1; */
 `;
 
 const MainContent = styled.div`
   flex: 0.7;
   overflow-y: auto;
-  margin: 0 10px;
+  margin: 15px 10px;
   height: auto;
 `;
 

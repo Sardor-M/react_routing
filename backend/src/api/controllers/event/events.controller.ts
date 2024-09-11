@@ -115,10 +115,12 @@ export async function getUpcomingRunningEvents(req: Request, res: Response) {
   const runnerRepository = dataSource.getRepository(Runner);
   const runners = await runnerRepository.find();
   let upcomingEvents = runners.map(
-    ({ id, category, title, price, imageUrl }) => {
+    ({ id, date, category, location, title, price, imageUrl }) => {
       return {
         id,
+        date,
         category,
+        location,
         title,
         price,
         imageUrl,

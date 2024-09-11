@@ -2,65 +2,138 @@
 import React from "react";
 import { EventCardProps } from "../../types";
 import Card from "../atoms/EventCard/Card";
-import styled from "styled-components";
-import { SiNamebase } from "react-icons/si";
+import styled, { css } from "styled-components";
 import Image from "../atoms/Image";
-import Text from "../atoms/Text";
+import { FaLocationDot } from "react-icons/fa6";
+import { MdDateRange } from "react-icons/md";
+import { BiCategoryAlt } from "react-icons/bi";
 
-const Heading = styled.h3`
+const CardLayout = styled.div<{ layout: "horizontal" | "vertical" }>`
+  border-radius: 8px;
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  ${({ layout }) =>
+    layout === "horizontal"
+      ? css`
+          flex-direction: row;
+          align-items: center;
+          justify-content: start;
+          max-width: 1000px; // Restrict the max width for horizontal cards
+          width: 100%;
+        `
+      : css`
+          flex-direction: column;
+          width: 100%;
+        `}
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-shrink: 0; // prevents the iamge from shrinking
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 200px; // setting the max width to maintain the size in vertical layout
+  max-height: 200px; // setting the max height to maintain the size in horizontal layout
+  margin-right: 20px;
+`;
+
+const EventDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* padding: 10px; */
+  padding-top: 5px; // Slight padding for alignment
+`;
+
+const EventTitle = styled.div`
+  padding-top: 12px;
+  padding-bottom: 12px;
   font-size: 18px;
-  margin: 10px 0;
+  margin: 0;
   font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+`;
+
+const EventLocation = styled.div`
+  color: #666;
+  font-size: 14px;
+  margin: 4px 0;
+  display: flex;
+  align-items: center; // this will align the icon and text in the same line;
 `;
 
 const EventDate = styled.p`
   color: #666;
   font-size: 14px;
-`;
-
-const CardContainer = styled.div`
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  margin: 4px 0;
   display: flex;
-  flex-direction: column;
+  align-items: center; // this will align the icon and text in the same line;
 `;
 
-export const EventCard: React.FC<EventCardProps> = ({
+export const EventCard: React.FC<
+  EventCardProps & { layout?: "horizontal" | "vertical" }
+> = ({
   imageSrc,
   title,
   date,
   location,
+  category,
+  width = "100%",
+  height = "auto",
+  borderRadius = "8px",
+  imageWidth = "300px",
+  imageHeight = "300px",
+  layout = "vertical",
 }) => {
   return (
     <Card
       position="relative"
-      width="100%"
-      height="100%"
+      width={width}
+      height={height}
       backgroundColor="rgba(0, 0, 0, 0.03)"
+      borderRadius={borderRadius}
     >
-      <CardContainer>
-        <Image
-          src={imageSrc}
-          alt={title}
-          width="242px"
-          height="330px"
-          objectFit="cover"
-          style={{
-            borderRadius: "10px",
-            marginBottom: "10px",
-          }}
-        />
-        <Heading>
-          <SiNamebase> </SiNamebase> {title}
-        </Heading>
-        <Text display={"center"} fontWeight={"bold"}>
-          {location}{" "}
-        </Text>
-        <EventDate>{date}</EventDate>
-      </CardContainer>
+      <CardLayout layout={layout}>
+        <ImageWrapper>
+          <Image
+            src={imageSrc}
+            alt={title}
+            width={imageWidth}
+            height={imageHeight}
+            objectFit="cover"
+            style={{
+              borderRadius: "10px",
+              marginBottom: "10px",
+            }}
+          />
+        </ImageWrapper>
+        <EventDetails>
+          <EventTitle>{title}</EventTitle>
+          <EventLocation>
+            <FaLocationDot
+              style={{ marginRight: "5px", fill: "rgb(57, 102, 251)" }}
+            />
+            {location}
+          </EventLocation>
+          <EventDate>
+            <MdDateRange
+              style={{ marginRight: "5px", fill: "rgb(57, 102, 251)" }}
+            />
+            {date}{" "}
+          </EventDate>
+          <EventDate>
+            <BiCategoryAlt
+              style={{ marginRight: "5px", fill: "rgb(57, 102, 251)" }}
+            />
+            {category}
+          </EventDate>
+        </EventDetails>
+      </CardLayout>
     </Card>
   );
 };

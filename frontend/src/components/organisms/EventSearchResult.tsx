@@ -2,24 +2,30 @@
 import React, { useState } from "react";
 import { EventCard } from "../molecules/EventCard";
 import { EventCardProps } from "../../types";
-import List from "../atoms/EventCard/Card";
 import { useFilters } from "../../context/FilterContext";
 import styled from "styled-components";
 import { Events } from "../../types";
 
-const ResultsListTitleContainer = styled.h3`
-  /* display: block; */
+const EventResultList = styled.div`
+  display: flex;
+  margin-top: 18px;
+  align-items: start;
+`;
+
+const ResultsListTitleContainer = styled.div`
+  display: block;
   text-align: left;
   margin-right: 20px;
 `;
 
 const ShowMoreButton = styled.button`
-  background-color: #f8f9fa;
-  border: 1px solid #f8f9fa;
+  text-align: center;
   border-radius: 12px;
-  margin: 20px auto;
+  margin: 40px auto;
   padding: 10px 20px;
   cursor: pointer;
+  background-color: #d7ebff;
+  border: 1px solid #f8f9fa;
   &:hover {
     background-color: #b9dbff;
   }
@@ -43,32 +49,34 @@ export const EventSearchResult: React.FC<EventCardProps> = () => {
   console.log("visible events", events);
 
   return (
-    <List>
+    <>
       <ResultsListTitleContainer>
         Running Events found near you:
       </ResultsListTitleContainer>
       {events.length > 0 ? (
         visibleEvents.map((event) => (
-          <EventCard
-            key={event.id}
-            aria-label={event.id}
-            imageSrc={event.imageUrl}
-            location={event.location}
-            title={event.title}
-            description={event.description}
-            price={event.price}
-            category={event.category}
-            date={
-              event.date
-                ? new Date(event.date).toLocaleDateString("en-US", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })
-                : ""
-            }
-          />
+          <EventResultList>
+            <EventCard
+              layout="horizontal"
+              imageSrc={event.imageUrl}
+              location={event.location}
+              title={event.title}
+              price={event.price}
+              category={event.category}
+              imageWidth="200px" // Custom image width for this usage
+              imageHeight="200px" // Custom image height for this usage
+              date={
+                event.date
+                  ? new Date(event.date).toLocaleDateString("en-US", {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : ""
+              }
+            />
+          </EventResultList>
         ))
       ) : (
         <p>No events found</p>
@@ -76,6 +84,6 @@ export const EventSearchResult: React.FC<EventCardProps> = () => {
       {events.length > visibleCount && (
         <ShowMoreButton onClick={showMoreItems}>Show More</ShowMoreButton>
       )}
-    </List>
+    </>
   );
 };

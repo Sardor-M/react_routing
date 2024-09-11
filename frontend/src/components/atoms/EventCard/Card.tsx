@@ -20,18 +20,43 @@ const StyledCard = styled(motion.div)<CardProps>`
   border-radius: ${({ borderRadius }) => borderRadius || "8px"};
   padding: ${({ padding }) => padding || "16px"};
   margin: ${({ margin }) => margin || "0"};
-  display: ${({ display }) => display || "block"};
-  width: ${({ width }) => width || "auto"};
+  display: "flex";
+  width: ${({ width }) => width || "100%"};
   position: ${({ position }) => position || "relative"};
   top: ${({ top }) => top || "auto"};
   left: ${({ left }) => left || "auto"};
   background-color: ${({ backgroundColor }) => backgroundColor || "#fff"};
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   height: ${({ height }) => height || "auto"};
   overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
 `;
 
+const hoverAnimation = {
+  scale: 1.03,
+  rotate: 0.2,
+  boxShadow: "0 10px 20px rgba(0, 0, 0, 0.15)",
+  transition: {
+    duration: 0.3,
+  },
+};
+
+const tapAnimation = {
+  scale: 0.9,
+  transition: {
+    duration: 0.2, // duration of the transition for the tap effect
+  },
+};
+
 const Card: React.FC<CardProps> = ({ children, ...props }) => {
-  return <StyledCard {...props}>{children}</StyledCard>;
+  return (
+    <StyledCard whileHover={hoverAnimation} whileTap={tapAnimation} {...props}>
+      {children}
+    </StyledCard>
+  );
 };
 
 export default Card;

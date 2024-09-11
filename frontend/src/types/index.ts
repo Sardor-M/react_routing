@@ -57,20 +57,24 @@ export interface TextProps {
 }
 
 export interface EventCardProps {
-  location?: string;
-  imageSrc?: string;
+  id?: number;
   title?: string;
+  imageSrc?: string;
   eventName?: string;
   name?: string;
   price?: number;
   src?: string;
   alt?: string;
-  width?: string;
-  height?: string;
   objectFit?: "cover" | "contain" | "none" | "scale-down" | "fill";
   isIcon?: boolean;
   description?: string;
   category?: string;
   date?: string;
-  type?: string;
+  location?: string;
+  width?: string;
+  height?: string;
+  borderRadius?: string;
+  imageWidth?: string;
+  imageHeight?: string;
+  style?: React.CSSProperties;
 }
