@@ -29,15 +29,15 @@ const CardLayout = styled.div<{ layout: "horizontal" | "vertical" }>`
         `}
 `;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled.div<{ layout: "horizontal" | "vertical" }>`
   display: flex;
   flex-shrink: 0; // prevents the iamge from shrinking
   border-radius: 10px;
   overflow: hidden;
   width: 100%;
-  max-width: 200px; // setting the max width to maintain the size in vertical layout
-  max-height: 200px; // setting the max height to maintain the size in horizontal layout
-  margin-right: 20px;
+  margin-right: ${({ layout }) => (layout === "horizontal" ? "10px" : "0")};
+  max-width: ${({ layout }) => (layout === "horizontal" ? "220px" : "300px")};
+  max-height: ${({ layout }) => (layout === "horizontal" ? "200px" : "300px")};
 `;
 
 const EventDetails = styled.div`
@@ -99,7 +99,7 @@ export const EventCard: React.FC<
       borderRadius={borderRadius}
     >
       <CardLayout layout={layout}>
-        <ImageWrapper>
+        <ImageWrapper layout={layout}>
           <Image
             src={imageSrc}
             alt={title}
