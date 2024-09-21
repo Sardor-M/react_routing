@@ -6,6 +6,7 @@ import useHttp from "../../../hooks/useHttp";
 import { useEffect, useState } from "react";
 import { EventCard } from "../../molecules/EventCard";
 import SubTitle from "../../atoms/Subtitle";
+import LoadingState from "../../atoms/LoadingState";
 
 // Container for the entire list of events
 const EventsListSection = styled.section`
@@ -76,7 +77,7 @@ export default function UpcomingEventsList() {
   }, [fetchData]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingState />;
   }
 
   if (error) {

@@ -6,16 +6,19 @@ import { useFilters } from "../../context/FilterContext";
 import styled from "styled-components";
 import { Events } from "../../types";
 
+const HeaderElementContainer = styled.h3`
+  display: flex;
+  margin-top: 2px;
+  margin-bottom: 22px;
+  text-align: left;
+  align-items: center;
+  font-size: 19px;
+`;
+
 const EventResultList = styled.div`
   display: flex;
   margin-top: 18px;
   align-items: start;
-`;
-
-const ResultsListTitleContainer = styled.div`
-  display: block;
-  text-align: left;
-  margin-right: 20px;
 `;
 
 const ShowMoreButton = styled.button`
@@ -50,9 +53,9 @@ export const EventSearchResult: React.FC<EventCardProps> = () => {
 
   return (
     <>
-      <ResultsListTitleContainer>
+      <HeaderElementContainer>
         Running Events found near you:
-      </ResultsListTitleContainer>
+      </HeaderElementContainer>
       {events.length > 0 ? (
         visibleEvents.map((event) => (
           <EventResultList>
