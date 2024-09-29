@@ -42,6 +42,12 @@ export class Runner {
   @Column()
   month!: string;
 
+  // @Column("float", { nullable: true })
+  // latitude?: number;
+
+  // @Column("float", { nullable: true })
+  // longitude?: number;
+
   @ManyToOne(() => User, (user) => user.events)
   creator!: User;
 

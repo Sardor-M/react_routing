@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import FilterSidebar from "../organisms/FilterSidebar";
-import ResultMap from "../molecules/ResultMap";
+
 
 const SearchFilterContainer = styled.div`
   overflow: hidden;
@@ -46,9 +46,11 @@ const MapContainer = styled.div`
 
 interface EventSearchTemplateProps {
   children: React.ReactNode;
+  mapComponent: React.ReactNode;
 }
 const EventSearchTemplate: React.FC<EventSearchTemplateProps> = ({
   children,
+  mapComponent,
 }) => {
   return (
     <SearchFilterContainer>
@@ -59,7 +61,9 @@ const EventSearchTemplate: React.FC<EventSearchTemplateProps> = ({
         <ContentContainer> {children}</ContentContainer>
       </MainContent>
       <MapContainer>
-        <ResultMap />
+        {/* // event result map organism should be rendered here */}
+        {/* <EventResultMap /> */}
+        {mapComponent}
       </MapContainer>
     </SearchFilterContainer>
   );

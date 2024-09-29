@@ -34,8 +34,14 @@ const ShowMoreButton = styled.button`
   }
 `;
 
-export const EventSearchResult: React.FC<EventCardProps> = () => {
-  const { events } = useFilters() as { events: Events[] };
+interface EventSearchResultProps {
+  events: Events[];
+}
+
+export const EventSearchResult: React.FC<EventSearchResultProps> = ({
+  events,
+}) => {
+  // const { events } = useFilters() as { events: Events[] };
   const [visibleCount, setVisibelCount] = useState<number>(7);
   console.log("filtered events are returned", events);
 

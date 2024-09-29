@@ -9,36 +9,23 @@ import { Event } from "../../../entity/Event";
 import { EventRegistration } from "../../../entity/EventRegistration";
 import { EventRegisterService } from "../../../services/EventRegisterService";
 import { UserRequestInfo } from "../../../types/userRequest";
+import { getcodeLocation } from "../../../services/EventGeoLocation";
 
-// const GEOCODING_API_KEY = process.env.GEOCODING_API_KEY;
-
-// async function getGeoLocation(location: string) {
-//   const response = await axios.get(
-//     "https://maps.googleapis.com/maps/api/geocode/json",
-//     {
-//       params: {
-//         address: location,
-//         key: GEOCODING_API_KEY,
-//       },
-//     }
-//   );
-
-//   const { lat, lng } = response.data.results[0].geometry.location;
-//   return { lat, lng };
-// }
-
+// this will get all the events
 export async function getAllRunners(req: Request, res: Response) {
   try {
     const runnerRepository = dataSource.getRepository(Runner);
     const runners = await runnerRepository.find();
     console.log("Runners data in the response: ", runnerRepository, runners);
+
     if (!runners || runners.length === 0) {
       res
         .status(404)
         .json({ message: "No Runners found from the server is an error" });
       return;
     }
-    res.json(runners);
+
+    return res.json(runners);
   } catch (error) {
     console.error(error);
     res
@@ -75,25 +62,42 @@ export async function getFilteredEvent(req: Request, res: Response) {
       }
     });
 
+    // Limit the number of events to 50 events
+    query = query.take(50);
+
     const events = await query.getMany();
 
-    // const geoLocationEvents = await Promise.all(
-    //   events.map(async (event) => {
-    //     const { lat, lng } = await getGeoLocation(event.location);
-    //     return {
-    //       ...event,
-    //       latitude: lat,
-    //       langitude,
-    //     };
-    //   })
-    // );
+    const runnersWithCoordinates = await Promise.all(
+      events.map(async (event) => {
+        if (event.location) {
+          try {
+            const { latitude, longitude } = (await getcodeLocation(
+              event.location
+            )) as { latitude: number; longitude: number };
+            return { ...event, latitude, longitude };
+          } catch (error) {
+            console.error(
+              `Error geocoding location for runner ${event.id}:`,
+              error
+            );
+            return event; // return the evnet without coordinates
+          }
+        } else {
+          return event; // no location provided for the event
+        }
+      })
+    );
+    res.json(runnersWithCoordinates);
 
-    res.json(events);
+    // res.json(events);
 
     console.log("Filtered Event:", events);
   } catch (error) {
     console.error("There was error fetching the data", error);
-    res.status(500).json({ message: "Error fetching events" });
+    res.status(500).json({
+      message: "Error fetching events",
+      error: (error as Error).message,
+    });
   }
 }
 

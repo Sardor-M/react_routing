@@ -6,17 +6,21 @@ export interface Reviews {
   event: number;
 }
 
+// used for event details and events result map
 export interface Events {
   imageUrl: string;
   category: string;
   title: string;
   price: number;
-  description: string;
-  id: number;
   upcomingId: string;
   location: string;
   date: string;
   month: string;
+  id: number;
+  description: string;
+  name?: string;
+  latitude: number;
+  longitude: number;
   // imageUrl?: string;
   // category?: string;
   // title?: string;
@@ -27,8 +31,6 @@ export interface Events {
   // location?: string;
   // date?: string;
   // month?: string;
-  // latitude?: number;
-  // longitude?: number;
 }
 
 export interface GetEvent {
