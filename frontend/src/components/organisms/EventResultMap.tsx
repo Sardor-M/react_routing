@@ -25,11 +25,6 @@ const EventResultMap: React.FC<MapProps> = ({ events }) => {
   }, [events]);
   console.log("Events with Coordinates:", eventsWithCoordinates);
 
-  //   const [viewstate, setViewState] = useState<ViewState>({
-  //     latitude: eventsWithCoordinates[0]?.latitude || 37.7577,
-  //     longitude: eventsWithCoordinates[0]?.longitude || -122.4376,
-  //     zoom: 8,
-  //   });
   const [viewState, setViewState] = useState<ViewState>(() => ({
     latitude: eventsWithCoordinates[0]?.latitude || 37.7577,
     longitude: eventsWithCoordinates[0]?.longitude || -122.4376,
@@ -65,7 +60,7 @@ const EventResultMap: React.FC<MapProps> = ({ events }) => {
     <Map
       {...viewState}
       onMove={(evt) => setViewState(evt.viewState)}
-      mapStyle="mapbox://styles/mapbox/streets-v11"
+      mapStyle="mapbox://styles/sardor0968/cm1n7c9l7001901rb0z6rexnm" // changed the map style to more basic one
       mapboxAccessToken={MAPBOX_TOKEN}
       style={{ width: "100%", height: "100%" }} // ensuring that the map takes up the full width and height of the parent container
     >
