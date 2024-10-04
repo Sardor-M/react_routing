@@ -95,6 +95,7 @@ export default function UpcomingEventsList() {
         >
           {/* Wrap EventCard in EventItem */}
           <EventCard
+            key={event.id}
             category={event.category}
             layout="vertical"
             location={event.location}

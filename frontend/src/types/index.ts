@@ -79,4 +79,6 @@ export interface EventCardProps {
   imageWidth?: string;
   imageHeight?: string;
   style?: React.CSSProperties;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }

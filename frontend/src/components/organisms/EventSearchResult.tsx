@@ -1,8 +1,6 @@
 // Organisms/EventCard.tsx
 import React, { useState } from "react";
 import { EventCard } from "../molecules/EventCard";
-import { EventCardProps } from "../../types";
-import { useFilters } from "../../context/FilterContext";
 import styled from "styled-components";
 import { Events } from "../../types";
 
@@ -36,10 +34,13 @@ const ShowMoreButton = styled.button`
 
 interface EventSearchResultProps {
   events: Events[];
+  hoveredEventId: number | null;
+  setHoveredEventId: (id: number | null) => void;
 }
 
 export const EventSearchResult: React.FC<EventSearchResultProps> = ({
   events,
+  setHoveredEventId,
 }) => {
   // const { events } = useFilters() as { events: Events[] };
   const [visibleCount, setVisibelCount] = useState<number>(7);
@@ -66,12 +67,16 @@ export const EventSearchResult: React.FC<EventSearchResultProps> = ({
         visibleEvents.map((event) => (
           <EventResultList>
             <EventCard
+              key={event.id}
               layout="horizontal"
               imageSrc={event.imageUrl}
               location={event.location}
               title={event.title}
               price={event.price}
               category={event.category}
+              onMouseEnter={() => setHoveredEventId(event.id)}
+              onMouseLeave={() => setHoveredEventId(null)}
+              style={{ padding: "10px", borderBottom: "1px solid #ccc" }}
               imageWidth="200px" // Custom image width for this usage
               imageHeight="200px" // Custom image height for this usage
               date={
