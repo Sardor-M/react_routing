@@ -64,7 +64,13 @@ const StyledNavLink = styled(NavLink)`
     text-decoration: underline;
   }
 
-  &.isActive {
+  &.active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #161616;
+  }
+
+  &.event-link.active {
     color: #3966fb;
   }
 `;
@@ -118,12 +124,7 @@ export default function Navbar() {
         <SiteLogoImg src={run_with_us} />
       </SiteLogoWrapper>
       <StyledNav>
-        <AnimatedNavLink
-          to="/homepage"
-          // className={({ isActive }) => (isActive ? "active-link" : "")} // wont work
-        >
-          Home
-        </AnimatedNavLink>
+        <AnimatedNavLink to="/homepage">Home</AnimatedNavLink>
         <AnimatedNavLink to="/events">Events</AnimatedNavLink>
         <AnimatedNavLink to="/runner">Runner's Community</AnimatedNavLink>
         <AnimatedNavLink to="/createEvent">Create an Event</AnimatedNavLink>

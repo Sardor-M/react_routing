@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { EventCard } from "../molecules/EventCard";
 import styled from "styled-components";
 import { Events } from "../../types";
+import { FaRunning } from "react-icons/fa";
 
 const HeaderElementContainer = styled.h3`
   display: flex;
@@ -61,7 +62,7 @@ export const EventSearchResult: React.FC<EventSearchResultProps> = ({
   return (
     <>
       <HeaderElementContainer>
-        Running Events found near you:
+        <FaRunning /> &nbsp; Running Events found near you : {events.length}
       </HeaderElementContainer>
       {events.length > 0 ? (
         visibleEvents.map((event) => (

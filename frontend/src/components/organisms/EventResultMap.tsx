@@ -88,9 +88,14 @@ const EventResultMap: React.FC<MapProps> = ({ events, hoveredEventId }) => {
   }, [events]);
   console.log("Events with Coordinates:", eventsWithCoordinates);
 
+  // Get the first 5 events
+  const firstFiveEvents = useMemo(() => {
+    return eventsWithCoordinates.slice(0, 5);
+  }, [eventsWithCoordinates]);
+
   const [viewState, setViewState] = useState<ViewState>(() => ({
-    latitude: eventsWithCoordinates[0]?.latitude || 37.7577,
-    longitude: eventsWithCoordinates[0]?.longitude || -122.4376,
+    latitude: firstFiveEvents[0]?.latitude || 37.7577,
+    longitude: firstFiveEvents[0]?.longitude || -122.4376,
     zoom: 8,
   }));
 
@@ -109,16 +114,17 @@ const EventResultMap: React.FC<MapProps> = ({ events, hoveredEventId }) => {
     );
     console.log("Mapbox Access Token:", process.env.REACT_APP_MAPBOX_TOKEN);
 
-    // we will center the map to the first event fertched
-    if (eventsWithCoordinates.length > 0) {
-      const firstEvent = eventsWithCoordinates[0];
+    // we will center the map to the first top 5 events fetched
+    if (firstFiveEvents.length > 0) {
+      // first 5 events will be centered on the map by default
+      console.log("firstFiveEvents:", firstFiveEvents);
       setViewState((prev) => ({
         ...prev,
-        latitude: firstEvent.latitude!,
-        longitude: firstEvent.longitude!,
+        latitude: firstFiveEvents[0].latitude!,
+        longitude: firstFiveEvents[0].longitude!,
       }));
     }
-  }, [eventsWithCoordinates]);
+  }, [eventsWithCoordinates, firstFiveEvents]);
 
   //   const hoveredEvent = eventsWithCoordinates.find(
   //     (e) => e.id === hoveredMarkerId
