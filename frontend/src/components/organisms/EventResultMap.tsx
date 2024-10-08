@@ -107,12 +107,57 @@ const EventResultMap: React.FC<MapProps> = ({ events, hoveredEventId }) => {
     setHoveredMarkerId(eventId);
   };
 
+  // method to calculate the center of the mao based on the first 5 events
+  function calculateCenter(events: Events[]) {
+    const lat = events.map((event) => event.latitude!);
+    const long = events.map((event) => event.longitude!);
+
+    // method to caclculate the avg latitude
+    const totalLatSum = lat.reduce((acc, curr) => acc + curr, 0);
+    const avgLat = totalLatSum / lat.length;
+
+    // method to calculate the avg longitude
+    const totalLongSum = long.reduce((acc, curr) => acc + curr, 0);
+    const avgLong = totalLongSum / long.length;
+
+    return { latitude: avgLat, longitude: avgLong };
+  }
+
+  function estimateZoomLevel(events: Events[]) {
+    // Etap 1: extract the long and langs
+    const lat = events.map((event) => event.latitude!);
+    const long = events.map((event) => event.longitude!);
+
+    // Etap 2: calculate the max and min lat and long
+    const maxLat = Math.max(...lat);
+    const minLat = Math.min(...lat);
+    const maxLong = Math.max(...long);
+    const minLong = Math.min(...long);
+
+    // Etap 3 calculate the distance between the max and min lat and long
+    const langDistance = maxLong - minLong;
+    const latDistance = maxLat - minLat;
+
+    // Etap 4: we calculate the zoom level based on the distance between the max and min lat and long
+    const zoom =
+      Math.min(
+        Math.floor(Math.log2(360 / langDistance)),
+        Math.floor(Math.log2(180 / latDistance))
+
+        // we're adding a 1 to the zoom level to make the map a bit more zoomed in
+      ) + 1;
+
+    return zoom;
+  }
+
   useEffect(() => {
     console.log(
       "Events with Coordinates inside useEffect:",
       eventsWithCoordinates
     );
-    console.log("Mapbox Access Token:", process.env.REACT_APP_MAPBOX_TOKEN);
+
+    const center = calculateCenter(firstFiveEvents);
+    const zomm = estimateZoomLevel(firstFiveEvents);
 
     // we will center the map to the first top 5 events fetched
     if (firstFiveEvents.length > 0) {
@@ -120,8 +165,9 @@ const EventResultMap: React.FC<MapProps> = ({ events, hoveredEventId }) => {
       console.log("firstFiveEvents:", firstFiveEvents);
       setViewState((prev) => ({
         ...prev,
-        latitude: firstFiveEvents[0].latitude!,
-        longitude: firstFiveEvents[0].longitude!,
+        latitude: center.latitude!,
+        longitude: center.longitude!,
+        zoom: zomm,
       }));
     }
   }, [eventsWithCoordinates, firstFiveEvents]);
