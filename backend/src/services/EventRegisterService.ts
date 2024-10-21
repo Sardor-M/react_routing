@@ -24,30 +24,3 @@ export class EventRegisterService {
     return this.eventRegistrationRepository.save(registration);
   }
 }
-
-// import { dataSource } from "../database/db";
-// import { EventRegistration } from "../entity/EventRegistration";
-// import { User } from "../entity/User";
-// import { Event } from "../entity/Event";
-
-// const eventRegistrationRepository = dataSource.getRepository(EventRegistration);
-
-// /**
-//  * function to register a usr for an event.
-//  * @param eventId;
-//  * @param user;
-//  * @returns
-//  **/
-
-// export async function registerEvent(
-//   eventId: number,
-//   user: User
-// ): Promise<EventRegistration> {
-//   const registration = eventRegistrationRepository.create({
-//     event: { id: eventId } as any,
-//     user,
-//     registerationDate: new Date(),
-//   });
-
-//   return eventRegistrationRepository.save(registration);
-// }

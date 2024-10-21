@@ -6,6 +6,11 @@ import userRouters from "./api/routes/events.routes";
 import authRouter from "./api/routes/auth.routes";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import { socketHandler } from "./sockets/socketHandler";
+import { useContainer } from "typeorm";
+import Container from "typedi";
 
 const app = express();
 const port = 8080;
@@ -14,14 +19,30 @@ dotenv.config();
 
 app.use(morgan("dev"));
 
-app.use(
-  cors({
+useContainer(Container);
+
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+  cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
-  })
-);
+  },
+})
+
+// cors middleware setup
+app.use(cors({
+  origin: "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+}));
+
+
+// we handle the socket connection here
+socketHandler(io);
 
 app.use(cookieParser());
 
@@ -37,7 +58,7 @@ connectToDatabase()
     app.use("/api", userRouters);
     app.use("/auth", authRouter);
 
-    app.listen(port, () => {
+    httpServer.listen(port, () => {
       console.log(`Server is running on port: 8080`);
     });
   })

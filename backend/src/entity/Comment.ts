@@ -12,6 +12,8 @@ export class Comment {
 
   @Column()
   createdData!: Date;
+
+  // here we associate the coment with the Post or the Event
   @ManyToOne(() => User, (user) => user.comments)
   user!: User;
 
