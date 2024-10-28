@@ -28,7 +28,6 @@ export const PopularEventCard: React.FC<PopularCardEventInfoProps> = ({
   priceRange,
 }) => (
   <StyledEventCard>
-    {/* <Image src={imageSrc} alt={eventName} /> */}
     <Link to={"/events"}>
       <Image
         src={imageSrc}

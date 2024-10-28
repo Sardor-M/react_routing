@@ -1,29 +1,35 @@
-import { Service } from "typedi";
-import {Comment } from "../entity/Comment";
-import { InjectRepository } from "typeorm-typedi-extensions";
-import { CommentRepository } from "../repositories/CommentRepository";
+import e from "cors";
+import { Comment } from "../entity/Comment";
+import { CommentRepository } from '../repositories/CommentRepository';
 
-
-@Service()
 export class CommentService {
-    constructor(
-        @InjectRepository(CommentRepository)
-        private readonly commentRepository: CommentRepository
-    ) {}
 
-    async saveCommentToDatabase(data: {content: string, userId: number}): Promise<Comment> {
-        const comment = this.commentRepository.create({
-            content: data.content,
-            user: {id: data.userId}
-        });
+    private commentRepository: CommentRepository;
 
-        return this.commentRepository.save(comment);
+    // we set the CommentRepository as a dependency of the CommentService
+    constructor({CommentRepository} : {CommentRepository: CommentRepository}) {
+        this.commentRepository = CommentRepository;
+    }
+
+    async createComment(data: { content: string; userId: number; eventId: number }): Promise<Comment> {
+        const comment = new Comment();
+        comment.content = data.content;
+        comment.user = { id: data.userId, events: [], registrations: [], comments: [], ratings: [] };
+
+        return this.commentRepository.saveCommentToDb(comment);
     }
 
     async getAllComments(): Promise<Comment[]> {
-        return this.commentRepository.find({
-            relations: ["user"],
-            order: {createdData: "ASC"}
-        })
+        return this.commentRepository.findAllComments(
+           ["user", "event"], // we pass the relations  directly 
+           { createdDate: "ASC" }
+        );
+    }
+    async getCommentsByEventId(eventId: number): Promise<Comment[]> {
+        return this.commentRepository.findCommentsByEventId(
+            { event: { id: eventId } }, // we pass clause directly  
+            ["user"], 
+            { createdDate: "ASC" }
+        );
     }
 }

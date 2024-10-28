@@ -11,7 +11,7 @@ export const socketHandler = (io: Server) => {
     
         socket.on("comment:add", async (data) => {
             try {
-                const savedComment = await commentService.saveCommentToDatabase(data);
+                const savedComment = await commentService.createComment(data);
                 io.emit("comment:new", savedComment);
             } catch (error) {
                 console.error("Error saving comment: ", error);

@@ -1,5 +1,26 @@
-import { Repository } from "typeorm";
-import { Event } from "../entity/Event";
+import { DataSource, Repository } from "typeorm";
 import { Comment } from "../entity/Comment";
 
-export class CommentRepository extends Repository<Comment> {}
+export class CommentRepository  {
+    private commentRepository: Repository<Comment>;
+
+    constructor(dataSource: DataSource) {
+        this.commentRepository = dataSource.getRepository(Comment);
+    }
+
+    async findAllComments(relations: string[], order: {createdDate: 'ASC' | 'DESC'}): Promise<Comment[]> {
+        return this.commentRepository.find({relations, order})
+    }
+
+    async saveCommentToDb(comment: Comment): Promise<Comment> {
+        return this.commentRepository.save(comment);
+    }
+
+    async findCommentsByEventId(where: {event: {id: number}}, relations: string[], order: {createdDate: 'ASC' | 'DESC'} ): Promise<Comment[]> {
+        return this.commentRepository.find({where, relations, order});
+    }
+
+    async deleteComment(commentId: number): Promise<void> {
+        await this.commentRepository.delete(commentId);
+    }
+}

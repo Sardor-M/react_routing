@@ -6,6 +6,8 @@ import { dataSource } from "../../../database/db";
 import { userRegistrationSchema } from "../../../schemas/userSchema";
 import { UserRequestInfo } from "../../../types/userRequest";
 
+// TO-DO: i have to changet this to class based methods
+
 // helper function to get the jwttojken:
 const getJwtTokenSecret = (): string => {
   const jwtTokenSecrect = process.env.JWT_TOKEN_SECRET;

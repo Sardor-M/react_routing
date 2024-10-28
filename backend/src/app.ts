@@ -1,5 +1,6 @@
+import "reflect-metadata";
 import express from "express";
-import { connectToDatabase } from "./database/db";
+import { connectToDatabase, dataSource } from "./database/db";
 import cors from "cors";
 import morgan from "morgan";
 import userRouters from "./api/routes/events.routes";
@@ -9,17 +10,19 @@ import dotenv from "dotenv";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { socketHandler } from "./sockets/socketHandler";
-import { useContainer } from "typeorm";
-import Container from "typedi";
+import commentRouter from "./api/routes/comment.routes";
+import { CommentRepository } from "./repositories/CommentRepository";
+import { scopePerRequest } from "awilix-express";
+import container from "./container";
 
 const app = express();
 const port = 8080;
 
 dotenv.config();
 
-app.use(morgan("dev"));
+app.use(scopePerRequest(container));
+// app.use(morgan("dev"));
 
-useContainer(Container);
 
 const httpServer = createServer(app);
 
@@ -53,10 +56,20 @@ app.use((req, res, next) => {
   next();
 });
 
+// typeormUseContainer(Container);
+useContainer(Container);
+
+
 connectToDatabase()
   .then(() => {
+
+    Container.set('DataSource', dataSource);
+
+    Container.set(CommentRepository, Container.get(CommentRepository));
+
     app.use("/api", userRouters);
     app.use("/auth", authRouter);
+    app.use("/comments", commentRouter);
 
     httpServer.listen(port, () => {
       console.log(`Server is running on port: 8080`);

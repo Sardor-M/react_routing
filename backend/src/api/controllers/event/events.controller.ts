@@ -11,7 +11,7 @@ import { EventRegisterService } from "../../../services/EventRegisterService";
 import { UserRequestInfo } from "../../../types/userRequest";
 import { getcodeLocation } from "../../../services/EventGeoLocation";
 
-// this will get all the events
+// TO-DO: i have to change this to class based methods
 export async function getAllRunners(req: Request, res: Response) {
   try {
     const runnerRepository = dataSource.getRepository(Runner);

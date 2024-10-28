@@ -1,7 +1,6 @@
 import { DataSource, DataSourceOptions } from "typeorm";
 import { Runner } from "../entity/Runner";
 import { User } from "../entity/User";
-import { z } from "zod";
 import { Comment } from "../entity/Comment";
 import { EventRegistration } from "../entity/EventRegistration";
 import { Event } from "../entity/Event";
@@ -19,7 +18,6 @@ export const config: DataSourceOptions = {
   entities: [Runner, User, Comment, Event, EventRegistration, Rating],
   synchronize: false,
   migrations: ["src/migration/**/*.ts"],
-  // migrationsTableName: "Creating_New_Runners_Table",
 };
 
 export const dataSource = new DataSource(config);
