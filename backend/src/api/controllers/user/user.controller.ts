@@ -6,8 +6,6 @@ import { dataSource } from "../../../database/db";
 import { userRegistrationSchema } from "../../../schemas/userSchema";
 import { UserRequestInfo } from "../../../types/userRequest";
 
-// TO-DO: i have to changet this to class based methods
-
 // helper function to get the jwttojken:
 const getJwtTokenSecret = (): string => {
   const jwtTokenSecrect = process.env.JWT_TOKEN_SECRET;
@@ -17,70 +15,74 @@ const getJwtTokenSecret = (): string => {
   return jwtTokenSecrect;
 };
 
-export async function register(req: UserRequestInfo, res: Response) {
-  const result = userRegistrationSchema.safeParse(req.body);
+export class UserController {
 
-  if (!result.success) {
-    return res.status(400).json(result.error.errors);
-  }
+  async  register(req: UserRequestInfo, res: Response) {
+    const result = userRegistrationSchema.safeParse(req.body);
 
-  const { username, email, password } = result.data;
-  const userRepository = dataSource.getRepository(User);
-  const existingUser = await userRepository.findOne({ where: { email } });
+    if (!result.success) {
+      return res.status(400).json(result.error.errors);
+    }
 
-  if (!existingUser) {
-    return res.status(409).send("User already exists !");
-  }
+    const { username, email, password } = result.data;
+    const userRepository = dataSource.getRepository(User);
+    const existingUser = await userRepository.findOne({ where: { email } });
 
-  // const result = userSchema.safeParse(req.body)
+    if (!existingUser) {
+      return res.status(409).send("User already exists !");
+    }
 
-  const haseshPassword = await bcrypt.hash(password, 8);
-  const user = new User();
-  user.username = username;
-  user.email = email;
-  user.password = haseshPassword;
+    // const result = userSchema.safeParse(req.body)
 
-  try {
-    await userRepository.save(user);
+    const haseshPassword = await bcrypt.hash(password, 8);
+    const user = new User();
+    user.username = username;
+    user.email = email;
+    user.password = haseshPassword;
+
+    try {
+      await userRepository.save(user);
+      res.status(201).send("User created successfully");
+    } catch (err) {
+      console.error("Error saving user:", err);
+      return res.status(409).send("User already exits");
+    }
+
     res.status(201).send("User created successfully");
-  } catch (err) {
-    console.error("Error saving user:", err);
-    return res.status(409).send("User already exits");
   }
 
-  res.status(201).send("User created successfully");
+  async  login(req: UserRequestInfo, res: Response) {
+    const { email, password } = req.body;
+    const userRepository = dataSource.getRepository(User);
+    const user = await userRepository.findOne({ where: { email } });
+
+    if (!user || !password || !user.password) {
+      return res.status(401).send("Incorrect email or password");
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).send("Incorrect email or password");
+    }
+
+    const token = jwt.sign({ userId: user.id }, getJwtTokenSecret(), {
+      expiresIn: "60min",
+    });
+
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict", // will prevent a CSRF
+      maxAge: 3600000, // 1 hour
+    });
+
+    res.send({ message: "Logged in successfully!" });
+  }
+
+  async logout (req: Request, res: Response) {
+    res.clearCookie("token");
+    res.send({ message: "Logged out successfully!" });
+  };
+
 }
-
-export async function login(req: UserRequestInfo, res: Response) {
-  const { email, password } = req.body;
-  const userRepository = dataSource.getRepository(User);
-  const user = await userRepository.findOne({ where: { email } });
-
-  if (!user || !password || !user.password) {
-    return res.status(401).send("Incorrect email or password");
-  }
-
-  const passwordMatch = await bcrypt.compare(password, user.password);
-
-  if (!passwordMatch) {
-    return res.status(401).send("Incorrect email or password");
-  }
-
-  const token = jwt.sign({ userId: user.id }, getJwtTokenSecret(), {
-    expiresIn: "60min",
-  });
-
-  res.cookie("jwt", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict", // will prevent a CSRF
-    maxAge: 3600000, // 1 hour
-  });
-
-  res.send({ message: "Logged in successfully!" });
-}
-
-export const logout = (req: Request, res: Response) => {
-  res.clearCookie("token");
-  res.send({ message: "Logged out successfully!" });
-};
