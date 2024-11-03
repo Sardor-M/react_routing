@@ -1,4 +1,3 @@
-import e from "cors";
 import { Comment } from "../entity/Comment";
 import { CommentRepository } from '../repositories/CommentRepository';
 

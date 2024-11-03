@@ -1,13 +1,13 @@
 import { Socket, Server } from "socket.io";
 import { CommentService } from "../services/CommentService";
-import Container from "typedi";
+import container from "../container";
 
 export const socketHandler = (io: Server) => {
 
-    const commentService = Container.get(CommentService);
-
     io.on("connection", (socket: Socket) => {
         console.log("A user is connected", socket.id);
+
+        const commentService = container.resolve<CommentService>("commentService");
     
         socket.on("comment:add", async (data) => {
             try {

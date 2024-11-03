@@ -1,13 +1,16 @@
-import express from "express";
+import { Router } from "express";
 import { UserRequestInfo } from "../../types/userRequest";
 import { AuthMiddleware } from "../../middleware/auth.middleware";
 import { Response } from "express";
 import * as UserController from "../controllers/user/user.controller";
+import { makeInvoker } from "awilix-express";
 
-const authRouter = express.Router();
+const authRouter = Router();
+const authController = makeInvoker(UserController.UserController);
 
-authRouter.post("/register", UserController.register);
-authRouter.post("/login", UserController.login);
+
+authRouter.post("/register", authController("register"));
+authRouter.post("/login", authController("login"));
 authRouter.get(
   "/myPage",
   AuthMiddleware,

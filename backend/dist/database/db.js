@@ -20,7 +20,6 @@ exports.config = {
     entities: [Runner_1.Runner, User_1.User, Comment_1.Comment, Event_1.Event, EventRegistration_1.EventRegistration, Rating_1.Rating],
     synchronize: false,
     migrations: ["src/migration/**/*.ts"],
-    // migrationsTableName: "Creating_New_Runners_Table",
 };
 exports.dataSource = new typeorm_1.DataSource(exports.config);
 const connectToDatabase = async () => {

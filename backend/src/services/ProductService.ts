@@ -1,9 +1,8 @@
 // src/services/ProductService.ts
-import { Service } from "typedi";
 import { Event } from "../entity/Event";
 import { getRepository } from "../repositories/ProductRepository";
 
-@Service()
+
 export class ProductService {
   private productRepository = getRepository();
 

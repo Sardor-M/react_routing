@@ -35,6 +35,7 @@ import { AuthProvider } from "../context/AuthContext";
 import CreateAnEvent from "../components/pages/CreateAnEvent/CreateAnEvent";
 import ProtectedRoute from "../components/protected/ProtectedRoute";
 import AccountPage from "../components/pages/UserPage/AccountPage";
+import CommentPage from "../components/pages/CommentPage";
 
 const onSubmit = (form: { name: string; email: string; message: string }) => {
   console.log(form);
@@ -78,7 +79,7 @@ const router = createBrowserRouter(
         <Route path="dashboard" element={<DashboardPage />} />
         <Route
           path="review"
-          element={<ReviewsPages />}
+          element={<CommentPage eventId={1} />}
           loader={reviewsLoader}
         />
         <Route

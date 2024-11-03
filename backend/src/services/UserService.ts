@@ -1,14 +1,17 @@
-import { Service } from "typedi";
+
 import { User } from "../entity/User";
-import { getRepository } from "../repositories/ProductRepository";
+import { UserRepository } from '../repositories/UserRepository';
 
-@Service()
 export class UserService {
-    private userRepository = getRepository();
+    private userRepository: UserRepository;
 
-    // async getAllUsers(): Promise<User[]> {
-    //     // get all users
-    //     return await this.userRepository.find();
-    // }
+    constructor({userRepository} : {userRepository : UserRepository}) {
+        this.userRepository = userRepository;
+    }
+
+    async getAllUsers(): Promise<User[]> {
+        // get all users
+        return this.userRepository.find({});
+    }
 
 }
