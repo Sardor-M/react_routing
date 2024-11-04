@@ -32,9 +32,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         credentials: "include", // this is set for HttpOnly cookie - important
       });
       if (response.ok) {
-        const userDaa = await response.json();
+        const userData = await response.json();
         setIsAuthenticated(true);
-        setUser(userDaa);
+        setUser(userData);
       } else {
         // setIsAuthenticated(false);
         console.error("Login is failed.");

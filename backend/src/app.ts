@@ -1,5 +1,6 @@
 // src/app.ts
 import "reflect-metadata";
+
 import express from "express";
 import { connectToDatabase, dataSource } from "./database/db";
 import cors from "cors";
@@ -71,6 +72,30 @@ connectToDatabase()
     httpServer.listen(port, () => {
       console.log(`Server is running on port: ${port}`);
     });
+
+    function shutdown() {
+      console.log("Shutting down on port: ${port}");
+
+      io.close(() => {
+        console.log("Socket.IO server closed.")
+
+        httpServer.close(() => {
+          console.log("HTTP server closed.");
+
+          dataSource.destroy().then(() => {
+            console.log("Database connection is closed.");
+            process.exit(0);
+          }).catch((error) => {
+            console.error("Error closing database connection: ", error);
+            process.exit(1);
+          })
+        })
+      })
+    }
+    
+    // Handle termination signals
+    process.on("SIGINT", shutdown);
+    process.on("SIGNTERM", shutdown);
   })
   .catch((error) => {
     console.error("Error connecting to the database: ", error);

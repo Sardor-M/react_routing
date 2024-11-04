@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 import { Event } from "./Event";
 
@@ -10,7 +10,7 @@ export class Comment {
   @Column()
   content!: string;
 
-  @Column()
+  @CreateDateColumn()
   createdDate!: Date;
 
   @Column()

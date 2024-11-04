@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CommentService } from '../../services/CommentService';
 import { socket } from '../../socket';
+import { useAuth } from '../../context/AuthContext';
 
 interface Comment {
   id: number;
@@ -15,6 +16,16 @@ interface CommentPageProps {
 }
 
 const CommentPage: React.FC<CommentPageProps> = ({ eventId }) => {
+
+  const { user } = useAuth();
+  const userId = user?.id;
+
+  // if(!userId) {
+  //   return <div>Please login first to process further</div>
+  // }
+
+  console.log("user id: " + userId);
+
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
 
@@ -51,7 +62,7 @@ const CommentPage: React.FC<CommentPageProps> = ({ eventId }) => {
     e.preventDefault();
     console.log('Submitting comment:', newComment);
     if (newComment.trim()) {
-      socket.emit('comment:add', { content: newComment, eventId });
+      socket.emit('comment:add', { content: newComment, eventId, userId});
       setNewComment('');
     }
   };

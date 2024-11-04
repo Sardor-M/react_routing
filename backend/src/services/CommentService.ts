@@ -1,5 +1,7 @@
 import { Comment } from "../entity/Comment";
+import { User } from "../entity/User";
 import { CommentRepository } from '../repositories/CommentRepository';
+import { Event } from "../entity/Event";
 
 export class CommentService {
 
@@ -16,9 +18,13 @@ export class CommentService {
     async createComment(data: { content: string; userId: number; eventId: number }): Promise<Comment> {
         const comment = new Comment();
         comment.content = data.content;
-        comment.user = { id: data.userId, events: [], registrations: [], comments: [], ratings: [] };
 
-        return this.commentRepository.saveCommentToDb(comment);
+        // setting the relations
+        comment.user = {id: data.userId } as User;
+        comment.event =  {id: data.eventId} as Event;
+        // comment.user = { id: data.userId, events: [], registrations: [], comments: [], ratings: [] };
+
+        return await this.commentRepository.saveCommentToDb(comment);
     }
 
     async getAllComments(): Promise<Comment[]> {
