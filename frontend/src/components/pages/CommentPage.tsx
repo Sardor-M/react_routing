@@ -19,6 +19,12 @@ const CommentPage: React.FC<CommentPageProps> = ({ eventId }) => {
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
+
+    if(!socket.connected) {
+      socket.connect();
+      console.log('Socket connected:', socket.connected);
+    }
+
     loadComments();
 
     socket.on('comment:new', (comment: Comment) => {
@@ -43,6 +49,7 @@ const CommentPage: React.FC<CommentPageProps> = ({ eventId }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Submitting comment:', newComment);
     if (newComment.trim()) {
       socket.emit('comment:add', { content: newComment, eventId });
       setNewComment('');

@@ -6,8 +6,11 @@ export class CommentService {
     private commentRepository: CommentRepository;
 
     // we set the CommentRepository as a dependency of the CommentService
-    constructor({CommentRepository} : {CommentRepository: CommentRepository}) {
-        this.commentRepository = CommentRepository;
+    constructor({commentRepository} : {commentRepository: CommentRepository}) {
+        if(!commentRepository) {
+            throw new Error("commentRepository is undefined in CommentService constructor");
+        }
+        this.commentRepository = commentRepository;
     }
 
     async createComment(data: { content: string; userId: number; eventId: number }): Promise<Comment> {

@@ -4,7 +4,10 @@ import { Comment } from "../entity/Comment";
 export class CommentRepository  {
     private commentRepository: Repository<Comment>;
 
-    constructor(dataSource: DataSource) {
+    constructor({dataSource}: {dataSource: DataSource}) {
+        if (!dataSource) {
+            throw new Error("dataSource is undefined in CommentRepository constructor");
+        }
         this.commentRepository = dataSource.getRepository(Comment);
     }
 

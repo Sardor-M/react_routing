@@ -1,13 +1,16 @@
 import { Socket, Server } from "socket.io";
+import { AwilixContainer } from "awilix";
 import { CommentService } from "../services/CommentService";
-import container from "../container";
 
-export const socketHandler = (io: Server) => {
+export const socketHandler = (io: Server, container: AwilixContainer) => {
 
     io.on("connection", (socket: Socket) => {
         console.log("A user is connected", socket.id);
 
-        const commentService = container.resolve<CommentService>("commentService");
+        // we create a scoped container for each socket connection
+        const scope = container.createScope();
+
+        const commentService = scope.resolve<CommentService>("commentService");
     
         socket.on("comment:add", async (data) => {
             try {
@@ -21,6 +24,7 @@ export const socketHandler = (io: Server) => {
 
         socket.on("disconnect", () => {
             console.log("A user is disconnected", socket.id);
+            scope.dispose();
         });
     });
 }
