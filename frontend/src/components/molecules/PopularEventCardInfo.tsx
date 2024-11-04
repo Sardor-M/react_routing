@@ -11,16 +11,6 @@ export interface PopularCardEventInfoProps {
   imageSrc?: string;
 }
 
-// const CardContainer = styled.div`
-//   border-radius: 8px;
-//   overflow: hidden;
-//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-//   transition: box-shadow 0.3s ease;
-//   &:hover {
-//     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-//   }
-// `;
-
 const EventName = styled.h3`
   margin: 5px;
   padding: 5px;

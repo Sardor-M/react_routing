@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "../../atoms/Image";
 // this is the profile moleculoes for the user component
 
