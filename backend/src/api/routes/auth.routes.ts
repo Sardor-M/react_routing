@@ -11,6 +11,7 @@ const authController = makeInvoker(UserController.UserController);
 
 authRouter.post("/register", authController("register"));
 authRouter.post("/login", authController("login"));
+authRouter.post("/status", authController("status"));
 authRouter.get(
   "/myPage",
   AuthMiddleware,

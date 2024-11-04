@@ -16,7 +16,6 @@ const getJwtTokenSecret = (): string => {
 };
 
 export class UserController {
-
   async  register(req: UserRequestInfo, res: Response) {
     const result = userRegistrationSchema.safeParse(req.body);
 
@@ -51,7 +50,7 @@ export class UserController {
     res.status(201).send("User created successfully");
   }
 
-  async  login(req: UserRequestInfo, res: Response) {
+  async login(req: UserRequestInfo, res: Response) {
     const { email, password } = req.body;
     const userRepository = dataSource.getRepository(User);
     const user = await userRepository.findOne({ where: { email } });
@@ -70,6 +69,8 @@ export class UserController {
       expiresIn: "60min",
     });
 
+    const {password: _, ...userData } = user;
+
     res.cookie("jwt", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -77,7 +78,10 @@ export class UserController {
       maxAge: 3600000, // 1 hour
     });
 
-    res.send({ message: "Logged in successfully!" });
+    res.send({
+      user: userData,
+      message: "Logged in successfully!" 
+    });
   }
 
   async logout (req: Request, res: Response) {
@@ -85,4 +89,31 @@ export class UserController {
     res.send({ message: "Logged out successfully!" });
   };
 
+  async status(req: UserRequestInfo, res: Response) {
+    const token = req.cookies.jwt;
+    if(!token) {
+      return res.status(401).send("Not Authenticated");
+    }
+
+    try {
+      const decoded = jwt.verify(token, getJwtTokenSecret()) as {userId: number};
+      const userRepository = dataSource.getRepository(User);
+      const user = await userRepository.findOne({where: {id: decoded.userId }});
+
+      if(!user) {
+        return res.status(401).send("User not found !");
+      }
+
+      // we exclude the user password
+      const {password: _, ...userData } = user;
+
+      res.send({
+        user: userData
+      });
+      
+    } catch (error) {
+      console.error("Error verifying the token: ", error);
+      res.status(401).send("Invalid token.");
+    }
+  }
 }

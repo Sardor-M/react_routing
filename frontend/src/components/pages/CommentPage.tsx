@@ -20,11 +20,13 @@ const CommentPage: React.FC<CommentPageProps> = ({ eventId }) => {
   const { user } = useAuth();
   const userId = user?.id;
 
+  console.log("user id: " + userId);
+
   // if(!userId) {
   //   return <div>Please login first to process further</div>
   // }
 
-  console.log("user id: " + userId);
+
 
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');

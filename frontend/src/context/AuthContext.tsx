@@ -3,7 +3,6 @@ interface User {
   id: number;
   username: string;
   email: string;
-  password: string;
 }
 
 interface AuthContextType {
@@ -32,9 +31,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         credentials: "include", // this is set for HttpOnly cookie - important
       });
       if (response.ok) {
-        const userData = await response.json();
+        const data = await response.json();
         setIsAuthenticated(true);
-        setUser(userData);
+        setUser(data.user);
       } else {
         // setIsAuthenticated(false);
         console.error("Login is failed.");
@@ -62,14 +61,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const checkAuthStatus = async () => {
       try {
         const response = await fetch("http://localhost:8080/auth/status", {
+          method: "POST",
           credentials: "include",
         });
         if (response.ok) {
-          const userData = await response.json();
+          const data = await response.json();
+          console.log("user data recived:" + data.user);
           setIsAuthenticated(true);
-          setUser(userData);
+          setUser(data.user);
         } else {
           setIsAuthenticated(false);
+          setUser(undefined);
         }
       } catch (error) {
         console.error("Error checking authentication status: ", error);

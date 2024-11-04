@@ -13,8 +13,14 @@ export const socketHandler = (io: Server, container: AwilixContainer) => {
         const commentService = scope.resolve<CommentService>("commentService");
     
         socket.on("comment:add", async (data) => {
+
+            if (!data || !data.content || !data.eventId || !data.userId) {
+                throw new Error("Invalid data");
+            }
+            
             try {
-                const savedComment = await commentService.createComment(data);
+                const {content, eventId, userId}  = data;
+                const savedComment = await commentService.createComment({content, eventId, userId});
                 io.emit("comment:new", savedComment);
             } catch (error) {
                 console.error("Error saving comment: ", error);
